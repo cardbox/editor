@@ -1,6 +1,9 @@
 {
-  "name": "slate-playground",
-  "version": "0.0.0",
+  "name": "@cardbox/editor",
+  "publishConfig": {
+    "access": "public",
+  },
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
