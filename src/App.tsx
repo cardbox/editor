@@ -29,7 +29,7 @@ export const App = () => {
         'make-bold': 'mod+b',
         'make-italic': 'mod+i',
         'make-underlined': 'mod+u',
-        'make-inline-code': 'mod+`',
+        'make-inline-code': ['mod+`', 'mod+j'],
       }}
     />
   )

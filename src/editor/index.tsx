@@ -6,6 +6,7 @@ import { keybindController } from './keybinds'
 import { CustomElement, renderElement } from './elements'
 import { LeafElement, renderLeaf } from './leaf'
 import { Action, ActionKeybinds } from './lib/action-controller/types'
+import styles from './index.module.css'
 
 declare module 'slate' {
   interface CustomTypes {
@@ -23,6 +24,25 @@ function useEditor() {
   }, [])
 }
 
+function useKeybinds(keybinds: ActionKeybinds) {
+  useEffect(() => {
+    keybindController.unregisterAll()
+    Object.entries<ActionKeybinds[Action]>(keybinds).forEach(
+      ([action, keybind]) => {
+        if (!keybind) return
+        const keys = typeof keybind === 'string' ? [keybind] : keybind
+
+        for (const key of keys) {
+          keybindController.register(
+            key,
+            actionController.curryExecute(action as Action)
+          )
+        }
+      }
+    )
+  }, [keybinds])
+}
+
 interface Props {
   value: EditorValue
   onChange: (value: EditorValue) => void
@@ -31,16 +51,7 @@ interface Props {
 
 export const Editor = ({ value, onChange, keybinds }: Props) => {
   const editor = useEditor()
-
-  useEffect(() => {
-    keybindController.unregisterAll()
-    Object.entries<string>(keybinds).forEach(([action, keybind]) => {
-      keybindController.register(
-        keybind,
-        actionController.curryExecute(action as Action)
-      )
-    })
-  }, [keybinds])
+  useKeybinds(keybinds)
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
     keybindController.keyDown(event, editor)
@@ -49,6 +60,7 @@ export const Editor = ({ value, onChange, keybinds }: Props) => {
   return (
     <Slate editor={editor} value={value} onChange={onChange}>
       <Editable
+        className={styles.editor}
         renderElement={renderElement}
         renderLeaf={renderLeaf}
         onKeyDown={handleKeyDown}

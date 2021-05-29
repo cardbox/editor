@@ -8,7 +8,7 @@ export type Action =
   | 'make-inline-code'
 
 export type ActionKeybinds = {
-  [KAction in Action]?: string
+  [KAction in Action]?: string | string[]
 }
 
 export type ActionEvent = KeyboardEvent | React.KeyboardEvent
