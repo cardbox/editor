@@ -1,0 +1,36 @@
+name: Deploy to Github Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup NodeJS v14.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: v14.x
+
+      - name: Install dependencies
+        run: yarn install --non-interactive --no-progress --frozen-lockfile
+
+      - name: Build
+        run: yarn build
+
+      - name: Create 404.html to handle all routes by SPA
+        run: cp ./dist/index.html ./dist/404.html
+
+      - name: Copy CNAME to dist
+        run: cp ./CNAME ./dist/CNAME
+
+      - name: Deploy to Github Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist/
