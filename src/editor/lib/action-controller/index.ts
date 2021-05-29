@@ -16,7 +16,7 @@ export function createActionController() {
     callback(context, event)
   }
 
-  const carryExecute =
+  const curryExecute =
     (action: Action) => (context: Editor, event: ActionEvent) => {
       execute(action, context, event)
     }
@@ -24,6 +24,6 @@ export function createActionController() {
   return {
     register,
     execute,
-    carryExecute,
+    curryExecute,
   }
 }
