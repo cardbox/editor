@@ -1,4 +1,4 @@
-import { Editor, Text, Transforms } from 'slate'
+import { Editor } from 'slate'
 import { LeafElement } from '../leaf'
 
 export function toggleLeafProperty(
@@ -8,9 +8,9 @@ export function toggleLeafProperty(
   const leaf = Editor.marks(editor)
   if (!leaf) return
 
-  Transforms.setNodes(
-    editor,
-    { [property]: leaf[property] ? undefined : true },
-    { match: (node) => Text.isText(node), split: true }
-  )
+  if (leaf[property]) {
+    editor.removeMark(property)
+  } else {
+    editor.addMark(property, true)
+  }
 }
