@@ -57,11 +57,11 @@ export function createKeybindController<TContext = void>({
 
   const keyDown: EventListener<TContext> = (event, context) => {
     const nativeEvent = event instanceof Event ? event : event.nativeEvent
-    nativeEvent.stopPropagation()
 
     for (const listener of scopeListeners) {
       const match = listener.is(nativeEvent)
       if (!match) continue
+      nativeEvent.stopPropagation()
       listener.callback(context, nativeEvent)
       break
     }
