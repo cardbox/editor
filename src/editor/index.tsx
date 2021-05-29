@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from 'react'
 import { BaseEditor, createEditor, Descendant } from 'slate'
 import { Editable, ReactEditor, Slate, withReact } from 'slate-react'
+import { withHistory } from 'slate-history'
 import { actionController } from './actions'
 import { keybindController } from './keybinds'
 import { CustomElement, renderElement } from './elements'
@@ -20,7 +21,7 @@ export type EditorValue = Descendant[]
 
 function useEditor() {
   return useMemo(() => {
-    return withReact(createEditor())
+    return withReact(withHistory(createEditor()))
   }, [])
 }
 
