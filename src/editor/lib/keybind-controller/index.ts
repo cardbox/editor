@@ -23,14 +23,15 @@ type KeybindListeners<TContext = void> = {
 
 const listeners: KeybindListeners<unknown> = {}
 
-interface Params<TContext = void> {
+interface Params {
   scope?: string
-  context?: TContext
+  stopAllEvents?: boolean
 }
 
 export function createKeybindController<TContext = void>({
   scope = 'global',
-}: Params<TContext> = {}) {
+  stopAllEvents = true,
+}: Params = {}) {
   if (!listeners[scope]) {
     listeners[scope] = []
   }
@@ -57,11 +58,12 @@ export function createKeybindController<TContext = void>({
 
   const keyDown: EventListener<TContext> = (event, context) => {
     const nativeEvent = event instanceof Event ? event : event.nativeEvent
+    if (stopAllEvents) nativeEvent.stopPropagation()
 
     for (const listener of scopeListeners) {
       const match = listener.is(nativeEvent)
       if (!match) continue
-      nativeEvent.stopPropagation()
+      if (!stopAllEvents) nativeEvent.stopPropagation()
       listener.callback(context, nativeEvent)
       break
     }
