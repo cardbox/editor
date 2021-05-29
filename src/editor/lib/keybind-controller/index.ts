@@ -51,6 +51,10 @@ export function createKeybindController<TContext = void>({
     scopeListeners.splice(index, 1)
   }
 
+  const unregisterAll = () => {
+    scopeListeners.splice(0, scopeListeners.length)
+  }
+
   const keyDown: EventListener<TContext> = (event, context) => {
     const nativeEvent = event instanceof Event ? event : event.nativeEvent
     nativeEvent.stopPropagation()
@@ -66,6 +70,7 @@ export function createKeybindController<TContext = void>({
   return {
     register,
     unregister,
+    unregisterAll,
     keyDown,
   }
 }

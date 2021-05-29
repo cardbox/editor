@@ -33,10 +33,11 @@ export const Editor = ({ value, onChange, keybinds }: Props) => {
   const editor = useEditor()
 
   useEffect(() => {
+    keybindController.unregisterAll()
     Object.entries<string>(keybinds).forEach(([action, keybind]) => {
       keybindController.register(
         keybind,
-        actionController.carryExecute(action as Action)
+        actionController.curryExecute(action as Action)
       )
     })
   }, [keybinds])
