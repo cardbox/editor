@@ -1,13 +1,13 @@
-import React, { useEffect, useMemo } from 'react'
-import { BaseEditor, createEditor, Descendant } from 'slate'
-import { Editable, ReactEditor, Slate, withReact } from 'slate-react'
-import { withHistory } from 'slate-history'
-import { actionController } from './actions'
-import { keybindController } from './keybinds'
+import React from 'react'
+import { BaseEditor, Descendant } from 'slate'
+import { Editable, ReactEditor, Slate } from 'slate-react'
 import { CustomElement, renderElement } from './elements'
 import { LeafElement, renderLeaf } from './leaf'
-import { Action, ActionKeybinds } from './lib/action-controller/types'
+import { CustomActionKeybinds } from './lib/action-controller/types'
 import styles from './index.module.css'
+import { Extension } from './lib/extensions/extend'
+import { useEditor } from './use-editor'
+import { useKeybinds } from './use-keybinds'
 
 declare module 'slate' {
   interface CustomTypes {
@@ -19,44 +19,21 @@ declare module 'slate' {
 
 export type EditorValue = Descendant[]
 
-function useEditor() {
-  return useMemo(() => {
-    return withReact(withHistory(createEditor()))
-  }, [])
-}
-
-function useKeybinds(keybinds: ActionKeybinds) {
-  useEffect(() => {
-    keybindController.unregisterAll()
-    Object.entries<ActionKeybinds[Action]>(keybinds).forEach(
-      ([action, keybind]) => {
-        if (!keybind) return
-        const keys = typeof keybind === 'string' ? [keybind] : keybind
-
-        for (const key of keys) {
-          keybindController.register(
-            key,
-            actionController.curryExecute(action as Action)
-          )
-        }
-      }
-    )
-  }, [keybinds])
-}
-
 interface Props {
   value: EditorValue
   onChange: (value: EditorValue) => void
-  keybinds: ActionKeybinds
+  customKeybinds?: CustomActionKeybinds
+  customExtensions?: Extension[]
 }
 
-export const Editor = ({ value, onChange, keybinds }: Props) => {
-  const editor = useEditor()
-  useKeybinds(keybinds)
-
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    keybindController.keyDown(event, editor)
-  }
+export const Editor = ({
+  value,
+  onChange,
+  customKeybinds = {},
+  customExtensions = [],
+}: Props) => {
+  const editor = useEditor(customExtensions)
+  const { handleKeyDown } = useKeybinds(editor, customKeybinds)
 
   return (
     <Slate editor={editor} value={value} onChange={onChange}>

@@ -1,14 +1,20 @@
 import React from 'react'
 
 export type Action =
+  | 'place-break'
   | 'make-bold'
   | 'make-italic'
   | 'make-underlined'
-  | 'make-strikethrough'
   | 'make-inline-code'
 
 export type ActionKeybinds = {
   [KAction in Action]?: string | string[]
+}
+
+export type CustomActionKeybinds = Omit<ActionKeybinds, 'place-break'>
+
+export type DefaultActionKeybinds = {
+  [KAction in Action]: string | string[]
 }
 
 export type ActionEvent = KeyboardEvent | React.KeyboardEvent

@@ -11,6 +11,8 @@ export interface LeafElement {
   inlineCode?: boolean
 }
 
+export type LeafModification = Exclude<keyof LeafElement, 'text'>
+
 const LeafComponent = ({ attributes, children, leaf }: RenderLeafProps) => {
   const {
     bold = false,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Editor, EditorValue } from './editor'
 
 function useEditorValue() {
@@ -11,9 +11,9 @@ function useEditorValue() {
 
   const [value, setValue] = useState<EditorValue>(initialState)
 
-  useEffect(() => {
-    console.log(JSON.stringify(value, null, 2))
-  }, [value])
+  // useEffect(() => {
+  //   console.log(JSON.stringify(value, null, 2))
+  // }, [value])
 
   return [value, setValue] as const
 }
@@ -21,16 +21,5 @@ function useEditorValue() {
 export const App = () => {
   const [value, setValue] = useEditorValue()
 
-  return (
-    <Editor
-      value={value}
-      onChange={setValue}
-      keybinds={{
-        'make-bold': 'mod+b',
-        'make-italic': 'mod+i',
-        'make-underlined': 'mod+u',
-        'make-inline-code': ['mod+`', 'mod+j'],
-      }}
-    />
-  )
+  return <Editor value={value} onChange={setValue} />
 }

@@ -7,6 +7,11 @@ export interface ParagraphElement {
   children: LeafElement[]
 }
 
+export const createParagraphComponent = (): ParagraphElement => ({
+  type: 'paragraph',
+  children: [{ text: '' }],
+})
+
 export const ParagraphComponent = ({
   attributes,
   children,
