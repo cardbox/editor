@@ -2,7 +2,7 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  base: 'editor',
+  base: '/editor/',
   plugins: [],
   css: {
     modules: {
