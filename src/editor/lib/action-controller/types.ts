@@ -1,7 +1,8 @@
 import React from 'react'
 
 export type Action =
-  | 'place-break'
+  | 'insert-soft-break'
+  | 'insert-exit-break'
   | 'make-bold'
   | 'make-italic'
   | 'make-underlined'

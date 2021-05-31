@@ -10,7 +10,8 @@ import {
 } from './lib/action-controller/types'
 
 const defaultKeybinds: DefaultActionKeybinds = {
-  'place-break': ['enter', 'shift+enter', 'mod+enter'],
+  'insert-soft-break': 'shift+enter',
+  'insert-exit-break': ['enter', 'mod+enter'],
   'make-bold': 'mod+b',
   'make-italic': 'mod+i',
   'make-underlined': 'mod+u',
