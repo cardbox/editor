@@ -30,7 +30,7 @@ export const handler: ActionCallback<Editor> = (editor, event) => {
 
   if (Range.isExpanded(editor.selection)) {
     // 1. Delete the selected text
-    // Transforms.delete(editor, { at: editor.selection })
+    Transforms.delete(editor, { at: editor.selection })
   }
 
   const blockEntry = Queries.getAbove(editor, {
