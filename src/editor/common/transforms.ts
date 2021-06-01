@@ -1,7 +1,7 @@
 import { Editor } from 'slate'
 import { LeafElement } from '../leaf'
 
-export function toggleLeafProperty(
+export function toggleLeafModification(
   editor: Editor,
   property: Exclude<keyof LeafElement, 'text'>
 ) {
