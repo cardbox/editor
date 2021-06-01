@@ -11,7 +11,23 @@ export interface LeafElement {
   inlineCode?: boolean
 }
 
-export type LeafModification = Exclude<keyof LeafElement, 'text'>
+export const LEAF_MODIFICATIONS = [
+  'bold',
+  'italic',
+  'underlined',
+  'inlineCode',
+] as const
+export type LeafModification = typeof LEAF_MODIFICATIONS[number]
+
+export function createLeaf(
+  text: string,
+  modifications: Partial<Record<LeafModification, boolean>> = {}
+): LeafElement {
+  return {
+    text,
+    ...modifications,
+  }
+}
 
 const LeafComponent = ({ attributes, children, leaf }: RenderLeafProps) => {
   const {
