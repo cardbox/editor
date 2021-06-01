@@ -13,7 +13,10 @@ export type ActionKeybinds = {
   [KAction in Action]?: string | string[]
 }
 
-export type CustomActionKeybinds = Omit<ActionKeybinds, 'place-break'>
+export type CustomActionKeybinds = Omit<
+  ActionKeybinds,
+  'insert-soft-break' | 'insert-exit-break' | 'get-out-the-leaf'
+>
 
 export type DefaultActionKeybinds = {
   [KAction in Action]: string | string[]
