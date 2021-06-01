@@ -21,7 +21,7 @@ type Specific =
 
 type Config = Array<Common & Specific>
 
-function formatWithConfig(editor: Editor, config: Config): Editor {
+function formatWithConfig(editor: Editor, _config: Config): Editor {
   /*
    * TODO: Implement format extension
    * Transform `text`, *text*, _text_, 1., -, etc. to slate blocks/leaves
