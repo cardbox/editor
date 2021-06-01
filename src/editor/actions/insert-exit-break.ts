@@ -8,22 +8,22 @@ import { ActionCallback } from '../lib/action-controller/types'
  *
  * 1. The action always deletes the selected text
  *
- * 2. When selection is on the block end
+ * 2. When the selection is on the block end
  *    - insert a new default block after the current
  *    - move the focus there
  *    (the priority is higher since we need to move
  *     the selection to the new block's start)
  *
- * 3. When selection is on the block start
+ * 3. When the selection is on the block start
  *    - insert a new default block before the current
  *    - the focus should be in the same place as it was
  *
- * 4. When selection is on the block middle
+ * 4. When the selection is on the block middle
  *    - insert a new block with the same type as the current has
  *    - move the contents from the right side into this block
- *    - move the focus at the start of the new block
+ *    - move the selection at the start of the new block
  */
-export const handler: ActionCallback<Editor> = (editor, event) => {
+export const insertExitBreak: ActionCallback<Editor> = (editor, event) => {
   if (!editor.selection) return
 
   event.preventDefault()
@@ -46,7 +46,6 @@ export const handler: ActionCallback<Editor> = (editor, event) => {
   // 2. The selection is on the block end
   if (Point.equals(selectionPoint, blockEnd)) {
     Transforms.insertNodes(editor, createDefaultElement(), {
-      at: selectionPoint,
       select: true,
     })
     return
@@ -55,7 +54,6 @@ export const handler: ActionCallback<Editor> = (editor, event) => {
   // 3. The selection is on the block start
   if (Point.equals(selectionPoint, blockStart)) {
     Transforms.insertNodes(editor, createDefaultElement(), {
-      at: selectionPoint,
       select: false,
     })
     return
@@ -63,7 +61,6 @@ export const handler: ActionCallback<Editor> = (editor, event) => {
 
   // 4. The selection is on the block middle
   Transforms.splitNodes(editor, {
-    at: selectionPoint,
     mode: 'highest',
   })
 }
