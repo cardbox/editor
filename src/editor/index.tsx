@@ -42,6 +42,7 @@ export const Editor = ({
         renderElement={renderElement}
         renderLeaf={renderLeaf}
         onKeyDown={handleKeyDown}
+        autoFocus
       />
     </Slate>
   )

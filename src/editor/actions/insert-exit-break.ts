@@ -30,7 +30,7 @@ export const handler: ActionCallback<Editor> = (editor, event) => {
 
   if (Range.isExpanded(editor.selection)) {
     // 1. Delete the selected text
-    Transforms.delete(editor, { at: editor.selection })
+    // Transforms.delete(editor, { at: editor.selection })
   }
 
   const blockEntry = Queries.getAbove(editor, {
@@ -43,8 +43,7 @@ export const handler: ActionCallback<Editor> = (editor, event) => {
   const [blockStart, blockEnd] = Editor.edges(editor, blockPath)
   const selectionPoint = Range.start(editor.selection)
 
-  // 3. The selection is on the block end
-  // The priority is higher since we need to select the new block in this case
+  // 2. The selection is on the block end
   if (Point.equals(selectionPoint, blockEnd)) {
     Transforms.insertNodes(editor, createDefaultElement(), {
       at: selectionPoint,
@@ -53,7 +52,7 @@ export const handler: ActionCallback<Editor> = (editor, event) => {
     return
   }
 
-  // 2. The selection is on the block start
+  // 3. The selection is on the block start
   if (Point.equals(selectionPoint, blockStart)) {
     Transforms.insertNodes(editor, createDefaultElement(), {
       at: selectionPoint,

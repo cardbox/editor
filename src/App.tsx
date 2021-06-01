@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Editor, EditorValue } from './editor'
 
 function useEditorValue() {
@@ -11,9 +11,9 @@ function useEditorValue() {
 
   const [value, setValue] = useState<EditorValue>(initialState)
 
-  // useEffect(() => {
-  //   console.log(JSON.stringify(value, null, 2))
-  // }, [value])
+  useEffect(() => {
+    console.log(JSON.stringify(value, null, 2))
+  }, [value])
 
   return [value, setValue] as const
 }
