@@ -3,6 +3,7 @@ import React from 'react'
 export type Action =
   | 'insert-soft-break'
   | 'insert-exit-break'
+  | 'get-out-the-leaf'
   | 'make-bold'
   | 'make-italic'
   | 'make-underlined'

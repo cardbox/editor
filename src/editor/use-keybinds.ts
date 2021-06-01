@@ -12,6 +12,7 @@ import {
 const defaultKeybinds: DefaultActionKeybinds = {
   'insert-soft-break': 'shift+enter',
   'insert-exit-break': ['enter', 'mod+enter'],
+  'get-out-the-leaf': 'arrowright',
   'make-bold': 'mod+b',
   'make-italic': 'mod+i',
   'make-underlined': 'mod+u',
