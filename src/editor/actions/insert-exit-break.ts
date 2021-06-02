@@ -41,7 +41,9 @@ export const insertExitBreak: ActionCallback<Editor> = (editor, event) => {
 
   const [, blockPath] = blockEntry
   const [blockStart, blockEnd] = Editor.edges(editor, blockPath)
-  const selectionPoint = Range.start(editor.selection)
+
+  const selectionPoint = Queries.getPointFromLocation(editor.selection)
+  if (!selectionPoint) return
 
   // 2. The selection is on the block end
   if (Point.equals(selectionPoint, blockEnd)) {

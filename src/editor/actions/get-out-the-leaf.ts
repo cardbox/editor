@@ -1,6 +1,6 @@
 import { Editor, Point, Range, Transforms } from 'slate'
 import { Queries } from '../common/queries'
-import { createLeaf, LEAF_MODIFICATIONS } from '../leaf'
+import { createLeaf } from '../leaf'
 import { ActionCallback } from '../lib/action-controller/types'
 
 /*
@@ -13,7 +13,7 @@ import { ActionCallback } from '../lib/action-controller/types'
  * 3. After the current leaf insert a new one with text ' '
  * 4. Move the selection to the end of the new leaf
  */
-export const getOutTheLeaf: ActionCallback<Editor> = (editor, _event) => {
+export const getOutTheLeaf: ActionCallback<Editor> = (editor, event) => {
   if (!editor.selection) return
   if (Range.isExpanded(editor.selection)) return
 
@@ -41,13 +41,13 @@ export const getOutTheLeaf: ActionCallback<Editor> = (editor, _event) => {
     return
   }
 
-  const hasModifications = LEAF_MODIFICATIONS.some((modification) => {
-    return Boolean(leaf[modification])
-  })
+  const hasModifications = Queries.leafHasModifications(leaf)
 
   if (!hasModifications) {
     return
   }
+
+  event.preventDefault()
 
   Transforms.insertNodes(editor, createLeaf(' '), {
     select: true,

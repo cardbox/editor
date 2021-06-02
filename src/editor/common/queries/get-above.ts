@@ -1,13 +1,6 @@
-import { Ancestor, Editor, NodeEntry, Range } from 'slate'
-import { LeafElement } from '../leaf'
-
-function hasSelection(editor: Editor): boolean {
-  if (!editor.selection) {
-    return false
-  }
-
-  return Range.isExpanded(editor.selection)
-}
+import { Editor, NodeEntry } from 'slate'
+import { CustomElement } from '../../elements'
+import { LeafElement } from '../../leaf'
 
 interface GetAboveOptionsBlock {
   type: 'block'
@@ -19,17 +12,17 @@ interface GetAboveOptionsLeaf {
   mode?: 'highest' | 'lowest'
 }
 
-function getAbove(
+export function getAbove(
   editor: Editor,
   options: GetAboveOptionsBlock
-): NodeEntry<Ancestor> | undefined
+): NodeEntry<CustomElement> | undefined
 
-function getAbove(
+export function getAbove(
   editor: Editor,
   options: GetAboveOptionsLeaf
 ): NodeEntry<LeafElement> | undefined
 
-function getAbove(
+export function getAbove(
   editor: Editor,
   options: GetAboveOptionsBlock | GetAboveOptionsLeaf
 ) {
@@ -46,9 +39,4 @@ function getAbove(
       return Editor.isBlock(editor, node)
     },
   })
-}
-
-export const Queries = {
-  hasSelection,
-  getAbove,
 }
