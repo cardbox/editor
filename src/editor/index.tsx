@@ -2,12 +2,13 @@ import React from 'react'
 import { BaseEditor, Descendant } from 'slate'
 import { Editable, ReactEditor, Slate } from 'slate-react'
 import { CustomElement, renderElement } from './elements'
-import { LeafElement, renderLeaf } from './leaf'
+import { renderLeaf } from './leaf'
 import { CustomActionKeybinds } from './lib/action-controller/types'
 import styles from './index.module.css'
 import { Extension } from './lib/extensions/extend'
 import { useEditor } from './use-editor'
 import { useKeybinds } from './use-keybinds'
+import { LeafElement } from './leaf/types'
 
 declare module 'slate' {
   interface CustomTypes {

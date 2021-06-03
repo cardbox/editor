@@ -1,5 +1,5 @@
 import { Editor } from 'slate'
-import { LeafElement } from '../leaf'
+import { LeafElement } from '../leaf/types'
 
 export function toggleLeafModification(
   editor: Editor,

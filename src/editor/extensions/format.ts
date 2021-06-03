@@ -2,7 +2,7 @@ import { Editor, Range, Transforms } from 'slate'
 import { getOutTheLeaf } from '../actions/get-out-the-leaf'
 import { Queries } from '../common/queries'
 import { CustomElement } from '../elements'
-import { LeafElement } from '../leaf'
+import { LeafElement } from '../leaf/types'
 import { noopKeyboardEvent } from '../lib/util'
 
 interface SkipParams {
