@@ -1,23 +1,7 @@
-import clsx from 'clsx'
 import React from 'react'
 import { RenderLeafProps } from 'slate-react'
-import classes from './index.module.css'
-
-export interface LeafElement {
-  text: string
-  bold?: boolean
-  italic?: boolean
-  underlined?: boolean
-  inlineCode?: boolean
-}
-
-export const LEAF_MODIFICATIONS = [
-  'bold',
-  'italic',
-  'underlined',
-  'inlineCode',
-] as const
-export type LeafModification = typeof LEAF_MODIFICATIONS[number]
+import { Queries } from '../common/queries'
+import { ElementMapper, LeafElement, LeafModification } from './types'
 
 export function createLeaf(
   text: string,
@@ -29,33 +13,31 @@ export function createLeaf(
   }
 }
 
-const LeafComponent = ({ attributes, children, leaf }: RenderLeafProps) => {
-  const {
-    bold = false,
-    italic = false,
-    underlined = false,
-    inlineCode = false,
-  } = leaf
+const ELEMENT_MAPPER: ElementMapper = {
+  bold: 'b',
+  italic: 'em',
+  underlined: 'u',
+  inlineCode: 'code',
+}
 
-  const classNames = clsx({
-    [classes.bold]: bold,
-    [classes.italic]: italic,
-    [classes.underlined]: underlined,
-    [classes.inlineCode]: inlineCode,
-  })
+function buildElement({ leaf, children, attributes }: RenderLeafProps) {
+  const hasModifications = Queries.leafHasModifications(leaf)
 
-  if (inlineCode)
-    return (
-      <code className={classNames} {...attributes}>
-        {children}
-      </code>
-    )
+  if (!hasModifications) {
+    return <span {...attributes}>{children}</span>
+  }
 
-  return (
-    <span className={classNames} {...attributes}>
-      {children}
-    </span>
-  )
+  const modifications = Queries.leafModifications(leaf)
+
+  return modifications.reduce((acc, modification, index) => {
+    const elementType = ELEMENT_MAPPER[modification]
+    const props = index === modifications.length - 1 ? attributes : {}
+    return React.createElement(elementType, props, acc)
+  }, children)
+}
+
+const LeafComponent = (props: RenderLeafProps) => {
+  return buildElement(props)
 }
 
 export function renderLeaf(props: RenderLeafProps) {

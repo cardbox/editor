@@ -5,6 +5,7 @@ import { getRangeBefore } from './get-range-before'
 import { getRangeFromBlockStart } from './get-range-from-block-start'
 import { hasSelection } from './has-selection'
 import { leafHasModifications } from './leaf-has-modifications'
+import { leafModifications } from './leaf-modifications'
 
 export const Queries = {
   getAbove,
@@ -14,4 +15,5 @@ export const Queries = {
   getRangeFromBlockStart,
   hasSelection,
   leafHasModifications,
+  leafModifications,
 }

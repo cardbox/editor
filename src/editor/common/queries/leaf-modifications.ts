@@ -4,9 +4,9 @@ import {
   LEAF_MODIFICATIONS,
 } from '../../leaf/types'
 
-export function leafHasModifications(
+export function leafModifications(
   leaf: LeafElement,
   modifications: readonly LeafModification[] = LEAF_MODIFICATIONS
-): boolean {
-  return modifications.some((modification) => leaf[modification])
+): LeafModification[] {
+  return modifications.filter((modification) => leaf[modification])
 }

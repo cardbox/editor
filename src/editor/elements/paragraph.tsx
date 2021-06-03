@@ -1,6 +1,6 @@
 import React from 'react'
 import { RenderElementProps } from 'slate-react'
-import { LeafElement } from '../leaf'
+import { LeafElement } from '../leaf/types'
 
 export interface ParagraphElement {
   type: 'paragraph'
