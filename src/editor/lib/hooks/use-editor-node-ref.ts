@@ -1,8 +1,9 @@
 import { useLayoutEffect, useRef } from 'react'
-import { Editor } from 'slate'
 import { ReactEditor } from 'slate-react'
+import { useEditor } from './use-editor'
 
-export function useEditorNodeRef(editor: Editor) {
+export function useEditorNodeRef() {
+  const editor = useEditor()
   const editorNodeRef = useRef<HTMLElement | null>(null)
 
   useLayoutEffect(() => {

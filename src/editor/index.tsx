@@ -6,12 +6,13 @@ import { renderLeaf } from './leaf'
 import { CustomActionKeybinds } from './lib/action-controller/types'
 import styles from './index.module.css'
 import { Extension } from './lib/extensions/extend'
-import { useEditor } from './lib/hooks/use-editor'
+import { useExtendedEditor } from './lib/hooks/use-extended-editor'
 import { useKeybinds } from './lib/hooks/use-keybinds'
 import { LeafElement } from './leaf/types'
-import { Toolbar } from './toolbar'
+import { Toolbar, ToolbarModificationButton } from './toolbar'
 import 'tippy.js/dist/tippy.css'
 import './lib/tippy/editor-light.theme.css'
+import { EditorContext } from './lib/editor-context'
 
 declare module 'slate' {
   interface CustomTypes {
@@ -36,11 +37,11 @@ export const Editor = ({
   customKeybinds = {},
   customExtensions = [],
 }: Props) => {
-  const editor = useEditor(customExtensions)
+  const editor = useExtendedEditor(customExtensions)
   const { handleKeyDown } = useKeybinds(editor, customKeybinds)
 
   return (
-    <div className={styles.editorContainer}>
+    <EditorContext.Provider value={editor}>
       <Slate editor={editor} value={value} onChange={onChange}>
         <Editable
           className={styles.editor}
@@ -50,7 +51,50 @@ export const Editor = ({
           autoFocus
         />
       </Slate>
-      <Toolbar editor={editor}>Toolbar</Toolbar>
-    </div>
+      <Toolbar editor={editor}>
+        <ToolbarModificationButton
+          modification="bold"
+          icon="B"
+          action="make-bold"
+          style={{ fontWeight: 'bold' }}
+        />
+        <ToolbarModificationButton
+          modification="italic"
+          icon="I"
+          action="make-italic"
+          style={{ fontStyle: 'italic' }}
+        />
+        <ToolbarModificationButton
+          modification="underlined"
+          icon="U"
+          action="make-underlined"
+          style={{ textDecoration: 'underline' }}
+        />
+        <ToolbarModificationButton
+          modification="inlineCode"
+          icon={
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-code"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <polyline points="7 8 3 12 7 16" />
+              <polyline points="17 8 21 12 17 16" />
+              <line x1="14" y1="4" x2="10" y2="20" />
+            </svg>
+          }
+          action="make-inline-code"
+          style={{ width: 22, height: 22 }}
+        />
+      </Toolbar>
+    </EditorContext.Provider>
   )
 }

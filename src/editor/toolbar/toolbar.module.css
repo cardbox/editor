@@ -1,4 +1,5 @@
 .toolbar-container {
-  padding: 5px 10px;
+  display: flex;
+  padding: 6px;
   user-select: none;
 }
