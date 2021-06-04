@@ -1,3 +1,4 @@
+import { createPopper, VirtualElement } from '@popperjs/core'
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { Editor } from 'slate'
 import { useEditorNodeRef } from '../lib/hooks/use-editor-node-ref'
@@ -13,44 +14,67 @@ export const Toolbar = ({ editor }: Props) => {
   const toolbarRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
-    const hide = () => {
-      setVisible(false)
-      const { current: toolbar } = toolbarRef
-      if (!toolbar) return
-      toolbar.style.left = ''
-      toolbar.style.top = ''
+    if (!toolbarRef.current) return
+
+    const virtualElement: VirtualElement = {
+      getBoundingClientRect: () => {
+        const selection = window.getSelection()
+        if (!selection) return new DOMRect()
+        return selection.getRangeAt(0).getBoundingClientRect()
+      },
     }
 
-    const listener = (event: Event) => {
-      console.log(event)
+    const popperInstance = createPopper(virtualElement, toolbarRef.current, {
+      placement: 'top',
+      modifiers: [
+        {
+          name: 'offset',
+          options: {
+            offset: [0, 10],
+          },
+        },
+        {
+          name: 'computeStyles',
+          options: {
+            gpuAcceleration: false,
+          },
+        },
+      ],
+    })
 
+    const listener = () => {
       if (!editorNodeRef.current) return
       if (!toolbarRef.current) return
 
       if (document.activeElement !== editorNodeRef.current) {
-        return hide()
+        toolbarRef.current.style.top = ''
+        toolbarRef.current.style.right = ''
+        toolbarRef.current.style.bottom = ''
+        toolbarRef.current.style.left = ''
+        setVisible(false)
+        return
       }
 
       const selection = window.getSelection()
 
       if (!selection || selection.isCollapsed) {
-        return hide()
+        toolbarRef.current.style.top = ''
+        toolbarRef.current.style.right = ''
+        toolbarRef.current.style.bottom = ''
+        toolbarRef.current.style.left = ''
+        setVisible(false)
+        return
       }
 
       setVisible(true)
-
-      const { left, top } = calculateTooltipPosition({
-        selection: selection.getRangeAt(0).getBoundingClientRect(),
-        editor: editorNodeRef.current.getBoundingClientRect(),
-        toolbar: toolbarRef.current.getBoundingClientRect(),
-      })
-
-      toolbarRef.current.style.left = left + 'px'
-      toolbarRef.current.style.top = top + 'px'
+      popperInstance.update()
     }
 
     document.addEventListener('selectionchange', listener)
-    return () => document.removeEventListener('selectionchange', listener)
+    return () => {
+      document.removeEventListener('selectionchange', listener)
+      popperInstance.destroy()
+    }
   }, [editorNodeRef, toolbarRef])
 
   return (
@@ -58,57 +82,10 @@ export const Toolbar = ({ editor }: Props) => {
       className={styles.toolbar}
       data-visible={visible}
       ref={toolbarRef}
-      onMouseDown={(event) => event.preventDefault()}
-      onSelect={(event) => event.preventDefault()}
+      // onMouseDown={(event) => event.preventDefault()}
+      // onSelect={(event) => event.preventDefault()}
     >
       Toolbar
     </div>
   )
-}
-
-function calculateTooltipPosition({
-  selection,
-  editor,
-  toolbar,
-}: {
-  selection: DOMRect
-  editor: DOMRect
-  toolbar: DOMRect
-}) {
-  let top: number
-  let left: number
-
-  const margins = {
-    // between tooltip and selection
-    selection: 8,
-    // between tooltip and document's edge
-    document: 8,
-  }
-
-  /*
-   * We calculate position relative to the editor's top left corner
-   * Both selection and editor rects have coords relative to the document's top left corner
-   *
-   * So, to get the relative selection's coords
-   * We need to subtract the initial editor's coords from the selection's ones
-   */
-  const relativeX = selection.x - editor.x
-  const relativeY = selection.y - editor.y
-
-  left = relativeX + selection.width / 2 - toolbar.width / 2
-
-  if (left < 0 && editor.x + left < margins.document) {
-    left = -(editor.x - margins.document)
-  }
-
-  if (selection.top < toolbar.height + margins.selection + margins.document) {
-    top = relativeY + selection.height + margins.selection
-  } else {
-    top = relativeY - toolbar.height - margins.selection
-  }
-
-  return {
-    left,
-    top,
-  }
 }

@@ -10,6 +10,8 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@popperjs/core": "^2.9.2",
+    "@tippyjs/react": "^4.2.5",
     "clsx": "^1.1.1",
     "is-hotkey": "^0.2.0",
     "nanoid": "^3.1.23",
@@ -17,7 +19,8 @@
     "react-dom": "^17.0.0",
     "slate": "^0.63.0",
     "slate-history": "^0.62.0",
-    "slate-react": "^0.63.0"
+    "slate-react": "^0.63.0",
+    "tippy.js": "^6.3.1"
   },
   "devDependencies": {
     "@eslint-kit/eslint-config-base": "^4.0.0",
