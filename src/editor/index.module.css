@@ -1,3 +1,7 @@
+.editor-container {
+  position: relative;
+}
+
 .editor {
   font-family: 'TT Hoves';
   font-size: 16px;

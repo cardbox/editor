@@ -1,0 +1,19 @@
+.toolbar {
+  position: absolute;
+  width: fit-content;
+  padding: 6px;
+  visibility: hidden;
+  color: white;
+  background: rgba(0, 0, 0, 0.8);
+  user-select: none;
+  /* pointer-events: none; */
+
+  transition-duration: 75ms, 75ms;
+  transition-timing-function: ease-out, ease-out;
+  transition-delay: initial, initial;
+  transition-property: top, left;
+}
+
+.toolbar[data-visible="true"] {
+  visibility: visible;
+}

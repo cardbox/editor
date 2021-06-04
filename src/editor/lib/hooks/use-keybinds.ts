@@ -1,13 +1,13 @@
 import { useCallback, useEffect } from 'react'
 import { Editor } from 'slate'
-import { actionController } from './actions'
-import { keybindController } from './keybinds'
+import { actionController } from '../../actions'
+import { keybindController } from '../../keybinds'
 import {
   Action,
   ActionKeybinds,
   CustomActionKeybinds,
   DefaultActionKeybinds,
-} from './lib/action-controller/types'
+} from '../action-controller/types'
 
 const defaultKeybinds: DefaultActionKeybinds = {
   'insert-soft-break': 'shift+enter',

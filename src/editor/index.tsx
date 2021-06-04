@@ -6,9 +6,10 @@ import { renderLeaf } from './leaf'
 import { CustomActionKeybinds } from './lib/action-controller/types'
 import styles from './index.module.css'
 import { Extension } from './lib/extensions/extend'
-import { useEditor } from './use-editor'
-import { useKeybinds } from './use-keybinds'
+import { useEditor } from './lib/hooks/use-editor'
+import { useKeybinds } from './lib/hooks/use-keybinds'
 import { LeafElement } from './leaf/types'
+import { Toolbar } from './toolbar'
 
 declare module 'slate' {
   interface CustomTypes {
@@ -37,14 +38,17 @@ export const Editor = ({
   const { handleKeyDown } = useKeybinds(editor, customKeybinds)
 
   return (
-    <Slate editor={editor} value={value} onChange={onChange}>
-      <Editable
-        className={styles.editor}
-        renderElement={renderElement}
-        renderLeaf={renderLeaf}
-        onKeyDown={handleKeyDown}
-        autoFocus
-      />
-    </Slate>
+    <div className={styles.editorContainer}>
+      <Slate editor={editor} value={value} onChange={onChange}>
+        <Editable
+          className={styles.editor}
+          renderElement={renderElement}
+          renderLeaf={renderLeaf}
+          onKeyDown={handleKeyDown}
+          autoFocus
+        />
+      </Slate>
+      <Toolbar editor={editor} />
+    </div>
   )
 }
