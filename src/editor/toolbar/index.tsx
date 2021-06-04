@@ -76,7 +76,6 @@ export const Toolbar = ({ editor, children }: Props) => {
     }
 
     const handleTouchStart = () => {
-      console.log('touch start')
       instance.setProps({
         interactive: false,
       })
