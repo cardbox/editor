@@ -1,18 +1,3 @@
-.toolbar {
-  width: fit-content;
-  padding: 6px;
-  visibility: hidden;
-  color: white;
-  background: rgba(0, 0, 0, 0.8);
-  user-select: none;
-  transition: top ease-out 0.1s, right ease-out 0.1s, bottom ease-out 0.1s,
-    left ease-out 0.1s;
-}
-
-.toolbar[data-visible='true'] {
-  visibility: visible;
-}
-
 .toolbar-container {
   padding: 5px 10px;
   user-select: none;

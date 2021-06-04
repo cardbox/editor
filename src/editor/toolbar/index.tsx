@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useMemo } from 'react'
 import ReactDOM from 'react-dom'
 import { Editor } from 'slate'
 import tippy from 'tippy.js'
+import debounce from 'just-debounce'
 import { useEditorNodeRef } from '../lib/hooks/use-editor-node-ref'
 import styles from './index.module.css'
 
@@ -52,6 +53,12 @@ export const Toolbar = ({ editor, children }: Props) => {
       moveTransition: 'transform 0.1s ease-out',
     })
 
+    const debouncedMakeInteractive = debounce(() => {
+      instance.setProps({
+        interactive: true,
+      })
+    }, 300)
+
     const handleSelection = () => {
       if (!editorNodeRef.current) return
 
@@ -66,42 +73,23 @@ export const Toolbar = ({ editor, children }: Props) => {
       }
 
       instance.setProps({
+        // remove glithes on selection process
+        interactive: false,
         getReferenceClientRect: () => {
           const range = selection.getRangeAt(0)
           return range.getBoundingClientRect()
         },
       })
 
+      // restore interactivity when selection is finished
+      debouncedMakeInteractive()
+
       instance.show()
     }
 
-    const handleTouchStart = () => {
-      instance.setProps({
-        interactive: false,
-      })
-    }
-
-    const handleTouchEnd = () => {
-      // fix transform transition on disappearing
-      if (!instance.state.isVisible) return
-      instance.setProps({
-        interactive: true,
-      })
-    }
-
-    const { current: editor } = editorNodeRef
-
-    editor.addEventListener('mousedown', handleTouchStart)
-    editor.addEventListener('touchstart', handleTouchStart)
-    editor.addEventListener('mouseup', handleTouchEnd)
-    editor.addEventListener('touchend', handleTouchEnd)
     document.addEventListener('selectionchange', handleSelection)
     return () => {
       instance.destroy()
-      editor.removeEventListener('mousedown', handleTouchStart)
-      editor.removeEventListener('touchstart', handleTouchStart)
-      editor.removeEventListener('mouseup', handleTouchEnd)
-      editor.removeEventListener('touchend', handleTouchEnd)
       document.removeEventListener('selectionchange', handleSelection)
     }
   }, [container, editorNodeRef])
