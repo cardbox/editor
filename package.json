@@ -10,7 +10,6 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@popperjs/core": "^2.9.2",
     "@tippyjs/react": "^4.2.5",
     "clsx": "^1.1.1",
     "is-hotkey": "^0.2.0",
