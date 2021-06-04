@@ -1,91 +1,86 @@
-import { createPopper, VirtualElement } from '@popperjs/core'
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import { ReactNode, useEffect, useMemo } from 'react'
+import ReactDOM from 'react-dom'
 import { Editor } from 'slate'
+import tippy from 'tippy.js'
 import { useEditorNodeRef } from '../lib/hooks/use-editor-node-ref'
 import styles from './index.module.css'
 
-interface Props {
-  editor: Editor
+/*
+ * We use this element as the React Portal container
+ * It's something like our custom tippy react binding
+ * (the default one doesn't work well for the toolbar)
+ */
+function useContainer() {
+  const container = useMemo(() => {
+    const element = document.createElement('div')
+    element.classList.add(styles.toolbarContainer)
+    return element
+  }, [])
+
+  /*
+   * Prevent deselection after clicking on the tooltip
+   */
+  useEffect(() => {
+    const listener = (event: Event) => event.preventDefault()
+    container.addEventListener('mousedown', listener)
+    return () => container.removeEventListener('mousedown', listener)
+  }, [container])
+
+  return container
 }
 
-export const Toolbar = ({ editor }: Props) => {
-  const [visible, setVisible] = useState(false)
+interface Props {
+  editor: Editor
+  children: ReactNode
+}
+
+export const Toolbar = ({ editor, children }: Props) => {
   const editorNodeRef = useEditorNodeRef(editor)
-  const toolbarRef = useRef<HTMLDivElement>(null)
+  const container = useContainer()
 
-  useLayoutEffect(() => {
-    if (!toolbarRef.current) return
+  useEffect(() => {
+    if (!editorNodeRef.current) return
 
-    const virtualElement: VirtualElement = {
-      getBoundingClientRect: () => {
-        const selection = window.getSelection()
-        if (!selection) return new DOMRect()
-        return selection.getRangeAt(0).getBoundingClientRect()
-      },
-    }
-
-    const popperInstance = createPopper(virtualElement, toolbarRef.current, {
+    const instance = tippy(editorNodeRef.current, {
+      theme: 'editor-light',
+      content: container,
       placement: 'top',
-      modifiers: [
-        {
-          name: 'offset',
-          options: {
-            offset: [0, 10],
-          },
-        },
-        {
-          name: 'computeStyles',
-          options: {
-            gpuAcceleration: false,
-          },
-        },
-      ],
+      trigger: 'manual',
+      interactive: true,
+      arrow: false,
+      offset: [0, 10],
+      moveTransition: 'transform 0.1s ease-out',
     })
 
     const listener = () => {
       if (!editorNodeRef.current) return
-      if (!toolbarRef.current) return
 
       if (document.activeElement !== editorNodeRef.current) {
-        toolbarRef.current.style.top = ''
-        toolbarRef.current.style.right = ''
-        toolbarRef.current.style.bottom = ''
-        toolbarRef.current.style.left = ''
-        setVisible(false)
-        return
+        return instance.hide()
       }
 
       const selection = window.getSelection()
 
       if (!selection || selection.isCollapsed) {
-        toolbarRef.current.style.top = ''
-        toolbarRef.current.style.right = ''
-        toolbarRef.current.style.bottom = ''
-        toolbarRef.current.style.left = ''
-        setVisible(false)
-        return
+        return instance.hide()
       }
 
-      setVisible(true)
-      popperInstance.update()
+      instance.setProps({
+        getReferenceClientRect: () => {
+          const range = selection.getRangeAt(0)
+          return range.getBoundingClientRect()
+        },
+      })
+
+      instance.show()
     }
 
     document.addEventListener('selectionchange', listener)
     return () => {
+      instance.destroy()
       document.removeEventListener('selectionchange', listener)
-      popperInstance.destroy()
     }
-  }, [editorNodeRef, toolbarRef])
+  }, [container, editorNodeRef])
 
-  return (
-    <div
-      className={styles.toolbar}
-      data-visible={visible}
-      ref={toolbarRef}
-      // onMouseDown={(event) => event.preventDefault()}
-      // onSelect={(event) => event.preventDefault()}
-    >
-      Toolbar
-    </div>
-  )
+  return ReactDOM.createPortal(children, container)
 }

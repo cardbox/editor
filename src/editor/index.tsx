@@ -10,6 +10,8 @@ import { useEditor } from './lib/hooks/use-editor'
 import { useKeybinds } from './lib/hooks/use-keybinds'
 import { LeafElement } from './leaf/types'
 import { Toolbar } from './toolbar'
+import 'tippy.js/dist/tippy.css'
+import './lib/tippy/editor-light.theme.css'
 
 declare module 'slate' {
   interface CustomTypes {
@@ -48,7 +50,7 @@ export const Editor = ({
           autoFocus
         />
       </Slate>
-      <Toolbar editor={editor} />
+      <Toolbar editor={editor}>Toolbar</Toolbar>
     </div>
   )
 }

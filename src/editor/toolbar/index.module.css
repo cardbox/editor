@@ -12,3 +12,8 @@
 .toolbar[data-visible='true'] {
   visibility: visible;
 }
+
+.toolbar-container {
+  padding: 5px 10px;
+  user-select: none;
+}
