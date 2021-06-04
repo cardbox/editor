@@ -52,7 +52,7 @@ export const Toolbar = ({ editor, children }: Props) => {
       moveTransition: 'transform 0.1s ease-out',
     })
 
-    const listener = () => {
+    const handleSelection = () => {
       if (!editorNodeRef.current) return
 
       if (document.activeElement !== editorNodeRef.current) {
@@ -75,10 +75,35 @@ export const Toolbar = ({ editor, children }: Props) => {
       instance.show()
     }
 
-    document.addEventListener('selectionchange', listener)
+    const handleTouchStart = () => {
+      console.log('touch start')
+      instance.setProps({
+        interactive: false,
+      })
+    }
+
+    const handleTouchEnd = () => {
+      // fix transform transition on disappearing
+      if (!instance.state.isVisible) return
+      instance.setProps({
+        interactive: true,
+      })
+    }
+
+    const { current: editor } = editorNodeRef
+
+    editor.addEventListener('mousedown', handleTouchStart)
+    editor.addEventListener('touchstart', handleTouchStart)
+    editor.addEventListener('mouseup', handleTouchEnd)
+    editor.addEventListener('touchend', handleTouchEnd)
+    document.addEventListener('selectionchange', handleSelection)
     return () => {
       instance.destroy()
-      document.removeEventListener('selectionchange', listener)
+      editor.removeEventListener('mousedown', handleTouchStart)
+      editor.removeEventListener('touchstart', handleTouchStart)
+      editor.removeEventListener('mouseup', handleTouchEnd)
+      editor.removeEventListener('touchend', handleTouchEnd)
+      document.removeEventListener('selectionchange', handleSelection)
     }
   }, [container, editorNodeRef])
 
