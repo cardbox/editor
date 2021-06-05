@@ -98,8 +98,8 @@ export const Editor = ({
             </svg>
           }
           action="make-inline-code"
-          tooltip="Inline-code (⌘E/⌘`)"
-          style={{ width: 22, height: 22 }}
+          tooltip="Inline-code (⌘E)"
+          style={{ width: 18, height: 18, paddingLeft: 4 }}
         />
       </Toolbar>
     </EditorContext.Provider>

@@ -66,9 +66,9 @@ export const ToolbarModificationButton = ({
   if (tooltip) {
     return (
       <Tippy
-        theme={THEMES.EDITOR_DEFAULT}
+        theme={THEMES.EDITOR_KEYBIND}
         content={tooltip}
-        offset={[0, 15]}
+        offset={[0, 20]}
         hideOnClick={false}
       >
         {jsx}

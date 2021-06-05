@@ -50,8 +50,7 @@ export const Toolbar = ({ children }: Props) => {
       placement: 'top',
       trigger: 'manual',
       interactive: true,
-      arrow: false,
-      offset: [0, 10],
+      offset: [0, 15],
       moveTransition: 'transform 0.1s ease-out',
     })
 
