@@ -1,12 +1,9 @@
 import React from 'react'
 import { RenderElementProps } from 'slate-react'
-import { LeafElement } from '../leaf/types'
+import { LEAF_MODIFICATIONS } from '../leaf/types'
 import styles from './paragraph.module.css'
-
-export interface ParagraphElement {
-  type: 'paragraph'
-  children: LeafElement[]
-}
+import { ParagraphElement } from './paragraph.types'
+import { ElementSettings } from './types'
 
 export const createParagraphComponent = (text = ''): ParagraphElement => ({
   type: 'paragraph',
@@ -22,4 +19,9 @@ export const ParagraphComponent = ({
       {children}
     </p>
   )
+}
+
+export const PARAGRAPH_SETTINGS: ElementSettings = {
+  allowedModifications: Array.from(LEAF_MODIFICATIONS),
+  allowedTransformations: ['heading-1'],
 }

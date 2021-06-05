@@ -1,12 +1,8 @@
 import React from 'react'
 import { RenderElementProps } from 'slate-react'
-import { LeafElement } from '../leaf/types'
 import styles from './heading-1.module.css'
-
-export interface Heading1Element {
-  type: 'heading-1'
-  children: LeafElement[]
-}
+import { Heading1Element } from './heading-1.types'
+import { ElementSettings } from './types'
 
 export const createHeading1Component = (text = ''): Heading1Element => ({
   type: 'heading-1',
@@ -22,4 +18,9 @@ export const Heading1Component = ({
       {children}
     </h1>
   )
+}
+
+export const HEADING_1_SETTINGS: ElementSettings = {
+  allowedModifications: [],
+  allowedTransformations: ['paragraph'],
 }
