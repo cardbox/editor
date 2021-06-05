@@ -19,6 +19,10 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
+.container:hover .icon {
+  color: white;
+}
+
 .container[data-active="true"] .icon {
   color: white;
 }

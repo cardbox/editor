@@ -1,10 +1,16 @@
-import React, { CSSProperties, ReactNode, useEffect } from 'react'
+import React, {
+  CSSProperties,
+  MouseEventHandler,
+  ReactNode,
+  useEffect,
+} from 'react'
 import { Editor } from 'slate'
 import { actionController } from '../actions'
 import { LeafModification } from '../leaf/types'
 import { Action } from '../lib/action-controller/types'
 import { useEditor } from '../lib/hooks/use-editor'
 import { useForceUpdate } from '../lib/hooks/use-force-update'
+import { useThrottled } from '../lib/hooks/use-throttled'
 import { noopKeyboardEvent } from '../lib/util'
 import styles from './toolbar-modification-button.module.css'
 
@@ -29,23 +35,23 @@ export const ToolbarModificationButton = ({
 }: Props) => {
   const editor = useEditor()
   const isActive = hasModification(editor, modification)
-  const forceUpdate = useForceUpdate()
+  const forceUpdate = useThrottled(useForceUpdate(), 300)
 
   useEffect(() => {
-    document.addEventListener('selectionchange', () => {
-      console.log('selectionchange')
-      forceUpdate()
-    })
+    document.addEventListener('selectionchange', forceUpdate)
     return () => document.removeEventListener('selectionchange', forceUpdate)
   }, [forceUpdate])
+
+  const handleClick: MouseEventHandler<Element> = (event) => {
+    event.preventDefault()
+    actionController.execute(action, editor, noopKeyboardEvent)
+  }
 
   return (
     <button
       className={styles.container}
       data-active={isActive}
-      onClick={() => {
-        actionController.execute(action, editor, noopKeyboardEvent)
-      }}
+      onClick={handleClick}
     >
       <span className={styles.icon} style={style}>
         {icon}

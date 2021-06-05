@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useMemo } from 'react'
+import { ReactNode, useEffect, useMemo, useRef } from 'react'
 import ReactDOM from 'react-dom'
 import { Editor } from 'slate'
 import tippy from 'tippy.js'
@@ -30,6 +30,22 @@ function useContainer() {
   return container
 }
 
+interface SelectionOffsets {
+  anchor: number
+  focus: number
+}
+
+function getSelectionOffsets(selection: Selection): SelectionOffsets {
+  return {
+    anchor: selection.anchorOffset,
+    focus: selection.focusOffset,
+  }
+}
+
+function isSelectionOffsetsEqual(a: SelectionOffsets, b: SelectionOffsets) {
+  return a.anchor === b.anchor && a.focus === b.focus
+}
+
 interface Props {
   editor: Editor
   children: ReactNode
@@ -38,6 +54,10 @@ interface Props {
 export const Toolbar = ({ children }: Props) => {
   const editorNodeRef = useEditorNodeRef()
   const container = useContainer()
+  const previousOffsets = useRef<SelectionOffsets>({
+    anchor: Number.POSITIVE_INFINITY,
+    focus: Number.POSITIVE_INFINITY,
+  })
 
   useEffect(() => {
     if (!editorNodeRef.current) return
@@ -72,9 +92,15 @@ export const Toolbar = ({ children }: Props) => {
         return instance.hide()
       }
 
+      const offsets = getSelectionOffsets(selection)
+      const isSamePlace = isSelectionOffsetsEqual(
+        offsets,
+        previousOffsets.current
+      )
+
       instance.setProps({
         // remove glithes on selection process
-        interactive: false,
+        interactive: !isSamePlace,
         getReferenceClientRect: () => {
           const range = selection.getRangeAt(0)
           return range.getBoundingClientRect()
@@ -82,8 +108,11 @@ export const Toolbar = ({ children }: Props) => {
       })
 
       // restore interactivity when selection is finished
-      debouncedMakeInteractive()
+      if (!isSamePlace) {
+        debouncedMakeInteractive()
+      }
 
+      previousOffsets.current = offsets
       instance.show()
     }
 

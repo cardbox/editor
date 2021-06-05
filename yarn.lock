@@ -370,6 +370,11 @@
   resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.1.tgz#18845205e86ff0038517aab7a18a62a6b9f71275"
   integrity sha512-EaCxbanVeyxDRTQBkdLb3Bvl/HK7PBK6UJjsSixB0iHKoWxE5uu2Q/DgtpOhPIojN0Zl1whvOd7PoHs2P0s5eA==
 
+"@types/throttleit@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@types/throttleit/-/throttleit-1.0.0.tgz#35270b335dd93f6fdece488e1465842e5d6742ee"
+  integrity sha512-F2OlEPPf1cvi8M7A9IK6q08llRoHJMTp8oRHxwx4wbmRFvtea60gEJ3K5RO1OJ/KlMMMHn85ZKf20tg6IJeg+g==
+
 "@typescript-eslint/eslint-plugin@4.23.0":
   version "4.23.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-4.23.0.tgz#29d3c9c81f6200b1fd6d8454cfb007ba176cde80"
@@ -2310,6 +2315,11 @@ text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
+
+throttleit@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/throttleit/-/throttleit-1.0.0.tgz#9e785836daf46743145a5984b6268d828528ac6c"
+  integrity sha1-nnhYNtr0Z0MUWlmEtiaNgoUorGw=
 
 tiny-invariant@1.0.6:
   version "1.0.6"
