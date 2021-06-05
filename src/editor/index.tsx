@@ -11,7 +11,7 @@ import { useKeybinds } from './lib/hooks/use-keybinds'
 import { LeafElement } from './leaf/types'
 import { Toolbar, ToolbarModificationButton } from './toolbar'
 import 'tippy.js/dist/tippy.css'
-import './lib/tippy/editor-light.theme.css'
+import './lib/tippy/themes.css'
 import { EditorContext } from './lib/editor-context'
 
 declare module 'slate' {
@@ -56,18 +56,21 @@ export const Editor = ({
           modification="bold"
           icon="B"
           action="make-bold"
+          tooltip="Bold (⌘B)"
           style={{ fontWeight: 'bold' }}
         />
         <ToolbarModificationButton
           modification="italic"
           icon="I"
           action="make-italic"
+          tooltip="Italic (⌘I)"
           style={{ fontStyle: 'italic' }}
         />
         <ToolbarModificationButton
           modification="underlined"
           icon="U"
           action="make-underlined"
+          tooltip="Underlined (⌘U)"
           style={{ textDecoration: 'underline' }}
         />
         <ToolbarModificationButton
@@ -92,6 +95,7 @@ export const Editor = ({
             </svg>
           }
           action="make-inline-code"
+          tooltip="Inline-code (⌘E/⌘`)"
           style={{ width: 22, height: 22 }}
         />
       </Toolbar>

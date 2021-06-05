@@ -1,3 +1,4 @@
+import Tippy from '@tippyjs/react'
 import React, {
   CSSProperties,
   MouseEventHandler,
@@ -11,6 +12,7 @@ import { Action } from '../lib/action-controller/types'
 import { useEditor } from '../lib/hooks/use-editor'
 import { useForceUpdate } from '../lib/hooks/use-force-update'
 import { useThrottled } from '../lib/hooks/use-throttled'
+import { THEMES } from '../lib/tippy/themes'
 import { noopKeyboardEvent } from '../lib/util'
 import styles from './toolbar-modification-button.module.css'
 
@@ -24,6 +26,7 @@ interface Props {
   modification: LeafModification
   icon: ReactNode
   action: Action
+  tooltip?: string
   style?: CSSProperties
 }
 
@@ -31,6 +34,7 @@ export const ToolbarModificationButton = ({
   modification,
   icon,
   action,
+  tooltip,
   style = {},
 }: Props) => {
   const editor = useEditor()
@@ -47,7 +51,7 @@ export const ToolbarModificationButton = ({
     actionController.execute(action, editor, noopKeyboardEvent)
   }
 
-  return (
+  const jsx = (
     <button
       className={styles.container}
       data-active={isActive}
@@ -58,4 +62,19 @@ export const ToolbarModificationButton = ({
       </span>
     </button>
   )
+
+  if (tooltip) {
+    return (
+      <Tippy
+        theme={THEMES.EDITOR_DEFAULT}
+        content={tooltip}
+        offset={[0, 15]}
+        hideOnClick={false}
+      >
+        {jsx}
+      </Tippy>
+    )
+  }
+
+  return jsx
 }

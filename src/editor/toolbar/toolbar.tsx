@@ -4,6 +4,7 @@ import { Editor } from 'slate'
 import tippy from 'tippy.js'
 import debounce from 'just-debounce'
 import { useEditorNodeRef } from '../lib/hooks/use-editor-node-ref'
+import { THEMES } from '../lib/tippy/themes'
 import styles from './toolbar.module.css'
 
 /*
@@ -30,22 +31,6 @@ function useContainer() {
   return container
 }
 
-interface SelectionOffsets {
-  anchor: number
-  focus: number
-}
-
-function getSelectionOffsets(selection: Selection): SelectionOffsets {
-  return {
-    anchor: selection.anchorOffset,
-    focus: selection.focusOffset,
-  }
-}
-
-function isSelectionOffsetsEqual(a: SelectionOffsets, b: SelectionOffsets) {
-  return a.anchor === b.anchor && a.focus === b.focus
-}
-
 interface Props {
   editor: Editor
   children: ReactNode
@@ -54,16 +39,13 @@ interface Props {
 export const Toolbar = ({ children }: Props) => {
   const editorNodeRef = useEditorNodeRef()
   const container = useContainer()
-  const previousOffsets = useRef<SelectionOffsets>({
-    anchor: Number.POSITIVE_INFINITY,
-    focus: Number.POSITIVE_INFINITY,
-  })
+  const previousSelectedText = useRef<string>('')
 
   useEffect(() => {
     if (!editorNodeRef.current) return
 
     const instance = tippy(editorNodeRef.current, {
-      theme: 'editor-light',
+      theme: THEMES.EDITOR_TOOLBAR,
       content: container,
       placement: 'top',
       trigger: 'manual',
@@ -88,32 +70,38 @@ export const Toolbar = ({ children }: Props) => {
 
       const selection = window.getSelection()
 
-      if (!selection || selection.isCollapsed) {
+      if (!selection) {
         return instance.hide()
       }
 
-      const offsets = getSelectionOffsets(selection)
-      const isSamePlace = isSelectionOffsetsEqual(
-        offsets,
-        previousOffsets.current
-      )
+      const range = selection.getRangeAt(0)
+      const selectedText = range.toString()
+
+      if (selection.isCollapsed) {
+        previousSelectedText.current = selectedText
+        return instance.hide()
+      }
+
+      const isSamePlace = selectedText === previousSelectedText.current
+
+      if (isSamePlace) {
+        return
+      }
 
       instance.setProps({
         // remove glithes on selection process
-        interactive: !isSamePlace,
+        interactive: false,
         getReferenceClientRect: () => {
           const range = selection.getRangeAt(0)
           return range.getBoundingClientRect()
         },
       })
 
-      // restore interactivity when selection is finished
-      if (!isSamePlace) {
-        debouncedMakeInteractive()
-      }
-
-      previousOffsets.current = offsets
       instance.show()
+
+      // restore interactivity when selection is finished
+      debouncedMakeInteractive()
+      previousSelectedText.current = selectedText
     }
 
     document.addEventListener('selectionchange', handleSelection)
