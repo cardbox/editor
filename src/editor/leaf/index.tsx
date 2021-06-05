@@ -3,14 +3,25 @@ import { RenderLeafProps } from 'slate-react'
 import { Queries } from '../common/queries'
 import { ElementMapper, LeafElement, LeafModification } from './types'
 
-export function createLeaf(
-  text: string,
-  modifications: Partial<Record<LeafModification, boolean>> = {}
-): LeafElement {
-  return {
-    text,
-    ...modifications,
-  }
+export function createLeaf({
+  text,
+  href,
+  modifications = [],
+}: {
+  text: string
+  href?: string
+  modifications?: LeafModification[]
+}): LeafElement {
+  return modifications.reduce<LeafElement>(
+    (leaf, modification) => {
+      leaf[modification] = true
+      return leaf
+    },
+    {
+      text,
+      href,
+    }
+  )
 }
 
 const ELEMENT_MAPPER: ElementMapper = {
@@ -21,19 +32,27 @@ const ELEMENT_MAPPER: ElementMapper = {
 }
 
 function buildElement({ leaf, children, attributes }: RenderLeafProps) {
-  const hasModifications = Queries.leafHasModifications(leaf)
-
-  if (!hasModifications) {
-    return <span {...attributes}>{children}</span>
-  }
-
   const modifications = Queries.leafModifications(leaf)
 
-  return modifications.reduce((acc, modification, index) => {
+  const wrapped = modifications.reduce((acc, modification, index) => {
     const elementType = ELEMENT_MAPPER[modification]
     const props = index === modifications.length - 1 ? attributes : {}
     return React.createElement(elementType, props, acc)
   }, children)
+
+  if (modifications.length === 0) {
+    return <span {...attributes}>{wrapped}</span>
+  }
+
+  if (leaf.href) {
+    return (
+      <a href={leaf.href} target="_blank" {...attributes}>
+        {wrapped}
+      </a>
+    )
+  }
+
+  return wrapped
 }
 
 const LeafComponent = (props: RenderLeafProps) => {

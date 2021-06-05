@@ -1,15 +1,49 @@
 import React, { useEffect, useState } from 'react'
 import { Editor, EditorValue } from './editor'
-import { createParagraphComponent } from './editor/elements'
-import { createHeading1Component } from './editor/elements/heading-1'
 
 function useEditorValue() {
   const initialState: EditorValue = [
-    createHeading1Component('Manage map or Set in effector store'),
-    createParagraphComponent(
-      'Sometimes we need to save Set in effector store.' +
-        '\nSimple createStore(new Set) will not trigger updates on .add(item)'
-    ),
+    {
+      type: 'heading-1',
+      children: [
+        {
+          text: 'Manage map or Set in effector store',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      children: [
+        {
+          text: 'Sometimes we need to save Set in ',
+        },
+        {
+          text: 'effector',
+          italic: true,
+        },
+        {
+          text: ' store.\nSimple ',
+        },
+        {
+          text: 'createStore(new Set())',
+          inlineCode: true,
+        },
+        {
+          text: ' ',
+        },
+        {
+          text: 'will not',
+          bold: true,
+        },
+        {
+          text: ' trigger updates on ',
+        },
+        {
+          text: '.add(item)',
+          inlineCode: true,
+        },
+      ],
+    },
   ]
 
   const [value, setValue] = useState<EditorValue>(initialState)

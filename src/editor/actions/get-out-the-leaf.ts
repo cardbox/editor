@@ -49,7 +49,7 @@ export const getOutTheLeaf: ActionCallback<Editor> = (editor, event) => {
 
   event.preventDefault()
 
-  Transforms.insertNodes(editor, createLeaf(' '), {
+  Transforms.insertNodes(editor, createLeaf({ text: ' ' }), {
     select: true,
   })
 }

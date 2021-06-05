@@ -6,6 +6,7 @@ export interface LeafElement {
   italic?: boolean
   underlined?: boolean
   inlineCode?: boolean
+  href?: string
 }
 
 export const LEAF_MODIFICATIONS = [

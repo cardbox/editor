@@ -1,11 +1,16 @@
 .editor {
-  font-family: 'TT Hoves';
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 24px;
 }
 
 .editor code {
+  font-family: 'Source Code Pro', monospace;
   padding: 4px 6px;
   background: #F7F6F9;
   border-radius: 6px;
+}
+
+.editor b {
+  font-weight: 600;
 }

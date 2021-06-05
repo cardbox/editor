@@ -1,9 +1,9 @@
 import { Editor } from 'slate'
-import { LeafElement } from '../leaf/types'
+import { LeafModification } from '../leaf/types'
 
 export function toggleLeafModification(
   editor: Editor,
-  property: Exclude<keyof LeafElement, 'text'>
+  property: LeafModification
 ) {
   const leaf = Editor.marks(editor)
   if (!leaf) return
