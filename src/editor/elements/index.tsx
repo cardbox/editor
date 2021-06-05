@@ -1,12 +1,13 @@
 import React from 'react'
 import { RenderElementProps } from 'slate-react'
+import { Heading1Component, Heading1Element } from './heading-1'
 import {
   ParagraphElement,
   ParagraphComponent,
   createParagraphComponent,
 } from './paragraph'
 
-export type CustomElement = ParagraphElement
+export type CustomElement = ParagraphElement | Heading1Element
 export type DefaultElement = ParagraphElement
 
 export type CustomElementType = CustomElement['type']
@@ -22,7 +23,8 @@ export const createDefaultElement: CreateDefaultElement =
   createParagraphComponent
 
 const elementMapper: ElementMapper = {
-  paragraph: ParagraphComponent,
+  'paragraph': ParagraphComponent,
+  'heading-1': Heading1Component,
 }
 
 export function renderElement(props: RenderElementProps) {

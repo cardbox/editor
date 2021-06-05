@@ -27,7 +27,7 @@ export type EditorValue = Descendant[]
 interface Props {
   value: EditorValue
   onChange: (value: EditorValue) => void
-  readOnly: boolean
+  readOnly?: boolean
   customKeybinds?: CustomActionKeybinds
   customExtensions?: Extension[]
 }
