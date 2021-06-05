@@ -27,6 +27,7 @@ export type EditorValue = Descendant[]
 interface Props {
   value: EditorValue
   onChange: (value: EditorValue) => void
+  readOnly: boolean
   customKeybinds?: CustomActionKeybinds
   customExtensions?: Extension[]
 }
@@ -34,6 +35,7 @@ interface Props {
 export const Editor = ({
   value,
   onChange,
+  readOnly = false,
   customKeybinds = {},
   customExtensions = [],
 }: Props) => {
@@ -48,6 +50,7 @@ export const Editor = ({
           renderElement={renderElement}
           renderLeaf={renderLeaf}
           onKeyDown={handleKeyDown}
+          readOnly={readOnly}
           autoFocus
         />
       </Slate>
