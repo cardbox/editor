@@ -40,16 +40,16 @@ function buildElement({ leaf, children, attributes }: RenderLeafProps) {
     return React.createElement(elementType, props, acc)
   }, children)
 
-  if (modifications.length === 0) {
-    return <span {...attributes}>{wrapped}</span>
-  }
-
   if (leaf.href) {
     return (
       <a href={leaf.href} target="_blank" {...attributes}>
         {wrapped}
       </a>
     )
+  }
+
+  if (modifications.length === 0) {
+    return <span {...attributes}>{wrapped}</span>
   }
 
   return wrapped
