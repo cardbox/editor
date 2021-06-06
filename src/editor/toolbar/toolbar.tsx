@@ -1,11 +1,14 @@
-import { ReactNode, useEffect, useMemo, useRef } from 'react'
+import { ReactNode, useEffect, useMemo } from 'react'
 import ReactDOM from 'react-dom'
 import { Editor } from 'slate'
 import tippy from 'tippy.js'
 import debounce from 'just-debounce'
 import { useEditorNodeRef } from '../lib/hooks/use-editor-node-ref'
 import { THEMES } from '../lib/tippy/themes'
+import { useThrottled } from '../lib/hooks/use-throttled'
+import { useForceUpdate } from '../lib/hooks/use-force-update'
 import styles from './toolbar.module.css'
+import { useToolbarState } from './toolbar-context'
 
 /*
  * We use this element as the React Portal container
@@ -33,18 +36,20 @@ function useContainer() {
 
 interface Props {
   editor: Editor
-  children: ReactNode
+  renderButtons: () => ReactNode
 }
 
-export const Toolbar = ({ children }: Props) => {
+export const Toolbar = ({ renderButtons }: Props) => {
   const editorNodeRef = useEditorNodeRef()
   const container = useContainer()
-  const previousSelectedText = useRef<string>('')
+  const { instance, lastSelectedText } = useToolbarState()
+  const forceUpdate = useThrottled(useForceUpdate(), 300)
 
+  // eslint-disable-next-line sonarjs/cognitive-complexity
   useEffect(() => {
     if (!editorNodeRef.current) return
 
-    const instance = tippy(editorNodeRef.current, {
+    instance.current = tippy(editorNodeRef.current, {
       theme: THEMES.EDITOR_TOOLBAR,
       content: container,
       placement: 'top',
@@ -52,63 +57,75 @@ export const Toolbar = ({ children }: Props) => {
       interactive: true,
       offset: [0, 15],
       moveTransition: 'transform 0.1s ease-out',
+      getReferenceClientRect: () => {
+        const selection = window.getSelection()
+        if (!selection) return new DOMRect()
+        const range = selection.getRangeAt(0)
+        return range.getBoundingClientRect()
+      },
     })
 
-    const debouncedMakeInteractive = debounce(() => {
-      instance.setProps({
-        interactive: true,
-      })
+    const debouncedShow = debounce(() => {
+      if (!instance.current) return
+      forceUpdate() // update toolbar buttons
+      instance.current.show()
     }, 300)
 
     const handleSelection = () => {
       if (!editorNodeRef.current) return
+      if (!instance.current) return
 
       if (document.activeElement !== editorNodeRef.current) {
-        return instance.hide()
+        /*
+         * The user may select text in another instance of the Editor
+         */
+
+        return instance.current.hide()
       }
 
       const selection = window.getSelection()
 
       if (!selection) {
-        return instance.hide()
+        return instance.current.hide()
+      }
+
+      if (selection.isCollapsed) {
+        /*
+         * The user selected 0 characters
+         * We don't want to show the toolbar in this case
+         */
+
+        lastSelectedText.current = ''
+        return instance.current.hide()
       }
 
       const range = selection.getRangeAt(0)
       const selectedText = range.toString()
 
-      if (selection.isCollapsed) {
-        previousSelectedText.current = selectedText
-        return instance.hide()
-      }
-
-      const isSamePlace = selectedText === previousSelectedText.current
+      const isSamePlace = selectedText === lastSelectedText.current
 
       if (isSamePlace) {
-        return
+        /*
+         * 'selectionchange' was fired but text remained the same
+         * Most likely, the user just formatted the text
+         * So, re-render the component to update toolbar buttons
+         */
+
+        return forceUpdate()
       }
 
-      instance.setProps({
-        // remove glithes on selection process
-        interactive: false,
-        getReferenceClientRect: () => {
-          const range = selection.getRangeAt(0)
-          return range.getBoundingClientRect()
-        },
-      })
+      instance.current.hide() // keep hidden while selecting
+      debouncedShow() // show on finish
 
-      instance.show()
-
-      // restore interactivity when selection is finished
-      debouncedMakeInteractive()
-      previousSelectedText.current = selectedText
+      lastSelectedText.current = selectedText
     }
 
     document.addEventListener('selectionchange', handleSelection)
     return () => {
-      instance.destroy()
+      instance.current?.destroy()
       document.removeEventListener('selectionchange', handleSelection)
     }
   }, [container, editorNodeRef])
 
-  return ReactDOM.createPortal(children, container)
+  return ReactDOM.createPortal(renderButtons(), container)
 }

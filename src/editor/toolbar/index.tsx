@@ -1,2 +1,2 @@
-export { ToolbarModificationButton } from './toolbar-modification-button'
 export { Toolbar } from './toolbar'
+export * from './toolbar-context'
