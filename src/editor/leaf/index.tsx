@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { RenderLeafProps } from 'slate-react'
 import { Queries } from '../common/queries'
 import { ElementMapper, LeafElement, LeafModification } from './types'
@@ -34,25 +34,27 @@ const ELEMENT_MAPPER: ElementMapper = {
 function buildElement({ leaf, children, attributes }: RenderLeafProps) {
   const modifications = Queries.leafModifications(leaf)
 
-  const wrapped = modifications.reduce((acc, modification, index) => {
+  let wrapped: ReactElement = children
+
+  for (const modification of modifications) {
     const elementType = ELEMENT_MAPPER[modification]
-    const props = index === modifications.length - 1 ? attributes : {}
-    return React.createElement(elementType, props, acc)
-  }, children)
+    wrapped = React.createElement(elementType, null, wrapped)
+  }
 
   if (leaf.href) {
-    return (
-      <a href={leaf.href} target="_blank" {...attributes}>
+    wrapped = (
+      <a href={leaf.href} target="_blank">
         {wrapped}
       </a>
     )
   }
 
-  if (modifications.length === 0) {
-    return <span {...attributes}>{wrapped}</span>
+  if (wrapped === children) {
+    // simple text
+    wrapped = <span>{wrapped}</span>
   }
 
-  return wrapped
+  return React.cloneElement(wrapped, attributes)
 }
 
 const LeafComponent = (props: RenderLeafProps) => {
