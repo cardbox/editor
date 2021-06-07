@@ -1,9 +1,8 @@
 import { Editor, Range, Transforms } from 'slate'
-import { getOutTheLeaf } from '../actions/get-out-the-leaf'
+import { CustomTransforms } from '../common/custom-transforms'
 import { Queries } from '../common/queries'
 import { CustomElement } from '../elements'
 import { LeafElement } from '../leaf/types'
-import { noopKeyboardEvent } from '../lib/util'
 
 interface SkipParams {
   block: CustomElement
@@ -257,7 +256,7 @@ function replaceAtRange({
 
   if (keepTrigger) {
     if (entry.transformType === 'leaf') {
-      getOutTheLeaf(editor, noopKeyboardEvent)
+      CustomTransforms.getOutTheLeaf(editor)
     } else {
       insertText(trigger)
     }
