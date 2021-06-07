@@ -33,7 +33,11 @@ export const ToolbarModificationButton = ({
 
   const handleClick: MouseEventHandler<Element> = (event) => {
     event.preventDefault()
-    actionController.execute(action, editor, noopKeyboardEvent)
+
+    actionController.execute(action, {
+      editor,
+      event: noopKeyboardEvent,
+    })
   }
 
   return (

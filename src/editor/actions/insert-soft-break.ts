@@ -1,10 +1,11 @@
-import { Editor } from 'slate'
+import { CustomTransforms } from '../common/custom-transforms'
 import { ActionCallback } from '../lib/action-controller/types'
+import { ActionParams } from './types'
 
-export const insertSoftBreak: ActionCallback<Editor> = (editor, event) => {
-  const { selection } = editor
-  if (!selection) return
-
+export const insertSoftBreak: ActionCallback<ActionParams> = ({
+  editor,
+  event,
+}) => {
   event.preventDefault()
-  editor.insertText('\n')
+  CustomTransforms.insertSoftBreak(editor)
 }

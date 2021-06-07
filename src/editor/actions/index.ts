@@ -6,8 +6,9 @@ import { makeItalic } from './make-italic'
 import { makeUnderlined } from './make-underlined'
 import { makeInlineCode } from './make-inline-code'
 import { getOutTheLeaf } from './get-out-the-leaf'
+import { ActionParams } from './types'
 
-export const actionController = createActionController()
+export const actionController = createActionController<ActionParams>()
 
 actionController.register('insert-soft-break', insertSoftBreak)
 actionController.register('insert-exit-break', insertExitBreak)

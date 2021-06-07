@@ -1,8 +1,11 @@
-import { Editor } from 'slate'
-import { toggleLeafModification } from '../common/transforms'
+import { CustomTransforms } from '../common/custom-transforms'
 import { ActionCallback } from '../lib/action-controller/types'
+import { ActionParams } from './types'
 
-export const makeUnderlined: ActionCallback<Editor> = (editor, event) => {
+export const makeUnderlined: ActionCallback<ActionParams> = ({
+  editor,
+  event,
+}) => {
   event.preventDefault()
-  toggleLeafModification(editor, 'underlined')
+  CustomTransforms.toggleModification(editor, 'underlined')
 }

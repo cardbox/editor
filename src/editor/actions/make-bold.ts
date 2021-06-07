@@ -1,8 +1,8 @@
-import { Editor } from 'slate'
-import { toggleLeafModification } from '../common/transforms'
+import { CustomTransforms } from '../common/custom-transforms'
 import { ActionCallback } from '../lib/action-controller/types'
+import { ActionParams } from './types'
 
-export const makeBold: ActionCallback<Editor> = (editor, event) => {
+export const makeBold: ActionCallback<ActionParams> = ({ editor, event }) => {
   event.preventDefault()
-  toggleLeafModification(editor, 'bold')
+  CustomTransforms.toggleModification(editor, 'bold')
 }

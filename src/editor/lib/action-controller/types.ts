@@ -24,7 +24,10 @@ export type DefaultActionKeybinds = {
 
 export type ActionEvent = KeyboardEvent | React.KeyboardEvent
 
-export type ActionCallback<TContext = void> = (
-  context: TContext,
+export interface ActionBaseParams {
   event: ActionEvent
-) => void
+}
+
+export type ActionCallback<
+  TParams extends ActionBaseParams = ActionBaseParams
+> = (params: TParams) => void

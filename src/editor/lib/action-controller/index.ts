@@ -1,8 +1,9 @@
-import { Editor } from 'slate'
-import { Action, ActionCallback, ActionEvent } from './types'
+import { Action, ActionBaseParams, ActionCallback } from './types'
 
-export function createActionController() {
-  type Callback = ActionCallback<Editor>
+export function createActionController<
+  TParams extends ActionBaseParams = ActionBaseParams
+>() {
+  type Callback = ActionCallback<TParams>
 
   const actions = new Map<Action, Callback>()
 
@@ -10,16 +11,15 @@ export function createActionController() {
     actions.set(action, callback)
   }
 
-  const execute = (action: Action, context: Editor, event: ActionEvent) => {
+  const execute = (action: Action, params: TParams) => {
     const callback = actions.get(action)
     if (!callback) return
-    callback(context, event)
+    callback(params)
   }
 
-  const curryExecute =
-    (action: Action) => (context: Editor, event: ActionEvent) => {
-      execute(action, context, event)
-    }
+  const curryExecute = (action: Action) => (params: TParams) => {
+    execute(action, params)
+  }
 
   return {
     register,

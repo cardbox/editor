@@ -29,20 +29,25 @@ export function useKeybinds(
       ...customKeybinds,
     }
 
+    // clear possible previous keybinds
     keybindController.unregisterAll()
-    Object.entries<ActionKeybinds[Action]>(finalKeybinds).forEach(
-      ([action, keybind]) => {
-        if (!keybind) return
-        const keys = typeof keybind === 'string' ? [keybind] : keybind
 
-        for (const key of keys) {
-          keybindController.register(
-            key,
-            actionController.curryExecute(action as Action)
-          )
-        }
+    type Entries = Array<[Action, ActionKeybinds[Action]]>
+    const entries = Object.entries(finalKeybinds) as Entries
+
+    entries.forEach(([action, keybind]) => {
+      if (!keybind) return
+      const keys = typeof keybind === 'string' ? [keybind] : keybind
+
+      for (const key of keys) {
+        keybindController.register(key, (editor, event) => {
+          actionController.execute(action, {
+            editor,
+            event,
+          })
+        })
       }
-    )
+    })
   }, [customKeybinds])
 
   const handleKeyDown = useCallback(
