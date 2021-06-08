@@ -94,7 +94,7 @@ export const LinkPopup = () => {
         return range.getBoundingClientRect()
       },
       hideOnClick: true,
-      onHide: () => setHref(''),
+      onHidden: () => setHref(''),
     })
 
     return () => instance.current?.destroy()
