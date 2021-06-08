@@ -1,5 +1,4 @@
 import { useCallback, useEffect } from 'react'
-import { Editor } from 'slate'
 import { actionController } from '../../actions'
 import { keybindController } from '../../keybinds'
 import {
@@ -8,6 +7,8 @@ import {
   CustomActionKeybinds,
   DefaultActionKeybinds,
 } from '../action-controller/types'
+import { useEditor } from './use-editor'
+import { useUI } from './use-ui'
 
 const defaultKeybinds: DefaultActionKeybinds = {
   'insert-soft-break': 'shift+enter',
@@ -19,10 +20,10 @@ const defaultKeybinds: DefaultActionKeybinds = {
   'make-inline-code': ['mod+e', 'mod+`'],
 }
 
-export function useKeybinds(
-  editor: Editor,
-  customKeybinds: CustomActionKeybinds
-) {
+export function useKeybinds(customKeybinds: CustomActionKeybinds) {
+  const editor = useEditor()
+  const ui = useUI()
+
   useEffect(() => {
     const finalKeybinds: ActionKeybinds = {
       ...defaultKeybinds,
@@ -44,6 +45,7 @@ export function useKeybinds(
           actionController.execute(action, {
             editor,
             event,
+            ui,
           })
         })
       }

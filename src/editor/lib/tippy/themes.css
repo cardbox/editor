@@ -6,6 +6,10 @@
   padding: 0;
 }
 
+.tippy-box[data-theme~="editor-link-popup"] .tippy-content {
+  padding: 0;
+}
+
 .tippy-box[data-theme~="editor-keybind"] .tippy-content {
   font-size: 12px;
 }

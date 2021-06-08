@@ -1,7 +1,8 @@
 import { createContext, useContext, MutableRefObject, useRef } from 'react'
 import { Instance } from 'tippy.js'
+import { useForceUpdate } from '../../lib/hooks/use-force-update'
 
-interface ToolbarState {
+export interface ToolbarState {
   instance: MutableRefObject<Instance | null>
   lastSelectedText: MutableRefObject<string>
 }
@@ -24,6 +25,11 @@ export function useToolbarState() {
 
 export function useToolbarActions() {
   const state = useToolbarState()
+  const forceUpdate = useForceUpdate()
+
+  const update = () => {
+    forceUpdate()
+  }
 
   const hide = () => {
     if (!state.instance.current) return
@@ -32,6 +38,9 @@ export function useToolbarActions() {
   }
 
   return {
+    update,
     hide,
   }
 }
+
+export type ToolbarActions = ReturnType<typeof useToolbarActions>

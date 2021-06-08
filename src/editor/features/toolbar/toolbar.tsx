@@ -1,12 +1,11 @@
 import { ReactNode, useEffect, useMemo } from 'react'
 import ReactDOM from 'react-dom'
-import { Editor } from 'slate'
 import tippy from 'tippy.js'
 import debounce from 'just-debounce'
-import { useEditorNodeRef } from '../lib/hooks/use-editor-node-ref'
-import { THEMES } from '../lib/tippy/themes'
-import { useThrottled } from '../lib/hooks/use-throttled'
-import { useForceUpdate } from '../lib/hooks/use-force-update'
+import { useEditorNodeRef } from '../../lib/hooks/use-editor-node-ref'
+import { THEMES } from '../../lib/tippy/themes'
+import { useThrottled } from '../../lib/hooks/use-throttled'
+import { useForceUpdate } from '../../lib/hooks/use-force-update'
 import styles from './toolbar.module.css'
 import { useToolbarState } from './toolbar-context'
 
@@ -18,7 +17,7 @@ import { useToolbarState } from './toolbar-context'
 function useContainer() {
   const container = useMemo(() => {
     const element = document.createElement('div')
-    element.classList.add(styles.toolbarContainer)
+    element.classList.add(styles.container)
     return element
   }, [])
 
@@ -35,7 +34,6 @@ function useContainer() {
 }
 
 interface Props {
-  editor: Editor
   renderButtons: () => ReactNode
 }
 

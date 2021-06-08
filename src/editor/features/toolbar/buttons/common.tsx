@@ -1,6 +1,6 @@
 import Tippy from '@tippyjs/react'
 import React, { ButtonHTMLAttributes, ReactNode } from 'react'
-import { THEMES } from '../../lib/tippy/themes'
+import { THEMES } from '../../../lib/tippy/themes'
 import styles from './common.module.css'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {

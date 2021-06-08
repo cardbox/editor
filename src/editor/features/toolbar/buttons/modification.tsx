@@ -1,10 +1,11 @@
 import React, { CSSProperties, MouseEventHandler, ReactNode } from 'react'
 import { Editor } from 'slate'
-import { actionController } from '../../actions'
-import { LeafModification } from '../../leaf/types'
-import { Action } from '../../lib/action-controller/types'
-import { useEditor } from '../../lib/hooks/use-editor'
-import { noopKeyboardEvent } from '../../lib/util'
+import { actionController } from '../../../actions'
+import { LeafModification } from '../../../leaf/types'
+import { Action } from '../../../lib/action-controller/types'
+import { useEditor } from '../../../lib/hooks/use-editor'
+import { useUI } from '../../../lib/hooks/use-ui'
+import { noopKeyboardEvent } from '../../../lib/util'
 import { ToolbarButton } from './common'
 
 function hasModification(editor: Editor, modification: LeafModification) {
@@ -30,6 +31,7 @@ export const ToolbarModificationButton = ({
 }: Props) => {
   const editor = useEditor()
   const isActive = hasModification(editor, modification)
+  const ui = useUI()
 
   const handleClick: MouseEventHandler<Element> = (event) => {
     event.preventDefault()
@@ -37,6 +39,7 @@ export const ToolbarModificationButton = ({
     actionController.execute(action, {
       editor,
       event: noopKeyboardEvent,
+      ui,
     })
   }
 
