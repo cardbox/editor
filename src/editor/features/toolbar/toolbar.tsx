@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useMemo } from 'react'
 import ReactDOM from 'react-dom'
 import tippy from 'tippy.js'
-import debounce from 'just-debounce'
+import debounce from 'just-debounce-it'
 import { useEditorNodeRef } from '../../lib/hooks/use-editor-node-ref'
 import { THEMES } from '../../lib/tippy/themes'
 import { useThrottled } from '../../lib/hooks/use-throttled'
@@ -69,6 +69,12 @@ export const Toolbar = ({ renderButtons }: Props) => {
       instance.current.show()
     }, 300)
 
+    const hide = (cancelShow = true) => {
+      if (!instance.current) return
+      instance.current.hide()
+      if (cancelShow) debouncedShow.cancel()
+    }
+
     const handleSelection = () => {
       if (!editorNodeRef.current) return
       if (!instance.current) return
@@ -78,13 +84,13 @@ export const Toolbar = ({ renderButtons }: Props) => {
          * The user may select text in another instance of the Editor
          */
 
-        return instance.current.hide()
+        return hide()
       }
 
       const selection = window.getSelection()
 
       if (!selection) {
-        return instance.current.hide()
+        return hide()
       }
 
       if (selection.isCollapsed) {
@@ -94,7 +100,7 @@ export const Toolbar = ({ renderButtons }: Props) => {
          */
 
         lastSelectedText.current = ''
-        return instance.current.hide()
+        return hide()
       }
 
       const range = selection.getRangeAt(0)
@@ -112,7 +118,7 @@ export const Toolbar = ({ renderButtons }: Props) => {
         return forceUpdate()
       }
 
-      instance.current.hide() // keep hidden while selecting
+      hide(false) // keep hidden while selecting
       debouncedShow() // show on finish
 
       lastSelectedText.current = selectedText

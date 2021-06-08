@@ -334,6 +334,13 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
+"@types/just-debounce-it@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@types/just-debounce-it/-/just-debounce-it-1.5.0.tgz#d8089a96118cf7b3abd044c474fa56a563f95ea9"
+  integrity sha512-X0idscP49ASBe/yI29yLpBG1p/bae72yDMWsBGzxS1aaKinUl0Q2FkYVBMs+BXlVi3yPm4boWsiuFTQ0Dzw3dw==
+  dependencies:
+    just-debounce-it "*"
+
 "@types/lodash@^4.14.149":
   version "4.14.170"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.170.tgz#0d67711d4bf7f4ca5147e9091b847479b87925d6"
@@ -1528,10 +1535,10 @@ json5@^2.1.2:
     array-includes "^3.1.2"
     object.assign "^4.1.2"
 
-just-debounce@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/just-debounce/-/just-debounce-1.1.0.tgz#2f81a3ad4121a76bc7cb45dbf704c0d76a8e5ddf"
-  integrity sha512-qpcRocdkUmf+UTNBYx5w6dexX5J31AKK1OmPwH630a83DdVVUIngk55RSAiIGpQyoH0dlr872VHfPjnQnK1qDQ==
+just-debounce-it@*, just-debounce-it@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/just-debounce-it/-/just-debounce-it-1.5.0.tgz#2276448332dd5925e825ba3c524a71da707bf628"
+  integrity sha512-itSWJS5d2DTSCizVJ2Z0Djx/dGmUGfZe7WNfUfVP23+htGcIcPHbEjL4eB8ljojTs/+oYwLexImRRCP0A2WXjA==
 
 levn@^0.4.1:
   version "0.4.1"
