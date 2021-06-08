@@ -1,6 +1,6 @@
 import { Editor, NodeEntry } from 'slate'
-import { CustomElement } from '../../elements'
-import { LeafElement } from '../../leaf/types'
+import { CustomElement } from '../../entities/elements'
+import { LeafElement } from '../../entities/leaf/types'
 
 interface GetAboveOptionsBlock {
   type: 'block'

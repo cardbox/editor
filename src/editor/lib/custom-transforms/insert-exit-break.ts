@@ -1,6 +1,6 @@
 import { Editor, Path, Point, Range, Transforms } from 'slate'
-import { createDefaultElement } from '../../elements'
-import { Queries } from '../queries'
+import { createDefaultElement } from '../../entities/elements'
+import { EditorQueries } from '../editor-queries'
 
 /*
  * 1. The action always deletes the selected text
@@ -28,7 +28,7 @@ export function insertExitBreak(editor: Editor) {
     Transforms.delete(editor, { at: editor.selection })
   }
 
-  const blockEntry = Queries.getAbove(editor, {
+  const blockEntry = EditorQueries.getAbove(editor, {
     type: 'block',
     mode: 'highest',
   })
@@ -37,7 +37,7 @@ export function insertExitBreak(editor: Editor) {
   const [, blockPath] = blockEntry
   const [blockStart, blockEnd] = Editor.edges(editor, blockPath)
 
-  const selectionPoint = Queries.getPointFromLocation(editor.selection)
+  const selectionPoint = EditorQueries.getPointFromLocation(editor.selection)
   if (!selectionPoint) return
 
   // 2. The selection is on the block end

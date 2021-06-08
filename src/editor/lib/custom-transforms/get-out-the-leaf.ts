@@ -1,6 +1,6 @@
 import { Editor, Point, Range, Transforms } from 'slate'
-import { createLeaf } from '../../leaf'
-import { Queries } from '../queries'
+import { createLeaf } from '../../entities/leaf'
+import { EditorQueries } from '../editor-queries'
 
 interface TransformResult {
   success: boolean
@@ -26,7 +26,7 @@ export function getOutTheLeaf(editor: Editor): TransformResult {
     return failure()
   }
 
-  const blockEntry = Queries.getAbove(editor, {
+  const blockEntry = EditorQueries.getAbove(editor, {
     type: 'block',
     mode: 'lowest',
   })
@@ -35,7 +35,7 @@ export function getOutTheLeaf(editor: Editor): TransformResult {
     return failure()
   }
 
-  const leafEntry = Queries.getAbove(editor, {
+  const leafEntry = EditorQueries.getAbove(editor, {
     type: 'leaf',
     mode: 'lowest',
   })
@@ -56,7 +56,7 @@ export function getOutTheLeaf(editor: Editor): TransformResult {
     return failure()
   }
 
-  const hasModifications = Queries.leafHasModifications(leaf)
+  const hasModifications = EditorQueries.leafHasModifications(leaf)
 
   if (!hasModifications) {
     return failure()

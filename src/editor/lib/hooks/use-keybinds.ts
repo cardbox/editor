@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react'
-import { actionController } from '../../actions'
-import { keybindController } from '../../keybinds'
+import { actions } from '../../features/actions'
+import { keybinds } from '../../features/keybinds'
 import {
   Action,
   ActionKeybinds,
@@ -31,7 +31,7 @@ export function useKeybinds(customKeybinds: CustomActionKeybinds) {
     }
 
     // clear possible previous keybinds
-    keybindController.unregisterAll()
+    keybinds.unregisterAll()
 
     type Entries = Array<[Action, ActionKeybinds[Action]]>
     const entries = Object.entries(finalKeybinds) as Entries
@@ -41,8 +41,8 @@ export function useKeybinds(customKeybinds: CustomActionKeybinds) {
       const keys = typeof keybind === 'string' ? [keybind] : keybind
 
       for (const key of keys) {
-        keybindController.register(key, (editor, event) => {
-          actionController.execute(action, {
+        keybinds.register(key, (editor, event) => {
+          actions.execute(action, {
             editor,
             event,
             ui,
@@ -54,7 +54,7 @@ export function useKeybinds(customKeybinds: CustomActionKeybinds) {
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
-      keybindController.keyDown(event, editor)
+      keybinds.keyDown(event, editor)
     },
     [editor]
   )

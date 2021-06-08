@@ -1,7 +1,7 @@
 import React, { CSSProperties, MouseEventHandler, ReactNode } from 'react'
 import { Editor } from 'slate'
-import { actionController } from '../../../actions'
-import { LeafModification } from '../../../leaf/types'
+import { actions } from '../../actions'
+import { LeafModification } from '../../../entities/leaf/types'
 import { Action } from '../../../lib/action-controller/types'
 import { useEditor } from '../../../lib/hooks/use-editor'
 import { useUI } from '../../../lib/hooks/use-ui'
@@ -36,7 +36,7 @@ export const ToolbarModificationButton = ({
   const handleClick: MouseEventHandler<Element> = (event) => {
     event.preventDefault()
 
-    actionController.execute(action, {
+    actions.execute(action, {
       editor,
       event: noopKeyboardEvent,
       ui,

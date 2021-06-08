@@ -1,5 +1,5 @@
 import { Editor } from 'slate'
-import { LeafElement } from '../../leaf/types'
+import { LeafElement } from '../../entities/leaf/types'
 
 export function clearHref(editor: Editor) {
   const marks = Editor.marks(editor)

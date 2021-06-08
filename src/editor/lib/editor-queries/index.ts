@@ -7,7 +7,7 @@ import { hasSelection } from './has-selection'
 import { leafHasModifications } from './leaf-has-modifications'
 import { leafModifications } from './leaf-modifications'
 
-export const Queries = {
+export const EditorQueries = {
   getAbove,
   getPointFromLocation,
   getPointBefore,

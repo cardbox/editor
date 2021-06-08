@@ -1,8 +1,8 @@
 import { Editor, Range, Transforms } from 'slate'
-import { CustomTransforms } from '../common/custom-transforms'
-import { Queries } from '../common/queries'
-import { CustomElement } from '../elements'
-import { LeafElement } from '../leaf/types'
+import { CustomTransforms } from '../lib/custom-transforms'
+import { EditorQueries } from '../lib/editor-queries'
+import { CustomElement } from '../entities/elements'
+import { LeafElement } from '../entities/leaf/types'
 
 interface SkipParams {
   block: CustomElement
@@ -75,7 +75,7 @@ function checkAfter({
       match: false,
     }
 
-  const range = Queries.getRangeBefore(editor, {
+  const range = EditorQueries.getRangeBefore(editor, {
     matchString: entry.markup,
   })
 
@@ -97,7 +97,7 @@ function checkAfterOnStart({
   editor: Editor
   entry: ConfigEntry & MarkupAfter
 }): CheckResult {
-  const range = Queries.getRangeFromBlockStart(editor)
+  const range = EditorQueries.getRangeFromBlockStart(editor)
   if (!range) return { match: false }
 
   const string = Editor.string(editor, range)
@@ -122,7 +122,7 @@ function checkBetween({
 }): CheckResult {
   const [startChar, endChar] = entry.markup
 
-  const end = Queries.getPointBefore(editor, {
+  const end = EditorQueries.getPointBefore(editor, {
     edge: 'end',
     matchString: endChar,
     failOnInvalid: true,
@@ -140,7 +140,7 @@ function checkBetween({
       match: false,
     }
 
-  const start = Queries.getPointBefore(editor, {
+  const start = EditorQueries.getPointBefore(editor, {
     at: startSearchPoint,
     edge: 'start',
     matchString: startChar,
@@ -282,8 +282,8 @@ function processEntry({
     return { match: false }
   }
 
-  const blockEntry = Queries.getAbove(editor, { type: 'block' })
-  const leafEntry = Queries.getAbove(editor, { type: 'leaf' })
+  const blockEntry = EditorQueries.getAbove(editor, { type: 'block' })
+  const leafEntry = EditorQueries.getAbove(editor, { type: 'leaf' })
   if (!blockEntry) return { match: false }
   if (!leafEntry) return { match: false }
   const [block] = blockEntry
@@ -324,7 +324,7 @@ function formatWithConfig(editor: Editor, config: Config): Editor {
   const { insertText } = editor
 
   editor.insertText = (text) => {
-    if (Queries.hasSelection(editor)) {
+    if (EditorQueries.hasSelection(editor)) {
       return insertText(text)
     }
 

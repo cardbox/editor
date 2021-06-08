@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { RenderLeafProps } from 'slate-react'
-import { Queries } from '../common/queries'
+import { EditorQueries } from '../../lib/editor-queries'
 import { ElementMapper, LeafElement, LeafModification } from './types'
 
 export function createLeaf({
@@ -32,7 +32,7 @@ const ELEMENT_MAPPER: ElementMapper = {
 }
 
 function buildElement({ leaf, children, attributes }: RenderLeafProps) {
-  const modifications = Queries.leafModifications(leaf)
+  const modifications = EditorQueries.leafModifications(leaf)
 
   let wrapped: ReactElement = children
 
