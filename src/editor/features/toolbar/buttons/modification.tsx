@@ -1,36 +1,37 @@
 import React, { CSSProperties, MouseEventHandler, ReactNode } from 'react'
 import { Editor } from 'slate'
-import { actions } from '../../actions'
-import { LeafModification } from '../../../entities/leaf/types'
-import { Action } from '../../../lib/action-controller/types'
+import { Action, actions } from '../../actions'
+import { LeafElement } from '../../../entities/leaf/types'
 import { useEditor } from '../../../lib/hooks/use-editor'
 import { useUI } from '../../../lib/hooks/use-ui'
 import { noopKeyboardEvent } from '../../../lib/util'
 import { ToolbarButton } from './common'
 
-function hasModification(editor: Editor, modification: LeafModification) {
+type Mark = keyof Omit<LeafElement, 'text'>
+
+function hasMark(editor: Editor, mark: Mark) {
   const marks = Editor.marks(editor)
   if (!marks) return false
-  return Boolean(marks[modification])
+  return Boolean(marks[mark])
 }
 
 interface Props {
-  modification: LeafModification
+  mark: Mark
   icon: ReactNode
   action: Action
   tooltip?: string
   style?: CSSProperties
 }
 
-export const ToolbarModificationButton = ({
-  modification,
+export const ToolbarMarkButton = ({
+  mark,
   icon,
   action,
   tooltip,
   style = {},
 }: Props) => {
   const editor = useEditor()
-  const isActive = hasModification(editor, modification)
+  const isActive = hasMark(editor, mark)
   const ui = useUI()
 
   const handleClick: MouseEventHandler<Element> = (event) => {

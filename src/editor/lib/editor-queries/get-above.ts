@@ -1,15 +1,17 @@
-import { Editor, NodeEntry } from 'slate'
+import { Editor, Location, NodeEntry } from 'slate'
 import { CustomElement } from '../../entities/elements'
 import { LeafElement } from '../../entities/leaf/types'
 
 interface GetAboveOptionsBlock {
   type: 'block'
   mode?: 'highest' | 'lowest'
+  at?: Location
 }
 
 interface GetAboveOptionsLeaf {
   type: 'leaf'
   mode?: 'highest' | 'lowest'
+  at?: Location
 }
 
 export function getAbove(
@@ -29,8 +31,9 @@ export function getAbove(
   const { type, ...rest } = options
 
   if (type === 'leaf') {
-    if (!editor.selection) return
-    return Editor.leaf(editor, editor.selection)
+    const { at = editor.selection } = rest
+    if (!at) return
+    return Editor.leaf(editor, at)
   }
 
   return Editor.above(editor, {

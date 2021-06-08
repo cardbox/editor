@@ -1,11 +1,11 @@
 import React from 'react'
-import { CustomActionKeybinds } from './lib/action-controller/types'
 import { Extension } from './lib/extensions/extend'
 import 'tippy.js/dist/tippy.css'
 import './lib/tippy/themes.css'
 import { RootProvider } from './root-provider'
 import { EditorInner } from './editor-inner'
 import { EditorValue } from './types'
+import { CustomActionKeybinds } from './features/actions'
 
 export const Editor = ({
   value,

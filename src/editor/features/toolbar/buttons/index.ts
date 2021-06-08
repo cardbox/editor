@@ -1,1 +1,1 @@
-export { ToolbarModificationButton } from './modification'
+export { ToolbarMarkButton } from './modification'

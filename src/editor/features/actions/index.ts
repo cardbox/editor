@@ -6,9 +6,10 @@ import { makeItalic } from './make-italic'
 import { makeUnderlined } from './make-underlined'
 import { makeInlineCode } from './make-inline-code'
 import { getOutTheLeaf } from './get-out-the-leaf'
-import { ActionParams } from './types'
+import { Action, ActionParams } from './types'
+import { setLinkForText } from './set-link-for-text'
 
-export const actions = createActionController<ActionParams>()
+const actions = createActionController<Action, ActionParams>()
 
 actions.register('insert-soft-break', insertSoftBreak)
 actions.register('insert-exit-break', insertExitBreak)
@@ -17,3 +18,7 @@ actions.register('make-bold', makeBold)
 actions.register('make-italic', makeItalic)
 actions.register('make-underlined', makeUnderlined)
 actions.register('make-inline-code', makeInlineCode)
+actions.register('set-link-for-text', setLinkForText)
+
+export { actions }
+export * from './types'

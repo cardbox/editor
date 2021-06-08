@@ -1,12 +1,12 @@
 import { useCallback, useEffect } from 'react'
-import { actions } from '../../features/actions'
-import { keybinds } from '../../features/keybinds'
 import {
   Action,
   ActionKeybinds,
+  actions,
   CustomActionKeybinds,
   DefaultActionKeybinds,
-} from '../action-controller/types'
+} from '../../features/actions'
+import { keybinds } from '../../features/keybinds'
 import { useEditor } from './use-editor'
 import { useUI } from './use-ui'
 
@@ -18,6 +18,7 @@ const defaultKeybinds: DefaultActionKeybinds = {
   'make-italic': 'mod+i',
   'make-underlined': 'mod+u',
   'make-inline-code': ['mod+e', 'mod+`'],
+  'set-link-for-text': 'mod+k',
 }
 
 export function useKeybinds(customKeybinds: CustomActionKeybinds) {
