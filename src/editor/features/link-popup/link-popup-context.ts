@@ -9,6 +9,7 @@ export function useNewLinkPopupState() {
     instance: useRef<Instance | null>(null),
     input: useRef<HTMLInputElement | null>(null),
     selection: useRef<Range | null>(null),
+    hadHref: useRef<boolean>(false),
     href,
     setHref,
   }
@@ -20,6 +21,7 @@ export const LinkPopupContext = createContext<LinkPopupState>({
   instance: { current: null },
   input: { current: null },
   selection: { current: null },
+  hadHref: { current: false },
   href: '',
   setHref: () => {},
 })
@@ -42,13 +44,21 @@ export function useLinkPopupActions() {
     if (!state.instance.current) return
     state.selection.current = selection
     state.instance.current.show()
-    state.setHref(href)
+    if (href) {
+      state.setHref(href)
+      state.hadHref.current = true
+    }
+  }
+
+  const reset = () => {
+    state.selection.current = null
+    state.hadHref.current = false
+    state.setHref('')
   }
 
   const hide = () => {
     if (!state.instance.current) return
     state.instance.current.hide()
-    state.selection.current = null
   }
 
   const focus = () => {
@@ -63,6 +73,7 @@ export function useLinkPopupActions() {
   return {
     show,
     hide,
+    reset,
     focus,
     update,
   }

@@ -13,7 +13,7 @@ import { CustomTransforms } from '../../lib/custom-transforms'
 import { useEditor } from '../../lib/hooks/use-editor'
 import { REGEX } from '../../lib/util'
 import styles from './link-popup.module.css'
-import { useLinkPopupState } from './link-popup-context'
+import { useLinkPopupActions, useLinkPopupState } from './link-popup-context'
 
 /*
  * We use this element as the React Portal container
@@ -37,7 +37,9 @@ export const LinkPopup = () => {
   const editor = useEditor()
   const editorNodeRef = useEditorNodeRef()
   const container = useContainer()
-  const { instance, input, selection, href, setHref } = useLinkPopupState()
+  const { instance, input, selection, href, setHref, hadHref } =
+    useLinkPopupState()
+  const { reset } = useLinkPopupActions()
   const [valid, setValid] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -101,7 +103,7 @@ export const LinkPopup = () => {
         return range.getBoundingClientRect()
       },
       hideOnClick: true,
-      onHidden: () => setHref(''),
+      onHidden: () => reset(),
     })
 
     return () => instance.current?.destroy()
@@ -120,9 +122,11 @@ export const LinkPopup = () => {
           onChange={handleChange}
           placeholder="Enter the URL"
         />
-        <div className={styles.clearIcon} onClick={clear}>
-          <ClearIcon />
-        </div>
+        {hadHref.current && (
+          <div className={styles.clearIcon} onClick={clear}>
+            <ClearIcon />
+          </div>
+        )}
       </div>
       {error && <p className={styles.error}>{error}</p>}
     </form>,
