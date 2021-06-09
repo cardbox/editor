@@ -54,6 +54,13 @@ export const LinkPopup = () => {
     editorNodeRef.current?.focus()
   }
 
+  const clear = () => {
+    if (!selection.current) return
+    CustomTransforms.clearHref(editor, { at: selection.current })
+    instance.current?.hide()
+    editorNodeRef.current?.focus()
+  }
+
   const validate = (href: string) => {
     setError(null)
 
@@ -103,7 +110,9 @@ export const LinkPopup = () => {
   return ReactDOM.createPortal(
     <form onSubmit={handleSubmit}>
       <div className={styles.inputWrapper}>
-        <LinkIcon className={styles.icon} />
+        <div className={styles.linkIcon}>
+          <LinkIcon />
+        </div>
         <input
           ref={input}
           className={styles.input}
@@ -111,6 +120,9 @@ export const LinkPopup = () => {
           onChange={handleChange}
           placeholder="Enter the URL"
         />
+        <div className={styles.clearIcon} onClick={clear}>
+          <ClearIcon />
+        </div>
       </div>
       {error && <p className={styles.error}>{error}</p>}
     </form>,
@@ -138,6 +150,24 @@ const LinkIcon = (props: React.SVGProps<SVGSVGElement>) => {
       />
       <path
         d="M14.8285 10.5857C15.219 10.1952 15.219 9.56199 14.8285 9.17147C14.4379 8.78094 13.8048 8.78094 13.4142 9.17147L9.1716 13.4141C8.78107 13.8046 8.78107 14.4378 9.1716 14.8283C9.56212 15.2188 10.1953 15.2188 10.5858 14.8283L14.8285 10.5857Z"
+        fill="currentColor"
+      />
+    </svg>
+  )
+}
+
+const ClearIcon = (props: React.SVGProps<SVGSVGElement>) => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M6.2253 4.81108C5.83477 4.42056 5.20161 4.42056 4.81108 4.81108C4.42056 5.20161 4.42056 5.83477 4.81108 6.2253L10.5858 12L4.81114 17.7747C4.42062 18.1652 4.42062 18.7984 4.81114 19.1889C5.20167 19.5794 5.83483 19.5794 6.22535 19.1889L12 13.4142L17.7747 19.1889C18.1652 19.5794 18.7984 19.5794 19.1889 19.1889C19.5794 18.7984 19.5794 18.1652 19.1889 17.7747L13.4142 12L19.189 6.2253C19.5795 5.83477 19.5795 5.20161 19.189 4.81108C18.7985 4.42056 18.1653 4.42056 17.7748 4.81108L12 10.5858L6.2253 4.81108Z"
         fill="currentColor"
       />
     </svg>
