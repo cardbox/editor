@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import React, { useEffect, useState } from 'react'
 import { Editor, EditorValue } from './editor'
 
@@ -41,6 +42,66 @@ const initialState: EditorValue = [
       {
         text: '.add(item)',
         inlineCode: true,
+      },
+    ],
+  },
+  {
+    type: 'unordered-list',
+    children: [
+      {
+        type: 'list-item',
+        children: [
+          {
+            type: 'list-item-content',
+            children: [{ text: 'a' }],
+          },
+        ],
+      },
+      {
+        type: 'list-item',
+        children: [
+          {
+            type: 'list-item-content',
+            children: [{ text: 'b' }],
+          },
+          {
+            type: 'unordered-list',
+            children: [
+              {
+                type: 'list-item',
+                children: [
+                  {
+                    type: 'list-item-content',
+                    children: [{ text: 'nested' }],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'ordered-list',
+    children: [
+      {
+        type: 'list-item',
+        children: [
+          {
+            type: 'list-item-content',
+            children: [{ text: 'a' }],
+          },
+        ],
+      },
+      {
+        type: 'list-item',
+        children: [
+          {
+            type: 'list-item-content',
+            children: [{ text: 'b' }],
+          },
+        ],
       },
     ],
   },

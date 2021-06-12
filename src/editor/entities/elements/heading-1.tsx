@@ -4,7 +4,7 @@ import styles from './heading-1.module.css'
 import { Heading1Element } from './heading-1.types'
 import { ElementSettings } from './types'
 
-export const createHeading1Component = (text = ''): Heading1Element => ({
+export const createHeading1Element = (text = ''): Heading1Element => ({
   type: 'heading-1',
   children: [{ text }],
 })
@@ -21,6 +21,9 @@ export const Heading1Component = ({
 }
 
 export const HEADING_1_SETTINGS: ElementSettings = {
+  name: 'Heading-1',
+  code: 'heading-1',
+  aliases: ['h1', 'title'],
   allowedModifications: [],
   allowedTransformations: ['paragraph'],
 }

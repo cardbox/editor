@@ -5,7 +5,7 @@ import styles from './paragraph.module.css'
 import { ParagraphElement } from './paragraph.types'
 import { ElementSettings } from './types'
 
-export const createParagraphComponent = (text = ''): ParagraphElement => ({
+export const createParagraphElement = (text = ''): ParagraphElement => ({
   type: 'paragraph',
   children: [{ text }],
 })
@@ -22,6 +22,9 @@ export const ParagraphComponent = ({
 }
 
 export const PARAGRAPH_SETTINGS: ElementSettings = {
+  name: 'Paragraph',
+  code: 'paragraph',
+  aliases: ['p', 'text'],
   allowedModifications: Array.from(LEAF_MODIFICATIONS),
   allowedTransformations: ['heading-1'],
 }

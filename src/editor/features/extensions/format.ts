@@ -180,9 +180,24 @@ function replaceBlock({
   const updated = entry.transform({ text, block, leaf })
 
   Transforms.delete(editor, { at: range })
-  Transforms.setNodes(editor, updated, {
-    match: (node) => Editor.isBlock(editor, node),
-  })
+
+  if (entry.markupType === 'after' && entry.onlyOnBlockStart) {
+    const blockEntry = EditorQueries.getAbove(editor, {
+      type: 'block',
+      mode: 'lowest',
+    })
+
+    if (blockEntry) {
+      const [, blockPath] = blockEntry
+
+      Transforms.delete(editor, {
+        at: blockPath,
+        unit: 'block',
+      })
+    }
+  }
+
+  Editor.insertNode(editor, updated)
 }
 
 function replaceLeaf({
@@ -234,20 +249,25 @@ function replaceAtRange({
   entry,
   range,
   insertText,
-  block,
-  leaf,
 }: {
   editor: Editor
   entry: ConfigEntry
   range: Range
-  block: CustomElement
-  leaf: LeafElement
   insertText: (text: string) => void
 }) {
   const { trigger = ' ', keepTrigger = true } = entry
 
   const text = getText({ editor, entry, range })
-  if (!text) return
+  if (typeof text !== 'string') return
+
+  Transforms.delete(editor, { at: range })
+
+  const blockEntry = EditorQueries.getAbove(editor, { type: 'block' })
+  const leafEntry = EditorQueries.getAbove(editor, { type: 'leaf' })
+  if (!blockEntry) return
+  if (!leafEntry) return
+  const [block] = blockEntry
+  const [leaf] = leafEntry
 
   const result =
     entry.transformType === 'block'
@@ -306,8 +326,6 @@ function processEntry({
       editor,
       entry,
       range: check.range,
-      block,
-      leaf,
       insertText,
     })
   }
