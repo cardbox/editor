@@ -37,7 +37,6 @@ export function getOutTheLeaf(editor: Editor): TransformResult {
 
   const leafEntry = EditorQueries.getAbove(editor, {
     type: 'leaf',
-    mode: 'lowest',
   })
 
   if (!leafEntry) {
