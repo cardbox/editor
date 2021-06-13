@@ -18,10 +18,10 @@ type TypeOptions = BlockOptions | LeafOptions
 
 type Options = CommonOptions & TypeOptions
 
-export function getAbove(
+export function getAbove<T extends Element>(
   editor: Editor,
   options: Options & BlockOptions
-): NodeEntry<Element> | undefined
+): NodeEntry<T> | undefined
 
 export function getAbove(
   editor: Editor,
