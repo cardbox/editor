@@ -4,4 +4,4 @@
 
 ## Architecture
 
-[Excalidraw](https://excalidraw.com/#json=5528282392952832,wi1RR6_vrOUpCgkRmOWyRA)
+[Excalidraw](https://excalidraw.com/#json=5986779077279744,F6H-ebJ-A0zZrMji5M5GQw)
