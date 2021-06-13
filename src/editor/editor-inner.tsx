@@ -13,6 +13,7 @@ import { EditorValue } from './types'
 import { LinkPopup } from './features/link-popup'
 import { CustomActionKeybinds } from './actions'
 import { useListeners } from './features/listeners'
+import './features/list-interaction'
 
 export const EditorInner = ({
   value,
