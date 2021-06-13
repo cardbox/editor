@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid'
 import React from 'react'
 import { RenderElementProps } from 'slate-react'
 import { LEAF_MODIFICATIONS } from '../leaf/types'
@@ -6,6 +7,7 @@ import { ParagraphElement } from './paragraph.types'
 import { ElementSettings } from './types'
 
 export const createParagraphElement = (text = ''): ParagraphElement => ({
+  id: nanoid(),
   type: 'paragraph',
   children: [{ text }],
 })

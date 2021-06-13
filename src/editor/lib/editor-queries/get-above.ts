@@ -37,10 +37,10 @@ export function getAbove(editor: Editor, options: Options) {
     return Editor.leaf(editor, at)
   }
 
-  const { match = () => true } = options
+  const { match = () => true, ...rest } = options
 
   return Editor.above(editor, {
-    ...options,
+    ...rest,
     match: (node) => {
       if (!Editor.isBlock(editor, node)) return false
       return match(node)

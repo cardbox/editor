@@ -30,9 +30,11 @@ export function insertExitBreak(editor: Editor) {
 
   const blockEntry = EditorQueries.getAbove(editor, {
     type: 'block',
-    mode: 'highest',
+    mode: 'lowest',
   })
   if (!blockEntry) return
+
+  console.log(blockEntry)
 
   const [, blockPath] = blockEntry
   const [blockStart, blockEnd] = Editor.edges(editor, blockPath)

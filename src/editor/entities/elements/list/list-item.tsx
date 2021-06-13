@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid'
 import React from 'react'
 import { RenderElementProps } from 'slate-react'
 import { LeafElement, LEAF_MODIFICATIONS } from '../../leaf/types'
@@ -9,6 +10,7 @@ import { ListItemElement } from './types'
 export const createListItemElement = (
   children: LeafElement[] = [{ text: '' }]
 ): ListItemElement => ({
+  id: nanoid(),
   type: 'list-item',
   children: [createListItemContentElement(children)],
 })

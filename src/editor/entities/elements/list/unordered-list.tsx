@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid'
 import React from 'react'
 import { RenderElementProps } from 'slate-react'
 import { LeafElement, LEAF_MODIFICATIONS } from '../../leaf/types'
@@ -9,6 +10,7 @@ import { UnorderedListElement } from './types'
 export const createUnorderedListElement = (
   children: LeafElement[] = [{ text: '' }]
 ): UnorderedListElement => ({
+  id: nanoid(),
   type: 'unordered-list',
   children: [createListItemElement(children)],
 })
