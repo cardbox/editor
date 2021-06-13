@@ -1,12 +1,10 @@
-import {
-  LeafElement,
-  LeafModification,
-  LEAF_MODIFICATIONS,
-} from '../../leaf/types'
+import { Text } from 'slate'
+import { ALL_LEAF_MODIFICATIONS } from '../../constants'
+import { LeafModification } from '../../types'
 
 export function leafHasModifications(
-  leaf: LeafElement,
-  modifications: readonly LeafModification[] = LEAF_MODIFICATIONS
+  leaf: Text,
+  modifications: readonly LeafModification[] = ALL_LEAF_MODIFICATIONS
 ): boolean {
   return modifications.some((modification) => leaf[modification])
 }

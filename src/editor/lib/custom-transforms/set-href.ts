@@ -1,5 +1,4 @@
-import { Editor, Range, Transforms } from 'slate'
-import { LeafElement } from '../../leaf/types'
+import { Editor, Range, Text, Transforms } from 'slate'
 
 interface Options {
   at?: Range | null
@@ -13,7 +12,7 @@ export function setHref(editor: Editor, href: string, options: Options = {}) {
   const marks = Editor.marks(editor)
   if (!marks) return
 
-  const mark: keyof LeafElement = 'href'
+  const mark: keyof Text = 'href'
   editor.addMark(mark, href)
   Transforms.collapse(editor, { edge: 'focus' })
 }

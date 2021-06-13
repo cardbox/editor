@@ -1,10 +1,10 @@
 import { nanoid } from 'nanoid'
 import React from 'react'
 import { RenderElementProps } from 'slate-react'
-import { LEAF_MODIFICATIONS } from '../leaf/types'
+import { ALL_LEAF_MODIFICATIONS } from '../constants'
+import { ElementSettings } from '../types'
 import styles from './paragraph.module.css'
 import { ParagraphElement } from './paragraph.types'
-import { ElementSettings } from './types'
 
 export const createParagraphElement = (text = ''): ParagraphElement => ({
   id: nanoid(),
@@ -27,6 +27,6 @@ export const PARAGRAPH_SETTINGS: ElementSettings = {
   name: 'Paragraph',
   code: 'paragraph',
   aliases: ['p', 'text'],
-  allowedModifications: Array.from(LEAF_MODIFICATIONS),
+  allowedModifications: Array.from(ALL_LEAF_MODIFICATIONS),
   allowedTransformations: ['heading-1'],
 }

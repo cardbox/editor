@@ -1,6 +1,4 @@
-import { Editor, Location, NodeEntry } from 'slate'
-import { CustomElement } from '../../elements'
-import { LeafElement } from '../../leaf/types'
+import { Editor, Element, Location, NodeEntry, Text } from 'slate'
 
 interface CommonOptions {
   at?: Location
@@ -9,7 +7,7 @@ interface CommonOptions {
 interface BlockOptions {
   type: 'block'
   mode?: 'highest' | 'lowest'
-  match?: (block: CustomElement) => boolean
+  match?: (block: Element) => boolean
 }
 
 interface LeafOptions {
@@ -23,12 +21,12 @@ type Options = CommonOptions & TypeOptions
 export function getAbove(
   editor: Editor,
   options: Options & BlockOptions
-): NodeEntry<CustomElement> | undefined
+): NodeEntry<Element> | undefined
 
 export function getAbove(
   editor: Editor,
   options: Options & LeafOptions
-): NodeEntry<LeafElement> | undefined
+): NodeEntry<Text> | undefined
 
 export function getAbove(editor: Editor, options: Options) {
   if (options.type === 'leaf') {

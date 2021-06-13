@@ -1,5 +1,6 @@
 import React from 'react'
 import { RenderElementProps } from 'slate-react'
+import { ElementSettings, ElementType } from '../types'
 import {
   Heading1Component,
   createHeading1Element,
@@ -24,15 +25,14 @@ import {
   createParagraphElement,
   PARAGRAPH_SETTINGS,
 } from './paragraph'
-import {
-  CreateDefaultElement,
-  DefaultElementType,
-  ElementComponentMapper,
-  ElementSettingsMapper,
-} from './types'
+import { CreateDefaultElement, DefaultElementType } from './types'
 
 const DEFAULT_ELEMENT_TYPE: DefaultElementType = 'paragraph'
 const createDefaultElement: CreateDefaultElement = createParagraphElement
+
+type ElementComponentMapper = {
+  [KElementType in ElementType]: (props: RenderElementProps) => JSX.Element
+}
 
 const ELEMENT_COMPONENT_MAPPER: ElementComponentMapper = {
   'paragraph': ParagraphComponent,
@@ -41,6 +41,10 @@ const ELEMENT_COMPONENT_MAPPER: ElementComponentMapper = {
   'unordered-list': UnorderedListComponent,
   'list-item': ListItemComponent,
   'list-item-content': ListItemContentComponent,
+}
+
+type ElementSettingsMapper = {
+  [KElementType in ElementType]: ElementSettings
 }
 
 const ELEMENT_SETTINGS_MAPPER: ElementSettingsMapper = {

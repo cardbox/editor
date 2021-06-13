@@ -1,7 +1,8 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, ReactHTML } from 'react'
+import { Text } from 'slate'
 import { RenderLeafProps } from 'slate-react'
 import { EditorQueries } from '../lib/editor-queries'
-import { ElementMapper, LeafElement, LeafModification } from './types'
+import { LeafModification } from '../types'
 
 export function createLeaf({
   text,
@@ -11,8 +12,8 @@ export function createLeaf({
   text: string
   href?: string
   modifications?: LeafModification[]
-}): LeafElement {
-  return modifications.reduce<LeafElement>(
+}): Text {
+  return modifications.reduce<Text>(
     (leaf, modification) => {
       leaf[modification] = true
       return leaf
@@ -23,6 +24,8 @@ export function createLeaf({
     }
   )
 }
+
+type ElementMapper = Record<LeafModification, keyof ReactHTML>
 
 const ELEMENT_MAPPER: ElementMapper = {
   bold: 'b',

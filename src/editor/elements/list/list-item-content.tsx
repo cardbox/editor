@@ -1,13 +1,14 @@
 import { nanoid } from 'nanoid'
 import React from 'react'
+import { Text } from 'slate'
 import { RenderElementProps } from 'slate-react'
-import { LeafElement, LEAF_MODIFICATIONS } from '../../leaf/types'
-import { ElementSettings } from '../types'
+import { ALL_LEAF_MODIFICATIONS } from '../../constants'
+import { ElementSettings } from '../../types'
 import styles from './index.module.css'
 import { ListItemContentElement } from './types'
 
 export const createListItemContentElement = (
-  children: LeafElement[] = [{ text: '' }]
+  children: Text[] = [{ text: '' }]
 ): ListItemContentElement => ({
   id: nanoid(),
   type: 'list-item-content',
@@ -30,6 +31,6 @@ export const LIST_ITEM_CONTENT_SETTINGS: ElementSettings = {
   code: 'list-item-content',
   aliases: ['lic'],
   canBeSearched: false,
-  allowedModifications: Array.from(LEAF_MODIFICATIONS),
+  allowedModifications: Array.from(ALL_LEAF_MODIFICATIONS),
   allowedTransformations: [],
 }

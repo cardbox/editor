@@ -1,12 +1,10 @@
-import { Editor, Range, Transforms } from 'slate'
+import { Editor, Range, Transforms, Element, Text } from 'slate'
 import { CustomTransforms } from '../../lib/custom-transforms'
 import { EditorQueries } from '../../lib/editor-queries'
-import { CustomElement } from '../../elements'
-import { LeafElement } from '../../leaf/types'
 
 interface SkipParams {
-  block: CustomElement
-  leaf: LeafElement
+  block: Element
+  leaf: Text
 }
 
 interface Common {
@@ -30,18 +28,18 @@ type Markup = MarkupAfter | MarkupBetween
 
 interface TransformParams {
   text: string
-  block: CustomElement
-  leaf: LeafElement
+  block: Element
+  leaf: Text
 }
 
 interface TransformBlock {
   transformType: 'block'
-  transform: (params: TransformParams) => CustomElement
+  transform: (params: TransformParams) => Element
 }
 
 interface TransformLeaf {
   transformType: 'leaf'
-  transform: (params: TransformParams) => LeafElement
+  transform: (params: TransformParams) => Text
 }
 
 type Transform = TransformBlock | TransformLeaf
@@ -174,8 +172,8 @@ function replaceBlock({
   entry: ConfigEntry & TransformBlock
   range: Range
   text: string
-  block: CustomElement
-  leaf: LeafElement
+  block: Element
+  leaf: Text
 }) {
   const updated = entry.transform({ text, block, leaf })
 
@@ -212,8 +210,8 @@ function replaceLeaf({
   entry: ConfigEntry & TransformLeaf
   range: Range
   text: string
-  block: CustomElement
-  leaf: LeafElement
+  block: Element
+  leaf: Text
 }) {
   const updated = entry.transform({ text, block, leaf })
 

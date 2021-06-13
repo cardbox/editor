@@ -1,9 +1,9 @@
-import { LeafElement } from '../../leaf/types'
+import { Text } from 'slate'
 
 export interface ListItemContentElement {
   id: string
   type: 'list-item-content'
-  children: LeafElement[]
+  children: Text[]
 }
 
 export type ListElement = OrderedListElement | UnorderedListElement
