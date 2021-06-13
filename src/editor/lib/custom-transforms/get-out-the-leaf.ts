@@ -1,5 +1,5 @@
 import { Editor, Point, Range, Transforms } from 'slate'
-import { createLeaf } from '../../entities/leaf'
+import { createLeaf } from '../../leaf'
 import { EditorQueries } from '../editor-queries'
 
 interface TransformResult {

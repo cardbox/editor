@@ -1,4 +1,4 @@
-import { createActionController } from '../../lib/action-controller'
+import { createActionController } from '../lib/action-controller'
 import { insertExitBreak } from './insert-exit-break'
 import { insertSoftBreak } from './insert-soft-break'
 import { makeBold } from './make-bold'

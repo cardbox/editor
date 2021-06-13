@@ -5,7 +5,7 @@ import './lib/tippy/themes.css'
 import { RootProvider } from './root-provider'
 import { EditorInner } from './editor-inner'
 import { EditorValue } from './types'
-import { CustomActionKeybinds } from './features/actions'
+import { CustomActionKeybinds } from './actions'
 
 export const Editor = ({
   value,

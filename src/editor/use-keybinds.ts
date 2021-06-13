@@ -5,10 +5,10 @@ import {
   actions,
   CustomActionKeybinds,
   DefaultActionKeybinds,
-} from '../../features/actions'
-import { keybinds } from '../../features/keybinds'
-import { useEditor } from './use-editor'
-import { useUI } from './use-ui'
+} from './actions'
+import { keybinds } from './features/keybinds'
+import { useEditor } from './lib/hooks/use-editor'
+import { useUI } from './lib/hooks/use-ui'
 
 const defaultKeybinds: DefaultActionKeybinds = {
   'insert-soft-break': 'shift+enter',

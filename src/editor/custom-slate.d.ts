@@ -1,7 +1,7 @@
 import { BaseEditor } from 'slate'
 import { ReactEditor } from 'slate-react'
-import { CustomElement } from './entities/elements'
-import { LeafElement } from './entities/leaf/types'
+import { CustomElement } from './elements'
+import { LeafElement } from './leaf/types'
 
 declare module 'slate' {
   interface CustomTypes {

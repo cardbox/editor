@@ -2,7 +2,7 @@ import {
   LeafElement,
   LeafModification,
   LEAF_MODIFICATIONS,
-} from '../../entities/leaf/types'
+} from '../../leaf/types'
 
 export function leafHasModifications(
   leaf: LeafElement,

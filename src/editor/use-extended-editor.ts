@@ -5,7 +5,7 @@ import { withReact } from 'slate-react'
 import {
   createOrderedListElement,
   createUnorderedListElement,
-} from './entities/elements'
+} from './elements'
 import { extensions } from './features/extensions'
 import { extend, Extension } from './lib/extensions/extend'
 

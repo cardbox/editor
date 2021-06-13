@@ -1,5 +1,5 @@
 import { Editor, Path, Point, Range, Transforms } from 'slate'
-import { createDefaultElement } from '../../entities/elements'
+import { createDefaultElement } from '../../elements'
 import { EditorQueries } from '../editor-queries'
 
 /*
@@ -33,8 +33,6 @@ export function insertExitBreak(editor: Editor) {
     mode: 'lowest',
   })
   if (!blockEntry) return
-
-  console.log(blockEntry)
 
   const [, blockPath] = blockEntry
   const [blockStart, blockEnd] = Editor.edges(editor, blockPath)

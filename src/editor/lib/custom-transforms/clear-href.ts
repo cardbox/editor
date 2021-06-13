@@ -1,5 +1,5 @@
 import { Editor, Range, Transforms } from 'slate'
-import { LeafElement } from '../../entities/leaf/types'
+import { LeafElement } from '../../leaf/types'
 
 interface Options {
   at?: Range | null

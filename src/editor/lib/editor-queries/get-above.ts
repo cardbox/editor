@@ -1,6 +1,6 @@
 import { Editor, Location, NodeEntry } from 'slate'
-import { CustomElement } from '../../entities/elements'
-import { LeafElement } from '../../entities/leaf/types'
+import { CustomElement } from '../../elements'
+import { LeafElement } from '../../leaf/types'
 
 interface CommonOptions {
   at?: Location

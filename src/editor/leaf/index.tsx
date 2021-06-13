@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { RenderLeafProps } from 'slate-react'
-import { EditorQueries } from '../../lib/editor-queries'
+import { EditorQueries } from '../lib/editor-queries'
 import { ElementMapper, LeafElement, LeafModification } from './types'
 
 export function createLeaf({

@@ -1,8 +1,8 @@
 import { Editor, Range, Transforms } from 'slate'
 import { CustomTransforms } from '../../lib/custom-transforms'
 import { EditorQueries } from '../../lib/editor-queries'
-import { CustomElement } from '../../entities/elements'
-import { LeafElement } from '../../entities/leaf/types'
+import { CustomElement } from '../../elements'
+import { LeafElement } from '../../leaf/types'
 
 interface SkipParams {
   block: CustomElement
