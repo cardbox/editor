@@ -2,6 +2,14 @@
   padding-left: 24px;
 }
 
+.ordered-list .ordered-list {
+  list-style-type: lower-roman;
+}
+
+.ordered-list .ordered-list .ordered-list {
+  list-style-type: lower-alpha;
+}
+
 .unordered-list {
   padding-left: 24px;
 }
