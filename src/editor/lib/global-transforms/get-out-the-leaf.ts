@@ -1,4 +1,4 @@
-import { Editor, Point, Range, Transforms } from 'slate'
+import { Editor, Path, Point, Range, Transforms } from 'slate'
 import { createLeaf } from '../../leaf'
 import { GlobalQueries } from '../global-queries'
 
@@ -44,14 +44,18 @@ export function getOutTheLeaf(editor: Editor): TransformResult {
   }
 
   const [, blockPath] = blockEntry
-  const [leaf] = leafEntry
+  const [leaf, leafPath] = leafEntry
 
   const blockEnd = Editor.end(editor, blockPath)
   const selectionPoint = Range.start(editor.selection)
 
-  const isBlockEnd = Point.equals(selectionPoint, blockEnd)
+  const isAllowedPlace = () => {
+    const isBlockEnd = Point.equals(selectionPoint, blockEnd)
+    if (isBlockEnd) return true
+    return false
+  }
 
-  if (!isBlockEnd) {
+  if (!isAllowedPlace()) {
     return failure()
   }
 
@@ -61,9 +65,8 @@ export function getOutTheLeaf(editor: Editor): TransformResult {
     return failure()
   }
 
-  Transforms.insertNodes(editor, createLeaf({ text: ' ' }), {
-    select: true,
-  })
+  Transforms.insertNodes(editor, createLeaf({ text: ' ' }), { select: false })
+  Transforms.select(editor, Path.next(leafPath))
 
   return success()
 }
