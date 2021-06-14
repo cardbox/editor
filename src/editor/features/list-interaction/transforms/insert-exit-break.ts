@@ -1,4 +1,4 @@
-import { Editor, Path, Point, Range, Transforms } from 'slate'
+import { Editor, Node, Path, Range, Transforms } from 'slate'
 import { createListItemElement } from '../../../elements'
 import { ListItemElement } from '../../../elements/list/types'
 import { GlobalQueries } from '../../../lib/global-queries'
@@ -18,29 +18,28 @@ export function insertExitBreak(editor: Editor) {
   if (!listItemEntry) return
 
   const [, listItemPath] = listItemEntry
-  const [start, end] = Editor.edges(editor, listItemPath)
 
-  const selectionPoint = GlobalQueries.getPointFromLocation(editor.selection)
-  if (!selectionPoint) return
+  const matchListItem = (element: Node) => {
+    if (!Editor.isBlock(editor, element)) return false
+    return element.type === 'list-item'
+  }
 
-  if (Point.equals(selectionPoint, end)) {
+  const [isStart, isEnd] = GlobalQueries.isOnEdges(editor, {
+    of: listItemPath,
+  })
+
+  if (isEnd) {
     Transforms.insertNodes(editor, createListItemElement(), {
       select: true,
-      match: (element) => {
-        if (!Editor.isBlock(editor, element)) return false
-        return element.type === 'list-item'
-      },
+      match: matchListItem,
     })
     return
   }
 
-  if (Point.equals(selectionPoint, start)) {
+  if (isStart) {
     Transforms.insertNodes(editor, createListItemElement(), {
       select: false,
-      match: (element) => {
-        if (!Editor.isBlock(editor, element)) return false
-        return element.type === 'list-item'
-      },
+      match: matchListItem,
     })
     Transforms.select(
       editor,
@@ -51,9 +50,7 @@ export function insertExitBreak(editor: Editor) {
 
   Transforms.splitNodes(editor, {
     mode: 'lowest',
-    match: (element) => {
-      if (!Editor.isBlock(editor, element)) return false
-      return element.type === 'list-item'
-    },
+    match: matchListItem,
+    always: true,
   })
 }

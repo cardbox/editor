@@ -3,8 +3,11 @@ import { ActionBaseParams } from '../lib/action-controller/types'
 import { UI } from '../lib/hooks/use-ui.types'
 
 export type Action =
+  | 'delete-backward'
   | 'insert-soft-break'
   | 'insert-exit-break'
+  | 'indent'
+  | 'outdent'
   | 'get-out-the-leaf'
   | 'make-bold'
   | 'make-italic'

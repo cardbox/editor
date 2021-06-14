@@ -11,8 +11,11 @@ import { useEditor } from './lib/hooks/use-editor'
 import { useUI } from './lib/hooks/use-ui'
 
 const defaultKeybinds: DefaultActionKeybinds = {
+  'delete-backward': 'backspace',
   'insert-soft-break': 'shift+enter',
   'insert-exit-break': ['enter', 'mod+enter'],
+  'indent': 'tab',
+  'outdent': 'shift+tab',
   'get-out-the-leaf': 'arrowright',
   'make-bold': 'mod+b',
   'make-italic': 'mod+i',

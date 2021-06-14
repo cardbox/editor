@@ -1,4 +1,4 @@
-import { Editor, Path, Point, Range, Transforms } from 'slate'
+import { Editor, Path, Range, Transforms } from 'slate'
 import { createDefaultElement } from '../../elements'
 import { GlobalQueries } from '../global-queries'
 
@@ -16,17 +16,16 @@ export function insertExitBreak(editor: Editor) {
   if (!blockEntry) return
 
   const [, blockPath] = blockEntry
-  const [blockStart, blockEnd] = Editor.edges(editor, blockPath)
+  const [isStart, isEnd] = GlobalQueries.isOnEdges(editor, {
+    of: blockPath,
+  })
 
-  const selectionPoint = GlobalQueries.getPointFromLocation(editor.selection)
-  if (!selectionPoint) return
-
-  if (Point.equals(selectionPoint, blockEnd)) {
+  if (isEnd) {
     Transforms.insertNodes(editor, createDefaultElement(), { select: true })
     return
   }
 
-  if (Point.equals(selectionPoint, blockStart)) {
+  if (isStart) {
     Transforms.insertNodes(editor, createDefaultElement(), { select: false })
     Transforms.select(
       editor,

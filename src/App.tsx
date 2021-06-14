@@ -61,6 +61,23 @@ const initialState: EditorValue = [
             type: 'list-item-content',
             children: [{ text: 'a' }],
           },
+          {
+            id: nanoid(),
+            type: 'unordered-list',
+            children: [
+              {
+                id: nanoid(),
+                type: 'list-item',
+                children: [
+                  {
+                    id: nanoid(),
+                    type: 'list-item-content',
+                    children: [{ text: 'nested' }],
+                  },
+                ],
+              },
+            ],
+          },
         ],
       },
       {
@@ -106,6 +123,23 @@ const initialState: EditorValue = [
             type: 'list-item-content',
             children: [{ text: 'a' }],
           },
+          {
+            id: nanoid(),
+            type: 'ordered-list',
+            children: [
+              {
+                id: nanoid(),
+                type: 'list-item',
+                children: [
+                  {
+                    id: nanoid(),
+                    type: 'list-item-content',
+                    children: [{ text: 'nested' }],
+                  },
+                ],
+              },
+            ],
+          },
         ],
       },
       {
@@ -116,6 +150,23 @@ const initialState: EditorValue = [
             id: nanoid(),
             type: 'list-item-content',
             children: [{ text: 'b' }],
+          },
+          {
+            id: nanoid(),
+            type: 'ordered-list',
+            children: [
+              {
+                id: nanoid(),
+                type: 'list-item',
+                children: [
+                  {
+                    id: nanoid(),
+                    type: 'list-item-content',
+                    children: [{ text: 'nested' }],
+                  },
+                ],
+              },
+            ],
           },
         ],
       },

@@ -8,11 +8,17 @@ import { makeInlineCode } from './make-inline-code'
 import { getOutTheLeaf } from './get-out-the-leaf'
 import { Action, ActionParams } from './types'
 import { setLinkForText } from './set-link-for-text'
+import { deleteBackward } from './delete-backward'
+import { indent } from './indent'
+import { outdent } from './outdent'
 
 const actions = createActionController<Action, ActionParams>()
 
+actions.register('delete-backward', deleteBackward)
 actions.register('insert-soft-break', insertSoftBreak)
 actions.register('insert-exit-break', insertExitBreak)
+actions.register('indent', indent)
+actions.register('outdent', outdent)
 actions.register('get-out-the-leaf', getOutTheLeaf)
 actions.register('make-bold', makeBold)
 actions.register('make-italic', makeItalic)
