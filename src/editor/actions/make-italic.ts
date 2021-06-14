@@ -1,8 +1,8 @@
-import { CustomTransforms } from '../lib/custom-transforms'
+import { GlobalTransforms } from '../lib/global-transforms'
 import { ActionCallback } from '../lib/action-controller/types'
 import { ActionParams } from './types'
 
 export const makeItalic: ActionCallback<ActionParams> = ({ editor, event }) => {
   event.preventDefault()
-  CustomTransforms.toggleModification(editor, 'italic')
+  GlobalTransforms.toggleModification(editor, 'italic')
 }

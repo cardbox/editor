@@ -8,7 +8,7 @@ import { isInBlock } from './is-in-block'
 import { leafHasModifications } from './leaf-has-modifications'
 import { leafModifications } from './leaf-modifications'
 
-export const EditorQueries = {
+export const GlobalQueries = {
   getAbove,
   getPointFromLocation,
   getPointBefore,

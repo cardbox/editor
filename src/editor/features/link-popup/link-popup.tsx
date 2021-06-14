@@ -9,7 +9,7 @@ import ReactDOM from 'react-dom'
 import tippy from 'tippy.js'
 import { useEditorNodeRef } from '../../lib/hooks/use-editor-node-ref'
 import { THEMES } from '../../lib/tippy/themes'
-import { CustomTransforms } from '../../lib/custom-transforms'
+import { GlobalTransforms } from '../../lib/global-transforms'
 import { useEditor } from '../../lib/hooks/use-editor'
 import { REGEX } from '../../lib/util'
 import styles from './link-popup.module.css'
@@ -51,14 +51,14 @@ export const LinkPopup = () => {
     event.preventDefault()
     if (!valid) return
     if (!selection.current) return
-    CustomTransforms.setHref(editor, href, { at: selection.current })
+    GlobalTransforms.setHref(editor, href, { at: selection.current })
     instance.current?.hide()
     editorNodeRef.current?.focus()
   }
 
   const clear = () => {
     if (!selection.current) return
-    CustomTransforms.clearHref(editor, { at: selection.current })
+    GlobalTransforms.clearHref(editor, { at: selection.current })
     instance.current?.hide()
     editorNodeRef.current?.focus()
   }

@@ -1,10 +1,10 @@
 import { Editor } from 'slate'
 import { actions } from '../../../actions'
-import { EditorQueries } from '../../../lib/editor-queries'
+import { GlobalQueries } from '../../../lib/global-queries'
 import { insertExitBreak } from './insert-exit-break'
 
 function match({ editor }: { editor: Editor }) {
-  return EditorQueries.isInBlock(editor, ['ordered-list', 'unordered-list'])
+  return GlobalQueries.isInBlock(editor, ['ordered-list', 'unordered-list'])
 }
 
 actions.override('insert-exit-break', insertExitBreak, { match })

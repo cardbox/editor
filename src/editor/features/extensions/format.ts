@@ -1,6 +1,6 @@
 import { Editor, Range, Transforms, Element, Text } from 'slate'
-import { CustomTransforms } from '../../lib/custom-transforms'
-import { EditorQueries } from '../../lib/editor-queries'
+import { GlobalTransforms } from '../../lib/global-transforms'
+import { GlobalQueries } from '../../lib/global-queries'
 
 interface SkipParams {
   block: Element
@@ -73,7 +73,7 @@ function checkAfter({
       match: false,
     }
 
-  const range = EditorQueries.getRangeBefore(editor, {
+  const range = GlobalQueries.getRangeBefore(editor, {
     matchString: entry.markup,
   })
 
@@ -95,7 +95,7 @@ function checkAfterOnStart({
   editor: Editor
   entry: ConfigEntry & MarkupAfter
 }): CheckResult {
-  const range = EditorQueries.getRangeFromBlockStart(editor)
+  const range = GlobalQueries.getRangeFromBlockStart(editor)
   if (!range) return { match: false }
 
   const string = Editor.string(editor, range)
@@ -120,7 +120,7 @@ function checkBetween({
 }): CheckResult {
   const [startChar, endChar] = entry.markup
 
-  const end = EditorQueries.getPointBefore(editor, {
+  const end = GlobalQueries.getPointBefore(editor, {
     edge: 'end',
     matchString: endChar,
     failOnInvalid: true,
@@ -138,7 +138,7 @@ function checkBetween({
       match: false,
     }
 
-  const start = EditorQueries.getPointBefore(editor, {
+  const start = GlobalQueries.getPointBefore(editor, {
     at: startSearchPoint,
     edge: 'start',
     matchString: startChar,
@@ -180,7 +180,7 @@ function replaceBlock({
   Transforms.delete(editor, { at: range })
 
   if (entry.markupType === 'after' && entry.onlyOnBlockStart) {
-    const blockEntry = EditorQueries.getAbove(editor, {
+    const blockEntry = GlobalQueries.getAbove(editor, {
       type: 'block',
       mode: 'lowest',
     })
@@ -260,8 +260,8 @@ function replaceAtRange({
 
   Transforms.delete(editor, { at: range })
 
-  const blockEntry = EditorQueries.getAbove(editor, { type: 'block' })
-  const leafEntry = EditorQueries.getAbove(editor, { type: 'leaf' })
+  const blockEntry = GlobalQueries.getAbove(editor, { type: 'block' })
+  const leafEntry = GlobalQueries.getAbove(editor, { type: 'leaf' })
   if (!blockEntry) return
   if (!leafEntry) return
   const [block] = blockEntry
@@ -274,7 +274,7 @@ function replaceAtRange({
 
   if (keepTrigger) {
     if (entry.transformType === 'leaf') {
-      CustomTransforms.getOutTheLeaf(editor)
+      GlobalTransforms.getOutTheLeaf(editor)
     } else {
       insertText(trigger)
     }
@@ -300,8 +300,8 @@ function processEntry({
     return { match: false }
   }
 
-  const blockEntry = EditorQueries.getAbove(editor, { type: 'block' })
-  const leafEntry = EditorQueries.getAbove(editor, { type: 'leaf' })
+  const blockEntry = GlobalQueries.getAbove(editor, { type: 'block' })
+  const leafEntry = GlobalQueries.getAbove(editor, { type: 'leaf' })
   if (!blockEntry) return { match: false }
   if (!leafEntry) return { match: false }
   const [block] = blockEntry
@@ -340,7 +340,7 @@ function formatWithConfig(editor: Editor, config: Config): Editor {
   const { insertText } = editor
 
   editor.insertText = (text) => {
-    if (EditorQueries.hasSelection(editor)) {
+    if (GlobalQueries.hasSelection(editor)) {
       return insertText(text)
     }
 

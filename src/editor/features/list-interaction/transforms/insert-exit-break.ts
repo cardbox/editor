@@ -1,7 +1,7 @@
 import { Editor, Path, Point, Range, Transforms } from 'slate'
 import { createListItemElement } from '../../../elements'
 import { ListItemElement } from '../../../elements/list/types'
-import { EditorQueries } from '../../../lib/editor-queries'
+import { GlobalQueries } from '../../../lib/global-queries'
 
 export function insertExitBreak(editor: Editor) {
   if (!editor.selection) return
@@ -10,7 +10,7 @@ export function insertExitBreak(editor: Editor) {
     Transforms.delete(editor, { at: editor.selection })
   }
 
-  const listItemEntry = EditorQueries.getAbove<ListItemElement>(editor, {
+  const listItemEntry = GlobalQueries.getAbove<ListItemElement>(editor, {
     type: 'block',
     mode: 'lowest',
     match: (block) => block.type === 'list-item',
@@ -20,7 +20,7 @@ export function insertExitBreak(editor: Editor) {
   const [, listItemPath] = listItemEntry
   const [start, end] = Editor.edges(editor, listItemPath)
 
-  const selectionPoint = EditorQueries.getPointFromLocation(editor.selection)
+  const selectionPoint = GlobalQueries.getPointFromLocation(editor.selection)
   if (!selectionPoint) return
 
   if (Point.equals(selectionPoint, end)) {

@@ -5,7 +5,7 @@ import { insertExitBreak } from './insert-exit-break'
 import { setHref } from './set-href'
 import { toggleModification } from './toggle-modification'
 
-export const CustomTransforms = {
+export const GlobalTransforms = {
   toggleModification,
   setHref,
   clearHref,

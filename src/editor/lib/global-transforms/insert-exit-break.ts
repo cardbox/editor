@@ -1,6 +1,6 @@
 import { Editor, Path, Point, Range, Transforms } from 'slate'
 import { createDefaultElement } from '../../elements'
-import { EditorQueries } from '../editor-queries'
+import { GlobalQueries } from '../global-queries'
 
 export function insertExitBreak(editor: Editor) {
   if (!editor.selection) return
@@ -9,7 +9,7 @@ export function insertExitBreak(editor: Editor) {
     Transforms.delete(editor, { at: editor.selection })
   }
 
-  const blockEntry = EditorQueries.getAbove(editor, {
+  const blockEntry = GlobalQueries.getAbove(editor, {
     type: 'block',
     mode: 'lowest',
   })
@@ -18,7 +18,7 @@ export function insertExitBreak(editor: Editor) {
   const [, blockPath] = blockEntry
   const [blockStart, blockEnd] = Editor.edges(editor, blockPath)
 
-  const selectionPoint = EditorQueries.getPointFromLocation(editor.selection)
+  const selectionPoint = GlobalQueries.getPointFromLocation(editor.selection)
   if (!selectionPoint) return
 
   if (Point.equals(selectionPoint, blockEnd)) {

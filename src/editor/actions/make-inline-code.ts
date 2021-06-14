@@ -1,4 +1,4 @@
-import { CustomTransforms } from '../lib/custom-transforms'
+import { GlobalTransforms } from '../lib/global-transforms'
 import { ActionCallback } from '../lib/action-controller/types'
 import { ActionParams } from './types'
 
@@ -7,5 +7,5 @@ export const makeInlineCode: ActionCallback<ActionParams> = ({
   event,
 }) => {
   event.preventDefault()
-  CustomTransforms.toggleModification(editor, 'inlineCode')
+  GlobalTransforms.toggleModification(editor, 'inlineCode')
 }

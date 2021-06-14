@@ -1,5 +1,5 @@
 import { Range } from 'slate'
-import { CustomTransforms } from '../../../lib/custom-transforms'
+import { GlobalTransforms } from '../../../lib/global-transforms'
 import { REGEX } from '../../../lib/util'
 import { PasteListener } from './types'
 
@@ -10,5 +10,5 @@ export const link: PasteListener = ({ editor, event }) => {
   const url = new RegExp(REGEX.URL)
   if (!url.test(text)) return
   event.preventDefault()
-  CustomTransforms.setHref(editor, text)
+  GlobalTransforms.setHref(editor, text)
 }
