@@ -1,14 +1,17 @@
 import { nanoid } from 'nanoid'
 import React from 'react'
+import { Text } from 'slate'
 import { RenderElementProps } from 'slate-react'
 import { ElementSettings } from '../types'
 import styles from './heading-1.module.css'
 import { Heading1Element } from './heading-1.types'
 
-export const createHeading1Element = (text = ''): Heading1Element => ({
+export const createHeading1Element = (
+  children: Text[] = [{ text: '' }]
+): Heading1Element => ({
   id: nanoid(),
   type: 'heading-1',
-  children: [{ text }],
+  children,
 })
 
 export const Heading1Component = ({

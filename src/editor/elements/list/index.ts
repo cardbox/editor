@@ -21,3 +21,5 @@ export {
   UnorderedListComponent,
   UNORDERED_LIST_SETTINGS,
 } from './unordered-list'
+
+export { createListElement } from './list'

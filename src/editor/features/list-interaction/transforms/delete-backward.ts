@@ -6,6 +6,7 @@ import {
 } from '../../../elements/list/types'
 import { GlobalQueries } from '../../../lib/global-queries'
 import { mergeSiblings } from './merge-siblings'
+import { outdent } from './outdent'
 
 export function deleteBackward(editor: Editor) {
   if (!editor.selection) return
@@ -50,6 +51,11 @@ export function deleteBackward(editor: Editor) {
   const listIsNested = Boolean(listAboveEntry)
 
   const [isStart] = GlobalQueries.isOnEdges(editor, { of: contentPath })
+
+  if (isStart && listIsNested) {
+    outdent(editor)
+    return
+  }
 
   if (isStart && itemIsFirst && !listIsNested) {
     Transforms.setNodes(editor, { type: 'paragraph' }, { at: contentPath })

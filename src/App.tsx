@@ -108,6 +108,34 @@ const initialState: EditorValue = [
           },
         ],
       },
+      {
+        id: nanoid(),
+        type: 'list-item',
+        children: [
+          {
+            id: nanoid(),
+            type: 'list-item-content',
+            children: [{ text: 'c' }],
+          },
+          {
+            id: nanoid(),
+            type: 'unordered-list',
+            children: [
+              {
+                id: nanoid(),
+                type: 'list-item',
+                children: [
+                  {
+                    id: nanoid(),
+                    type: 'list-item-content',
+                    children: [{ text: 'nested' }],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
   {
