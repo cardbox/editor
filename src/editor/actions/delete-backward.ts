@@ -1,4 +1,5 @@
 import { ActionCallback } from '../lib/action-controller/types'
+import { GlobalTransforms } from '../lib/global-transforms'
 import { ActionParams } from './types'
 
 export const deleteBackward: ActionCallback<ActionParams> = ({
@@ -6,5 +7,5 @@ export const deleteBackward: ActionCallback<ActionParams> = ({
   event,
 }) => {
   event.preventDefault()
-  editor.deleteBackward('character')
+  GlobalTransforms.deleteBackward(editor)
 }

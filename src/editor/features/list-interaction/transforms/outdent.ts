@@ -1,37 +1,84 @@
-import { Editor, Element, Path, Range, Transforms } from 'slate'
+import { Editor, Location, Path, Range, Transforms } from 'slate'
 import { ListElement, ListItemElement } from '../../../elements/list/types'
+import { GlobalMatchers } from '../../../lib/global-matchers'
 import { GlobalQueries } from '../../../lib/global-queries'
 import { mergeSiblings } from './merge-siblings'
 
-export function outdent(editor: Editor) {
-  if (!editor.selection) return
-  if (Range.isExpanded(editor.selection)) return
+interface Options {
+  at?: Location
+}
 
-  const matchList = (block: Element) =>
-    block.type === 'unordered-list' || block.type === 'ordered-list'
+// eslint-disable-next-line sonarjs/cognitive-complexity
+export function outdent(editor: Editor, options: Options = {}) {
+  const { at = editor.selection } = options
+  if (!at) return
+
+  if (Range.isRange(at) && Range.isExpanded(at)) return
+
+  const isList = GlobalMatchers.block(editor, [
+    'ordered-list',
+    'unordered-list',
+  ])
 
   const listEntry = GlobalQueries.getAbove<ListElement>(editor, {
+    at,
     type: 'block',
     mode: 'lowest',
-    match: matchList,
+    match: isList,
   })
   if (!listEntry) return
   const [list, listPath] = listEntry
 
   const itemEntry = GlobalQueries.getAbove<ListItemElement>(editor, {
+    at,
     type: 'block',
     mode: 'lowest',
-    match: (block) => block.type === 'list-item',
+    match: GlobalMatchers.block(editor, 'list-item'),
   })
   if (!itemEntry) return
   const [item, itemPath] = itemEntry
 
   const itemAboveEntry = GlobalQueries.getAbove<ListItemElement>(editor, {
+    at,
     type: 'block',
     mode: 'lowest',
-    match: (block) => block.type === 'list-item' && block !== item,
+    match: GlobalMatchers.builder(editor)
+      .block('list-item')
+      .notEquals(item)
+      .compile(),
   })
-  if (!itemAboveEntry) return
+
+  if (!itemAboveEntry) {
+    const hasListInside = item.children.length > 1
+
+    if (hasListInside) {
+      const listInside = item.children[1]
+      for (let i = listInside.children.length - 1; i >= 0; i--) {
+        outdent(editor, { at: itemPath.concat([1, i, 0]) })
+      }
+    }
+
+    Transforms.setNodes(
+      editor,
+      { type: 'paragraph' },
+      { at: itemPath.concat(0) }
+    )
+    Transforms.unwrapNodes(editor, {
+      at: itemPath.concat(0),
+      mode: 'lowest',
+      match: GlobalMatchers.block(editor, 'list-item'),
+    })
+    Transforms.unwrapNodes(editor, {
+      at: itemPath,
+      mode: 'lowest',
+      match: GlobalMatchers.block(editor, ['ordered-list', 'unordered-list']),
+      split: true,
+    })
+
+    mergeSiblings(editor)
+    return
+  }
+
   const [, itemAbovePath] = itemAboveEntry
 
   const nextItemEntry = Editor.next(editor, { at: itemPath })
@@ -44,7 +91,7 @@ export function outdent(editor: Editor) {
     Transforms.splitNodes(editor, {
       at: nextItemPath,
       mode: 'lowest',
-      match: (element) => Editor.isBlock(editor, element) && matchList(element),
+      match: isList,
     })
     const bottomListPath = Path.next(Path.parent(nextItemPath))
     Transforms.moveNodes(editor, {

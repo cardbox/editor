@@ -1,28 +1,34 @@
-import { Editor, Element, Range, Transforms } from 'slate'
+import { Editor, Location, Range, Transforms } from 'slate'
 import { createListElement } from '../../../elements/list'
 import { ListElement, ListItemElement } from '../../../elements/list/types'
+import { GlobalMatchers } from '../../../lib/global-matchers'
 import { GlobalQueries } from '../../../lib/global-queries'
 import { mergeSiblings } from './merge-siblings'
 
-export function indent(editor: Editor) {
-  if (!editor.selection) return
-  if (Range.isExpanded(editor.selection)) return
+interface Options {
+  at?: Location
+}
 
-  const matchList = (block: Element) =>
-    block.type === 'unordered-list' || block.type === 'ordered-list'
+export function indent(editor: Editor, options: Options = {}) {
+  const { at = editor.selection } = options
+  if (!at) return
+
+  if (Range.isRange(at) && Range.isExpanded(at)) return
 
   const listEntry = GlobalQueries.getAbove<ListElement>(editor, {
+    at,
     type: 'block',
     mode: 'lowest',
-    match: matchList,
+    match: GlobalMatchers.block(editor, ['ordered-list', 'unordered-list']),
   })
   if (!listEntry) return
   const [list] = listEntry
 
   const itemEntry = GlobalQueries.getAbove<ListItemElement>(editor, {
+    at,
     type: 'block',
     mode: 'lowest',
-    match: (block) => block.type === 'list-item',
+    match: GlobalMatchers.block(editor, 'list-item'),
   })
   if (!itemEntry) return
   const [item, itemPath] = itemEntry
