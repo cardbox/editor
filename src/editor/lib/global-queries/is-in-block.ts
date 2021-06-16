@@ -12,7 +12,5 @@ export function isInBlock(
     match: GlobalMatchers.block(editor, block),
   })
 
-  console.log(blockAbove)
-
   return Boolean(blockAbove)
 }

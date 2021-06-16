@@ -1,6 +1,6 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { nanoid } from 'nanoid'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Editor, EditorValue } from './editor'
 
 const initialState: EditorValue = [
@@ -204,11 +204,6 @@ const initialState: EditorValue = [
 
 function useEditorValue() {
   const [value, setValue] = useState<EditorValue>(initialState)
-
-  useEffect(() => {
-    console.log('value', value)
-  }, [value])
-
   return [value, setValue] as const
 }
 

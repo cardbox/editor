@@ -1,4 +1,4 @@
-import { ActionBaseParams, ListenerConfig } from './types'
+import { ActionBaseParams, ActionCallbackResult, ListenerConfig } from './types'
 
 export function createActionController<
   TAction extends string = string,
@@ -42,16 +42,16 @@ export function createActionController<
     const configs = listeners.filter((config) => config.action === action)
     const sortedByPriority = configs.sort((a, b) => b.priority - a.priority)
 
-    let matchedConfig: LocalListenerConfig | null = null
     for (const config of sortedByPriority) {
-      if (config.match(params)) {
-        matchedConfig = config
-        break
-      }
-    }
+      const match = config.match(params)
+      if (!match) continue
 
-    if (!matchedConfig) return
-    matchedConfig.callback(params)
+      const result: ActionCallbackResult = config.callback(params) || {}
+      const { skipped = false } = result
+
+      if (skipped) continue
+      else break
+    }
   }
 
   const curryExecute = (action: TAction) => (params: TParams) => {

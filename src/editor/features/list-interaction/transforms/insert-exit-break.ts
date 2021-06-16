@@ -1,7 +1,9 @@
-import { Editor, Node, Path, Range, Transforms } from 'slate'
+import { Editor, Path, Range, Transforms } from 'slate'
 import { createListItemElement } from '../../../elements'
-import { ListItemElement } from '../../../elements/list/types'
+import { ListElement, ListItemElement } from '../../../elements/list/types'
+import { GlobalMatchers } from '../../../lib/global-matchers'
 import { GlobalQueries } from '../../../lib/global-queries'
+import { outdent } from './outdent'
 
 export function insertExitBreak(editor: Editor) {
   if (!editor.selection) return
@@ -10,28 +12,41 @@ export function insertExitBreak(editor: Editor) {
     Transforms.delete(editor, { at: editor.selection })
   }
 
+  const listEntry = GlobalQueries.getAbove<ListElement>(editor, {
+    type: 'block',
+    mode: 'lowest',
+    match: GlobalMatchers.block(editor, ['ordered-list', 'unordered-list']),
+  })
+  if (!listEntry) return
+  const [list] = listEntry
+
+  const matchItem = GlobalMatchers.block(editor, 'list-item')
+
   const listItemEntry = GlobalQueries.getAbove<ListItemElement>(editor, {
     type: 'block',
     mode: 'lowest',
-    match: (block) => block.type === 'list-item',
+    match: matchItem,
   })
   if (!listItemEntry) return
-
-  const [, listItemPath] = listItemEntry
-
-  const matchListItem = (element: Node) => {
-    if (!Editor.isBlock(editor, element)) return false
-    return element.type === 'list-item'
-  }
+  const [item, listItemPath] = listItemEntry
 
   const [isStart, isEnd] = GlobalQueries.isOnEdges(editor, {
     of: listItemPath,
   })
 
+  const isLastItem = item === list.children[list.children.length - 1]
+  const hasListInside = item.children.length > 1
+  const isEmpty = isStart && isEnd
+
+  if (isEmpty && isLastItem && !hasListInside) {
+    outdent(editor)
+    return
+  }
+
   if (isEnd) {
     Transforms.insertNodes(editor, createListItemElement(), {
       select: true,
-      match: matchListItem,
+      match: matchItem,
     })
     return
   }
@@ -39,7 +54,7 @@ export function insertExitBreak(editor: Editor) {
   if (isStart) {
     Transforms.insertNodes(editor, createListItemElement(), {
       select: false,
-      match: matchListItem,
+      match: matchItem,
     })
     Transforms.select(
       editor,
@@ -50,7 +65,7 @@ export function insertExitBreak(editor: Editor) {
 
   Transforms.splitNodes(editor, {
     mode: 'lowest',
-    match: matchListItem,
+    match: matchItem,
     always: true,
   })
 }

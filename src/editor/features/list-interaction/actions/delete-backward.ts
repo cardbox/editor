@@ -6,6 +6,8 @@ export const deleteBackward: ActionCallback<ActionParams> = ({
   editor,
   event,
 }) => {
-  event.preventDefault()
-  LocalTransforms.deleteBackward(editor)
+  const { handled } = LocalTransforms.deleteBackward(editor)
+
+  if (handled) event.preventDefault()
+  else return { skipped: true }
 }

@@ -1,15 +1,22 @@
 import { Editor, Range } from 'slate'
 import { ListItemContentElement } from '../../../elements/list/types'
 import { GlobalQueries } from '../../../lib/global-queries'
-import { GlobalTransforms } from '../../../lib/global-transforms'
 import { outdent } from './outdent'
 
-export function deleteBackward(editor: Editor) {
-  if (!editor.selection) return
+interface TransformResult {
+  handled: boolean
+}
+
+export function deleteBackward(editor: Editor): TransformResult {
+  const handled: TransformResult = { handled: true }
+  const skipped: TransformResult = { handled: false }
+
+  if (!editor.selection) {
+    return skipped
+  }
 
   if (Range.isExpanded(editor.selection)) {
-    GlobalTransforms.deleteBackward(editor)
-    return
+    return skipped
   }
 
   const contentEntry = GlobalQueries.getAbove<ListItemContentElement>(editor, {
@@ -18,15 +25,18 @@ export function deleteBackward(editor: Editor) {
     match: (block) => block.type === 'list-item-content',
   })
 
-  if (!contentEntry) return
+  if (!contentEntry) {
+    return skipped
+  }
+
   const [, contentPath] = contentEntry
 
   const [isStart] = GlobalQueries.isOnEdges(editor, { of: contentPath })
 
   if (!isStart) {
-    GlobalTransforms.deleteBackward(editor)
-    return
+    return skipped
   }
 
   outdent(editor)
+  return handled
 }
