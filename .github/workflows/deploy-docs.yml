@@ -21,7 +21,7 @@ jobs:
         run: yarn install --non-interactive --no-progress --frozen-lockfile
 
       - name: Build
-        run: yarn build
+        run: yarn build:docs
 
       - name: Create 404.html to handle all routes by SPA
         run: cp ./dist/index.html ./dist/404.html
