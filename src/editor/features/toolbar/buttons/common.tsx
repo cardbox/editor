@@ -1,7 +1,7 @@
 import Tippy from '@tippyjs/react'
 import React, { ButtonHTMLAttributes, ReactNode } from 'react'
 import { THEMES } from '../../../lib/tippy/themes'
-import styles from './common.module.css'
+import { Container, Icon } from './styles'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: ReactNode
@@ -17,11 +17,9 @@ export const ToolbarButton = ({
   ...rest
 }: Props) => {
   const pure = (
-    <button className={styles.container} data-active={isActive} {...rest}>
-      <span className={styles.icon} style={style}>
-        {icon}
-      </span>
-    </button>
+    <Container data-active={isActive} {...rest}>
+      <Icon style={style}>{icon}</Icon>
+    </Container>
   )
 
   if (tooltip) {

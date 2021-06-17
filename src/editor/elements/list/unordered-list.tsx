@@ -4,7 +4,6 @@ import { Text } from 'slate'
 import { RenderElementProps } from 'slate-react'
 import { ALL_LEAF_MODIFICATIONS } from '../../constants'
 import { ElementSettings } from '../../types'
-import styles from './index.module.css'
 import { createListItemElement } from './list-item'
 import { UnorderedListElement } from './types'
 
@@ -20,11 +19,7 @@ export const UnorderedListComponent = ({
   attributes,
   children,
 }: RenderElementProps) => {
-  return (
-    <ul className={styles.unorderedList} {...attributes}>
-      {children}
-    </ul>
-  )
+  return <ul {...attributes}>{children}</ul>
 }
 
 export const UNORDERED_LIST_SETTINGS: ElementSettings = {

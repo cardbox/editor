@@ -2,7 +2,6 @@ import React from 'react'
 import { Editable, Slate } from 'slate-react'
 import { renderElement } from './elements'
 import { renderLeaf } from './leaf'
-import styles from './editor.module.css'
 import { useKeybinds } from './use-keybinds'
 import { Toolbar } from './features/toolbar'
 import { ToolbarMarkButton } from './features/toolbar/buttons'
@@ -11,9 +10,9 @@ import { EditorValue } from './types'
 import { LinkPopup } from './features/link-popup'
 import { CustomActionKeybinds } from './actions'
 import { useListeners } from './features/listeners'
-import './lib/tippy/themes.css'
 import './features/list-interaction'
 import './features/paragraph-interaction'
+import { StyledEditor, TippyStyles } from './styles'
 
 export const EditorInner = ({
   value,
@@ -31,10 +30,10 @@ export const EditorInner = ({
   const { handlePaste } = useListeners()
 
   return (
-    <>
+    <StyledEditor>
+      <TippyStyles />
       <Slate editor={editor} value={value} onChange={onChange}>
         <Editable
-          className={styles.editor}
           renderElement={renderElement}
           renderLeaf={renderLeaf}
           onKeyDown={handleKeyDown}
@@ -49,7 +48,7 @@ export const EditorInner = ({
           <LinkPopup />
         </>
       )}
-    </>
+    </StyledEditor>
   )
 }
 

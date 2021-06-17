@@ -3,7 +3,6 @@ import React from 'react'
 import { Text } from 'slate'
 import { RenderElementProps } from 'slate-react'
 import { ElementSettings } from '../types'
-import styles from './heading-1.module.css'
 import { Heading1Element } from './heading-1.types'
 
 export const createHeading1Element = (
@@ -18,11 +17,7 @@ export const Heading1Component = ({
   attributes,
   children,
 }: RenderElementProps) => {
-  return (
-    <h1 className={styles.heading} {...attributes}>
-      {children}
-    </h1>
-  )
+  return <h1 {...attributes}>{children}</h1>
 }
 
 export const HEADING_1_SETTINGS: ElementSettings = {

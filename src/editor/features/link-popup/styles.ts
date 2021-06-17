@@ -1,44 +1,38 @@
-.container {
-  width: 280px;
-  padding: 8px;
-}
+import styled from 'styled-components'
 
-.input-wrapper {
+export const InputWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   color: rgba(255, 255, 255, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 3px;
-}
 
-.input-wrapper:focus-within {
-  color: rgba(255, 255, 255, 0.8);
-  border-color: rgba(255, 255, 255, 0.8);
-}
+  &:focus-within {
+    color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.8);
+  }
+`
 
-.link-icon {
+const Icon = styled.div`
   display: flex;
   align-items: center;
   height: 28px;
   padding: 0 5px;
-}
 
-.clear-icon {
-  display: flex;
-  align-items: center;
-  height: 28px;
-  padding: 0 5px;
+  & svg {
+    width: 20px;
+    height: 20px;
+  }
+`
+
+export const LinkIcon = styled(Icon)``
+
+export const ClearIcon = styled(Icon)`
   cursor: pointer;
-}
+`
 
-.link-icon svg,
-.clear-icon svg {
-  width: 20px;
-  height: 20px;
-}
-
-.input {
+export const Input = styled.input`
   width: 100%;
   height: 28px;
   padding: 0;
@@ -48,11 +42,11 @@
   background: transparent;
   color: inherit;
   outline: none;
-}
+`
 
-.error {
+export const Error = styled.div`
   margin-top: 8px;
   margin-bottom: 0;
   padding: 0 4px;
   font-size: 12px;
-}
+`

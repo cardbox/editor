@@ -1,11 +1,8 @@
-import path from 'path'
-
 import babel from '@rollup/plugin-babel'
 import commonjs from '@rollup/plugin-commonjs'
 import dts from 'rollup-plugin-dts'
 import resolve from '@rollup/plugin-node-resolve'
 import { terser } from 'rollup-plugin-terser'
-import postcss from 'rollup-plugin-postcss'
 
 import pkg from './package.json'
 import { minifyConfig } from './build/minification.js'
@@ -29,11 +26,6 @@ const createTerser = ({ inline }) =>
     })
   )
 
-const postcssPlugin = postcss({
-  extract: path.resolve('dist/editor.css'),
-  minimize: true,
-})
-
 const input = 'src/editor/index.ts'
 const external = [
   ...Object.keys(pkg.devDependencies),
@@ -50,6 +42,7 @@ export default [
       'react-dom',
       '@tippyjs/react',
       'tippy.js',
+      'styled-components',
     ],
     output: {
       name: 'editor',
@@ -60,10 +53,10 @@ export default [
         'react-dom': 'react-dom',
         '@tippyjs/react': '@tippyjs/react',
         'tippy.js': 'tippy.js',
+        'styled-components': 'styled-components',
       },
     },
     plugins: [
-      postcssPlugin,
       babelPlugin,
       resolverPlugin,
       commonjs(),
@@ -84,7 +77,6 @@ export default [
       },
     ],
     plugins: [
-      postcssPlugin,
       babelPlugin,
       resolverPlugin,
       commonjs(),
@@ -100,6 +92,6 @@ export default [
         format: 'es',
       },
     ],
-    plugins: [resolverPlugin, postcssPlugin, dts()],
+    plugins: [resolverPlugin, dts()],
   },
 ]

@@ -13,7 +13,7 @@ yarn add @cardbox/editor
 Second, install the peer dependencies:
 
 ```
-yarn add react@^16.8.6 react-dom@^16.8.6 tippy.js@^6.3.1 @tippyjs/react@^4.2.5
+yarn add react@^16.8.6 react-dom@^16.8.6 styled-components@^5.1.1 tippy.js@^6.3.1 @tippyjs/react@^4.2.5
 ```
 
 Then, use it:
@@ -23,9 +23,6 @@ import {
   Editor, // component
   EditorValue, // value type
 } from '@cardbox/editor'
-
-import 'tippy.js/dist/tippy.css'
-import '@cardbox/editor/dist/editor.css'
 
 const MyEditor = () => {
   const initialValue: EditorValue = [

@@ -12,8 +12,8 @@ import { THEMES } from '../../lib/tippy/themes'
 import { GlobalTransforms } from '../../lib/global-transforms'
 import { useEditor } from '../../lib/hooks/use-editor'
 import { REGEX } from '../../lib/util'
-import styles from './link-popup.module.css'
 import { useLinkPopupActions, useLinkPopupState } from './link-popup-context'
+import { Input, InputWrapper, LinkIcon, ClearIcon, Error } from './styles'
 
 /*
  * We use this element as the React Portal container
@@ -23,7 +23,7 @@ import { useLinkPopupActions, useLinkPopupState } from './link-popup-context'
 function useContainer() {
   return useMemo(() => {
     const element = document.createElement('div')
-    element.classList.add(styles.container)
+    element.classList.add('link-popup-container')
     return element
   }, [])
 }
@@ -116,30 +116,29 @@ const LinkPopupInner = () => {
 
   return ReactDOM.createPortal(
     <form onSubmit={handleSubmit}>
-      <div className={styles.inputWrapper}>
-        <div className={styles.linkIcon}>
-          <LinkIcon />
-        </div>
-        <input
+      <InputWrapper>
+        <LinkIcon>
+          <LinkIconSvg />
+        </LinkIcon>
+        <Input
           ref={input}
-          className={styles.input}
           value={href}
           onChange={handleChange}
           placeholder="Enter the URL"
         />
         {hadHref.current && (
-          <div className={styles.clearIcon} onClick={clear}>
-            <ClearIcon />
-          </div>
+          <ClearIcon onClick={clear}>
+            <ClearIconSvg />
+          </ClearIcon>
         )}
-      </div>
-      {error && <p className={styles.error}>{error}</p>}
+      </InputWrapper>
+      {error && <Error>{error}</Error>}
     </form>,
     container
   )
 }
 
-const LinkIcon = (props: React.SVGProps<SVGSVGElement>) => {
+const LinkIconSvg = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width="24"
@@ -165,7 +164,7 @@ const LinkIcon = (props: React.SVGProps<SVGSVGElement>) => {
   )
 }
 
-const ClearIcon = (props: React.SVGProps<SVGSVGElement>) => {
+const ClearIconSvg = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width="24"

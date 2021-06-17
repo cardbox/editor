@@ -4,7 +4,6 @@ import { Text } from 'slate'
 import { RenderElementProps } from 'slate-react'
 import { ALL_LEAF_MODIFICATIONS } from '../../constants'
 import { ElementSettings } from '../../types'
-import styles from './index.module.css'
 import { createListItemContentElement } from './list-item-content'
 import { ListItemElement } from './types'
 
@@ -20,11 +19,7 @@ export const ListItemComponent = ({
   attributes,
   children,
 }: RenderElementProps) => {
-  return (
-    <li className={styles.listItem} {...attributes}>
-      {children}
-    </li>
-  )
+  return <li {...attributes}>{children}</li>
 }
 
 export const LIST_ITEM_SETTINGS: ElementSettings = {

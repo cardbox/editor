@@ -6,7 +6,6 @@ import { useEditorNodeRef } from '../../lib/hooks/use-editor-node-ref'
 import { THEMES } from '../../lib/tippy/themes'
 import { useThrottled } from '../../lib/hooks/use-throttled'
 import { useForceUpdate } from '../../lib/hooks/use-force-update'
-import styles from './toolbar.module.css'
 import { useToolbarState } from './toolbar-context'
 
 /*
@@ -17,7 +16,7 @@ import { useToolbarState } from './toolbar-context'
 function useContainer() {
   const container = useMemo(() => {
     const element = document.createElement('div')
-    element.classList.add(styles.container)
+    element.classList.add('toolbar-container')
     return element
   }, [])
 

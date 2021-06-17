@@ -4,7 +4,6 @@ import { Text } from 'slate'
 import { RenderElementProps } from 'slate-react'
 import { ALL_LEAF_MODIFICATIONS } from '../constants'
 import { ElementSettings } from '../types'
-import styles from './paragraph.module.css'
 import { ParagraphElement } from './paragraph.types'
 
 export const createParagraphElement = (
@@ -19,11 +18,7 @@ export const ParagraphComponent = ({
   attributes,
   children,
 }: RenderElementProps) => {
-  return (
-    <p className={styles.paragraph} {...attributes}>
-      {children}
-    </p>
-  )
+  return <p {...attributes}>{children}</p>
 }
 
 export const PARAGRAPH_SETTINGS: ElementSettings = {
