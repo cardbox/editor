@@ -13,7 +13,7 @@ yarn add @cardbox/editor
 Second, install the peer dependencies:
 
 ```
-yarn add react@^17.0.0 react-dom@^17.0.0 tippy.js@^6.3.1 @tippyjs/react@^4.2.5
+yarn add react@^16.8.6 react-dom@^16.8.6 tippy.js@^6.3.1 @tippyjs/react@^4.2.5
 ```
 
 Then, use it:
