@@ -45,6 +45,26 @@ const MyEditor = () => {
 }
 ```
 
+## Usage
+
+### Text modifications
+
+- Bold: `⌘+B`
+- Italic: `⌘+I`
+- Underlined: `⌘+U`
+- Inline-code: `⌘+E`
+- Link: `⌘+K` (opens a tooltip)
+
+Also you can use the buttons located in the toolbar.
+
+### Lists
+
+Write `-` + space to create an unordered list.
+
+Write `1.` or `1)` + space to create an ordered list.
+
+Use `Tab` and `Shift+Tab` to navigate through items.
+
 ## Architecture
 
 [Excalidraw](https://excalidraw.com/#json=4811335044956160,DJxYluN2Ua3_wl756Fv62A)
