@@ -63,7 +63,7 @@ Write `-` + space to create an unordered list.
 
 Write `1.` or `1)` + space to create an ordered list.
 
-Use `Tab` and `Shift+Tab` to navigate through items.
+Use `Tab` and `Shift+Tab` to manage the items nesting level.
 
 ## Architecture
 
