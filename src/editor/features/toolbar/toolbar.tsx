@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useMemo } from 'react'
+import React, { ReactNode, useEffect, useMemo } from 'react'
 import ReactDOM from 'react-dom'
 import tippy from 'tippy.js'
 import debounce from 'just-debounce-it'
@@ -6,7 +6,6 @@ import { useEditorNodeRef } from '../../lib/hooks/use-editor-node-ref'
 import { THEMES } from '../../lib/tippy/themes'
 import { useThrottled } from '../../lib/hooks/use-throttled'
 import { useForceUpdate } from '../../lib/hooks/use-force-update'
-import styles from './toolbar.module.css'
 import { useToolbarState } from './toolbar-context'
 
 /*
@@ -17,7 +16,7 @@ import { useToolbarState } from './toolbar-context'
 function useContainer() {
   const container = useMemo(() => {
     const element = document.createElement('div')
-    element.classList.add(styles.container)
+    element.classList.add('toolbar-container')
     return element
   }, [])
 
@@ -37,7 +36,12 @@ interface Props {
   renderButtons: () => ReactNode
 }
 
-export const Toolbar = ({ renderButtons }: Props) => {
+export const Toolbar = (props: Props) => {
+  if (typeof window === 'undefined') return null
+  return <ToolbarInner {...props} />
+}
+
+const ToolbarInner = ({ renderButtons }: Props) => {
   const editorNodeRef = useEditorNodeRef()
   const container = useContainer()
   const { instance, lastSelectedText } = useToolbarState()

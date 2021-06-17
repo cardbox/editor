@@ -2,8 +2,6 @@ import React from 'react'
 import { Extension } from './lib/extensions/extend'
 import { useExtendedEditor } from './use-extended-editor'
 import { ToolbarContext, useNewToolbarState } from './features/toolbar'
-import 'tippy.js/dist/tippy.css'
-import './lib/tippy/themes.css'
 import { EditorContext } from './lib/editor-context'
 import { LinkPopupContext, useNewLinkPopupState } from './features/link-popup'
 

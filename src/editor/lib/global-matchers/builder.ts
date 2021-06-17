@@ -3,7 +3,7 @@ import { ElementType } from '../../types'
 import { block } from './block'
 import { notEquals } from './not-equals'
 
-class Builder {
+export class Builder {
   editor: Editor
 
   constructor(editor: Editor) {

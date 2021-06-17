@@ -4,7 +4,6 @@ import { Text } from 'slate'
 import { RenderElementProps } from 'slate-react'
 import { ALL_LEAF_MODIFICATIONS } from '../../constants'
 import { ElementSettings } from '../../types'
-import styles from './index.module.css'
 import { createListItemElement } from './list-item'
 import { OrderedListElement } from './types'
 
@@ -20,11 +19,7 @@ export const OrderedListComponent = ({
   attributes,
   children,
 }: RenderElementProps) => {
-  return (
-    <ol className={styles.orderedList} {...attributes}>
-      {children}
-    </ol>
-  )
+  return <ol {...attributes}>{children}</ol>
 }
 
 export const ORDERED_LIST_SETTINGS: ElementSettings = {
