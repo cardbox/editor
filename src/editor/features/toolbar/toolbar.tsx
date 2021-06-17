@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useMemo } from 'react'
+import React, { ReactNode, useEffect, useMemo } from 'react'
 import ReactDOM from 'react-dom'
 import tippy from 'tippy.js'
 import debounce from 'just-debounce-it'
@@ -37,7 +37,12 @@ interface Props {
   renderButtons: () => ReactNode
 }
 
-export const Toolbar = ({ renderButtons }: Props) => {
+export const Toolbar = (props: Props) => {
+  if (typeof window === 'undefined') return null
+  return <ToolbarInner {...props} />
+}
+
+const ToolbarInner = ({ renderButtons }: Props) => {
   const editorNodeRef = useEditorNodeRef()
   const container = useContainer()
   const { instance, lastSelectedText } = useToolbarState()

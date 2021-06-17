@@ -34,6 +34,11 @@ function isURL(string: string) {
 }
 
 export const LinkPopup = () => {
+  if (typeof window === 'undefined') return null
+  return <LinkPopupInner />
+}
+
+const LinkPopupInner = () => {
   const editor = useEditor()
   const editorNodeRef = useEditorNodeRef()
   const container = useContainer()

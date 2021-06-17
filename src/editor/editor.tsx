@@ -1,7 +1,5 @@
 import React from 'react'
 import { Extension } from './lib/extensions/extend'
-import 'tippy.js/dist/tippy.css'
-import './lib/tippy/themes.css'
 import { RootProvider } from './root-provider'
 import { EditorInner } from './editor-inner'
 import { EditorValue } from './types'

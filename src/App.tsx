@@ -2,6 +2,7 @@
 import { nanoid } from 'nanoid'
 import React, { useState } from 'react'
 import { Editor, EditorValue } from './editor'
+import 'tippy.js/dist/tippy.css'
 
 const initialState: EditorValue = [
   {
