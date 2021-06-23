@@ -1,4 +1,4 @@
-import { Editor, Element, Path } from 'slate'
+import { Editor } from 'slate'
 import { GlobalMatchers } from '../../lib/global-matchers'
 
 export function listNormalization(editor: Editor): Editor {
@@ -11,45 +11,14 @@ export function listNormalization(editor: Editor): Editor {
 
   const isItem = GlobalMatchers.block(editor, 'list-item')
 
-  function normalizeList(element: Element, path: Path) {
-    // const hasItems = element.children.some(isItem)
-    // if (hasItems) return
-    // Transforms.removeNodes(editor, { at: path })
-    // const iterator = Node.children(element, path, { reverse: true })
-    // for (const [child, childPath] of iterator) {
-    //   if (isItem(child)) continue
-    //   Transforms.removeNodes(editor, { at: childPath })
-    // }
-  }
-
-  function normalizeItem(element: Element, path: Path) {
-    // console.log(element, path)
-    // const iterator = Node.children(element, path, { reverse: true })
-    // for (const [child, childPath] of iterator) {
-    //   if (isContent(child) || isList(child)) continue
-    //   Transforms.removeNodes(editor, { at: childPath })
-    // }
-    // for (const [child, childPath] of Node.children(element, path)) {
-    //   if (isContent(child) || isList(child)) {
-    //     continue
-    //   }
-    //   Transforms.setNodes(
-    //     editor,
-    //     { type: 'list-item-content' },
-    //     {
-    //       at: childPath,
-    //     }
-    //   )
-    //   console.log(child)
-    //   editor.normalizeNode([child, childPath])
-    // }
-  }
+  function normalizeList() {}
+  function normalizeItem() {}
 
   editor.normalizeNode = (entry) => {
-    const [node, path] = entry
+    const [node] = entry
 
-    if (isItem(node)) normalizeItem(node, path)
-    if (isList(node)) normalizeList(node, path)
+    if (isItem(node)) normalizeItem()
+    if (isList(node)) normalizeList()
 
     return normalizeNode(entry)
   }
