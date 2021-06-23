@@ -3,11 +3,14 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.0.1",
+  "version": "0.0.0-real-version-will-be-set-at-the-ci",
   "main": "dist/editor.cjs.js",
   "module": "dist/editor.esm.js",
   "unpkg": "dist/editor.umd.js",
   "types": "dist/editor.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build:docs": "tsc && vite build",

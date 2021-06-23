@@ -49,11 +49,13 @@ export default [
       file: pkg.unpkg,
       format: 'umd',
       globals: {
-        'react': 'react',
-        'react-dom': 'react-dom',
-        '@tippyjs/react': '@tippyjs/react',
-        'tippy.js': 'tippy.js',
-        'styled-components': 'styled-components',
+        'react': 'React',
+        'react-is': 'ReactIs',
+        'react-dom': 'ReactDOM',
+        '@tippyjs/react': 'Tippy',
+        '@popperjs/core': 'Popper',
+        'tippy.js': 'tippy',
+        'styled-components': 'styled',
       },
     },
     plugins: [
