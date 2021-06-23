@@ -1,5 +1,6 @@
 import React from 'react'
 import { Editable, Slate } from 'slate-react'
+import { Editor } from 'slate'
 import { renderElement } from './elements'
 import { renderLeaf } from './leaf'
 import { useKeybinds } from './use-keybinds'
@@ -19,15 +20,21 @@ export const EditorInner = ({
   onChange,
   readOnly = false,
   customKeybinds = {},
+  editorRef,
 }: {
   value: EditorValue
   onChange: (value: EditorValue) => void
   readOnly?: boolean
   customKeybinds?: CustomActionKeybinds
+  editorRef?: React.MutableRefObject<Editor | null>
 }) => {
   const editor = useEditor()
   const { handleKeyDown } = useKeybinds(customKeybinds)
   const { handlePaste } = useListeners()
+
+  if (editorRef) {
+    editorRef.current = editor
+  }
 
   return (
     <StyledEditor>

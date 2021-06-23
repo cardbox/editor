@@ -43,11 +43,6 @@ export function indent(editor: Editor) {
     return 'unordered-list'
   }
 
-  Transforms.setNodes(
-    editor,
-    { type: 'list-item-content' },
-    { at: paragraphPath }
-  )
   Transforms.wrapNodes(editor, createListItemElement([]), { at: paragraphPath })
 
   const type = getNearestListType()

@@ -1,18 +1,11 @@
-import { Text } from 'slate'
-
-export interface ListItemContentElement {
-  id: string
-  type: 'list-item-content'
-  children: Text[]
-}
+import { Element } from 'slate'
 
 export type ListElement = OrderedListElement | UnorderedListElement
-export type SupportedListChildrenElement = ListItemContentElement | ListElement
 
 export interface ListItemElement {
   id: string
   type: 'list-item'
-  children: SupportedListChildrenElement[]
+  children: Element[]
 }
 
 export interface OrderedListElement {

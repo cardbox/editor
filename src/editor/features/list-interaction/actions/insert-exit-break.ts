@@ -6,6 +6,7 @@ export const insertExitBreak: ActionCallback<ActionParams> = ({
   editor,
   event,
 }) => {
-  event.preventDefault()
-  LocalTransforms.insertExitBreak(editor)
+  const { handled } = LocalTransforms.insertExitBreak(editor)
+  if (handled) event.preventDefault()
+  else return { skipped: true }
 }

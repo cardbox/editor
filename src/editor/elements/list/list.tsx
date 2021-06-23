@@ -1,6 +1,6 @@
-import { Text } from 'slate'
+import { createListItemElement } from './list-item'
 import { createOrderedListElement } from './ordered-list'
-import { ListElement } from './types'
+import { ListElement, ListItemElement } from './types'
 import { createUnorderedListElement } from './unordered-list'
 
 const mapTypeToCreate = {
@@ -13,7 +13,7 @@ export const createListElement = <
   TElement extends ListElement = ReturnType<typeof mapTypeToCreate[TType]>
 >(
   type: TType,
-  children: Text[] = [{ text: '' }]
+  children: ListItemElement[] = [createListItemElement()]
 ): TElement => {
   const fn = mapTypeToCreate[type]
   return fn(children) as TElement

@@ -1,18 +1,17 @@
 import { nanoid } from 'nanoid'
 import React from 'react'
-import { Text } from 'slate'
 import { RenderElementProps } from 'slate-react'
 import { ALL_LEAF_MODIFICATIONS } from '../../constants'
 import { ElementSettings } from '../../types'
 import { createListItemElement } from './list-item'
-import { UnorderedListElement } from './types'
+import { ListItemElement, UnorderedListElement } from './types'
 
 export const createUnorderedListElement = (
-  children: Text[] = [{ text: '' }]
+  children: ListItemElement[] = [createListItemElement()]
 ): UnorderedListElement => ({
   id: nanoid(),
   type: 'unordered-list',
-  children: [createListItemElement(children)],
+  children,
 })
 
 export const UnorderedListComponent = ({

@@ -1,6 +1,8 @@
-import { Editor, Node } from 'slate'
+import { Editor, Element, Node } from 'slate'
 import { ElementType } from '../../types'
 import { block } from './block'
+import { childOf } from './child-of'
+import { equals } from './equals'
 import { notEquals } from './not-equals'
 
 export class Builder {
@@ -19,6 +21,16 @@ export class Builder {
 
   notEquals(node: Node) {
     this.stages.push(notEquals(this.editor, node))
+    return this
+  }
+
+  equals(node: Node | Node[]) {
+    this.stages.push(equals(this.editor, node))
+    return this
+  }
+
+  childOf(element: Element) {
+    this.stages.push(childOf(this.editor, element))
     return this
   }
 

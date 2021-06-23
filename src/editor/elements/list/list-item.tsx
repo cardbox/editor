@@ -1,18 +1,18 @@
 import { nanoid } from 'nanoid'
 import React from 'react'
-import { Text } from 'slate'
+import { Element } from 'slate'
 import { RenderElementProps } from 'slate-react'
 import { ALL_LEAF_MODIFICATIONS } from '../../constants'
 import { ElementSettings } from '../../types'
-import { createListItemContentElement } from './list-item-content'
+import { createParagraphElement } from '../paragraph'
 import { ListItemElement } from './types'
 
 export const createListItemElement = (
-  children: Text[] = [{ text: '' }]
+  children: Element[] = [createParagraphElement()]
 ): ListItemElement => ({
   id: nanoid(),
   type: 'list-item',
-  children: [createListItemContentElement(children)],
+  children,
 })
 
 export const ListItemComponent = ({

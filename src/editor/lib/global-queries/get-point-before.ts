@@ -9,7 +9,6 @@ interface Options {
   failOnInvalid?: boolean
 }
 
-// eslint-disable-next-line sonarjs/cognitive-complexity
 export function getPointBefore(
   editor: Editor,
   options: Options

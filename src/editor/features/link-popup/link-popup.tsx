@@ -89,7 +89,6 @@ const LinkPopupInner = () => {
     validate(href)
   }, [href])
 
-  // eslint-disable-next-line sonarjs/cognitive-complexity
   useEffect(() => {
     if (!editorNodeRef.current) return
 

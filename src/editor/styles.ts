@@ -157,6 +157,11 @@ export const StyledEditor = styled.div`
     list-style-type: lower-alpha;
   }
 
+  li p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
   .toolbar-container {
     display: flex;
     padding: 6px;

@@ -1,9 +1,5 @@
 import { Heading1Element } from './heading-1.types'
-import {
-  ListElement,
-  ListItemContentElement,
-  ListItemElement,
-} from './list/types'
+import { ListElement, ListItemElement } from './list/types'
 import { ParagraphElement } from './paragraph.types'
 
 export type CustomElement =
@@ -11,7 +7,6 @@ export type CustomElement =
   | Heading1Element
   | ListElement
   | ListItemElement
-  | ListItemContentElement
 
 export type DefaultElement = ParagraphElement
 export type DefaultElementType = DefaultElement['type']

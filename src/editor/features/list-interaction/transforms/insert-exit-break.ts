@@ -1,71 +1,69 @@
 import { Editor, Path, Range, Transforms } from 'slate'
 import { createListItemElement } from '../../../elements'
-import { ListElement, ListItemElement } from '../../../elements/list/types'
 import { GlobalMatchers } from '../../../lib/global-matchers'
-import { GlobalQueries } from '../../../lib/global-queries'
+import { LocalQueries } from '../queries'
 import { outdent } from './outdent'
 
-export function insertExitBreak(editor: Editor) {
-  if (!editor.selection) return
+interface TransformResult {
+  handled: boolean
+}
+
+export function insertExitBreak(editor: Editor): TransformResult {
+  const handled: TransformResult = { handled: true }
+  const skipped: TransformResult = { handled: false }
+
+  if (!editor.selection) return handled
 
   if (Range.isExpanded(editor.selection)) {
-    Transforms.delete(editor, { at: editor.selection })
+    Transforms.delete(editor)
   }
 
-  const listEntry = GlobalQueries.getAbove<ListElement>(editor, {
-    type: 'block',
-    mode: 'lowest',
-    match: GlobalMatchers.block(editor, ['ordered-list', 'unordered-list']),
-  })
-  if (!listEntry) return
-  const [list] = listEntry
+  const info = LocalQueries.info(editor)
+  if (!info) return handled
 
-  const matchItem = GlobalMatchers.block(editor, 'list-item')
+  if (!info.items.current.meta.isSimple) {
+    return skipped
+  }
 
-  const listItemEntry = GlobalQueries.getAbove<ListItemElement>(editor, {
-    type: 'block',
-    mode: 'lowest',
-    match: matchItem,
-  })
-  if (!listItemEntry) return
-  const [item, listItemPath] = listItemEntry
-
-  const [isStart, isEnd] = GlobalQueries.isOnEdges(editor, {
-    of: listItemPath,
-  })
-
-  const isLastItem = item === list.children[list.children.length - 1]
-  const hasListInside = item.children.length > 1
-  const isEmpty = isStart && isEnd
-
-  if (isEmpty && isLastItem && !hasListInside) {
+  if (info.blocks.current.meta.isEmpty) {
     outdent(editor)
-    return
+    return handled
   }
 
-  if (isEnd) {
+  if (!info.blocks.first) return handled
+
+  if (info.blocks.first.meta.isOnStart) {
+    if (info.items.previous?.meta.isEmpty) {
+      return handled
+    }
+
     Transforms.insertNodes(editor, createListItemElement(), {
-      select: true,
-      match: matchItem,
+      at: info.items.current.path,
     })
-    return
+
+    return handled
   }
 
-  if (isStart) {
-    Transforms.insertNodes(editor, createListItemElement(), {
-      select: false,
-      match: matchItem,
-    })
-    Transforms.select(
-      editor,
-      Editor.point(editor, Path.next(listItemPath), { edge: 'start' })
-    )
-    return
+  if (info.blocks.first.meta.isOnEnd) {
+    if (info.blocks.second) {
+      Transforms.insertNodes(editor, createListItemElement(), {
+        at: info.blocks.second.path.concat(0),
+        select: true,
+      })
+    } else {
+      Transforms.insertNodes(editor, createListItemElement(), {
+        at: Path.next(info.items.current.path),
+        select: true,
+      })
+    }
+
+    return handled
   }
 
   Transforms.splitNodes(editor, {
-    mode: 'lowest',
-    match: matchItem,
+    match: GlobalMatchers.equals(editor, info.items.current.node),
     always: true,
   })
+
+  return handled
 }

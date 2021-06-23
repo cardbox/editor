@@ -1,5 +1,5 @@
 import { Editor, Range } from 'slate'
-import { ListItemContentElement } from '../../../elements/list/types'
+import { GlobalMatchers } from '../../../lib/global-matchers'
 import { GlobalQueries } from '../../../lib/global-queries'
 import { outdent } from './outdent'
 
@@ -19,19 +19,15 @@ export function deleteBackward(editor: Editor): TransformResult {
     return skipped
   }
 
-  const contentEntry = GlobalQueries.getAbove<ListItemContentElement>(editor, {
+  const itemEntry = GlobalQueries.getAbove(editor, {
     type: 'block',
     mode: 'lowest',
-    match: (block) => block.type === 'list-item-content',
+    match: GlobalMatchers.block(editor, 'list-item'),
   })
+  if (!itemEntry) return skipped
+  const [, itemPath] = itemEntry
 
-  if (!contentEntry) {
-    return skipped
-  }
-
-  const [, contentPath] = contentEntry
-
-  const [isStart] = GlobalQueries.isOnEdges(editor, { of: contentPath })
+  const [isStart] = GlobalQueries.isOnEdges(editor, { of: itemPath })
 
   if (!isStart) {
     return skipped

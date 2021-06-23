@@ -1,6 +1,7 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { nanoid } from 'nanoid'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Element, Text } from 'slate'
 import { Editor, EditorValue } from './editor'
 
 const initialState: EditorValue = [
@@ -58,7 +59,7 @@ const initialState: EditorValue = [
         children: [
           {
             id: nanoid(),
-            type: 'list-item-content',
+            type: 'paragraph',
             children: [{ text: 'a' }],
           },
           {
@@ -71,7 +72,7 @@ const initialState: EditorValue = [
                 children: [
                   {
                     id: nanoid(),
-                    type: 'list-item-content',
+                    type: 'paragraph',
                     children: [{ text: 'nested' }],
                   },
                 ],
@@ -86,7 +87,7 @@ const initialState: EditorValue = [
         children: [
           {
             id: nanoid(),
-            type: 'list-item-content',
+            type: 'paragraph',
             children: [{ text: 'b' }],
           },
           {
@@ -99,7 +100,7 @@ const initialState: EditorValue = [
                 children: [
                   {
                     id: nanoid(),
-                    type: 'list-item-content',
+                    type: 'paragraph',
                     children: [{ text: 'nested' }],
                   },
                 ],
@@ -114,7 +115,7 @@ const initialState: EditorValue = [
         children: [
           {
             id: nanoid(),
-            type: 'list-item-content',
+            type: 'paragraph',
             children: [{ text: 'c' }],
           },
           {
@@ -127,7 +128,7 @@ const initialState: EditorValue = [
                 children: [
                   {
                     id: nanoid(),
-                    type: 'list-item-content',
+                    type: 'paragraph',
                     children: [{ text: 'nested' }],
                   },
                 ],
@@ -148,7 +149,7 @@ const initialState: EditorValue = [
         children: [
           {
             id: nanoid(),
-            type: 'list-item-content',
+            type: 'paragraph',
             children: [{ text: 'a' }],
           },
           {
@@ -161,7 +162,7 @@ const initialState: EditorValue = [
                 children: [
                   {
                     id: nanoid(),
-                    type: 'list-item-content',
+                    type: 'paragraph',
                     children: [{ text: 'nested' }],
                   },
                 ],
@@ -176,7 +177,7 @@ const initialState: EditorValue = [
         children: [
           {
             id: nanoid(),
-            type: 'list-item-content',
+            type: 'paragraph',
             children: [{ text: 'b' }],
           },
           {
@@ -189,7 +190,7 @@ const initialState: EditorValue = [
                 children: [
                   {
                     id: nanoid(),
-                    type: 'list-item-content',
+                    type: 'paragraph',
                     children: [{ text: 'nested' }],
                   },
                 ],
@@ -202,8 +203,43 @@ const initialState: EditorValue = [
   },
 ]
 
+interface TreeEntry {
+  name: string
+  offset: number
+}
+
+function buildPlainValueTree(
+  children: Array<Element | Text>,
+  offset = 0,
+  result: TreeEntry[] = []
+) {
+  for (const child of children) {
+    if (Text.isText(child)) continue
+
+    result.push({ name: child.type, offset })
+
+    buildPlainValueTree(child.children, offset + 2, result)
+  }
+
+  return result
+}
+
+function printValue(value: EditorValue) {
+  const valueTree = buildPlainValueTree(value)
+  const strings: string[] = []
+
+  for (const item of valueTree) {
+    const spaces = ' '.repeat(item.offset)
+    strings.push(spaces + item.name)
+  }
+
+  const string = strings.join('\n')
+  console.log(string)
+}
+
 function useEditorValue() {
   const [value, setValue] = useState<EditorValue>(initialState)
+  useEffect(() => printValue(value), [value])
   return [value, setValue] as const
 }
 

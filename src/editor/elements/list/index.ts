@@ -5,12 +5,6 @@ export {
 } from './list-item'
 
 export {
-  createListItemContentElement,
-  ListItemContentComponent,
-  LIST_ITEM_CONTENT_SETTINGS,
-} from './list-item-content'
-
-export {
   createOrderedListElement,
   OrderedListComponent,
   ORDERED_LIST_SETTINGS,

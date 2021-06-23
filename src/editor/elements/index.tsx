@@ -8,8 +8,6 @@ import {
 } from './heading-1'
 import {
   ListItemComponent,
-  ListItemContentComponent,
-  LIST_ITEM_CONTENT_SETTINGS,
   LIST_ITEM_SETTINGS,
   OrderedListComponent,
   ORDERED_LIST_SETTINGS,
@@ -17,7 +15,6 @@ import {
   UNORDERED_LIST_SETTINGS,
   createOrderedListElement,
   createUnorderedListElement,
-  createListItemContentElement,
   createListItemElement,
 } from './list'
 import {
@@ -40,7 +37,6 @@ const ELEMENT_COMPONENT_MAPPER: ElementComponentMapper = {
   'ordered-list': OrderedListComponent,
   'unordered-list': UnorderedListComponent,
   'list-item': ListItemComponent,
-  'list-item-content': ListItemContentComponent,
 }
 
 type ElementSettingsMapper = {
@@ -53,7 +49,6 @@ const ELEMENT_SETTINGS_MAPPER: ElementSettingsMapper = {
   'ordered-list': ORDERED_LIST_SETTINGS,
   'unordered-list': UNORDERED_LIST_SETTINGS,
   'list-item': LIST_ITEM_SETTINGS,
-  'list-item-content': LIST_ITEM_CONTENT_SETTINGS,
 }
 
 export function renderElement(props: RenderElementProps) {
@@ -69,7 +64,6 @@ export {
   createHeading1Element,
   createOrderedListElement,
   createUnorderedListElement,
-  createListItemContentElement,
   createListItemElement,
 }
 

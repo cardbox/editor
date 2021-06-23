@@ -1,8 +1,6 @@
 import { Editor, Location, Range, Transforms } from 'slate'
 import { createListElement } from '../../../elements/list'
-import { ListElement, ListItemElement } from '../../../elements/list/types'
-import { GlobalMatchers } from '../../../lib/global-matchers'
-import { GlobalQueries } from '../../../lib/global-queries'
+import { LocalQueries } from '../queries'
 import { mergeSiblings } from './merge-siblings'
 
 interface Options {
@@ -15,40 +13,21 @@ export function indent(editor: Editor, options: Options = {}) {
 
   if (Range.isRange(at) && Range.isExpanded(at)) return
 
-  const listEntry = GlobalQueries.getAbove<ListElement>(editor, {
-    at,
-    type: 'block',
-    mode: 'lowest',
-    match: GlobalMatchers.block(editor, ['ordered-list', 'unordered-list']),
-  })
-  if (!listEntry) return
-  const [list] = listEntry
+  const info = LocalQueries.info(editor, { at })
+  if (!info) return
 
-  const itemEntry = GlobalQueries.getAbove<ListItemElement>(editor, {
-    at,
-    type: 'block',
-    mode: 'lowest',
-    match: GlobalMatchers.block(editor, 'list-item'),
-  })
-  if (!itemEntry) return
-  const [item, itemPath] = itemEntry
+  const { lists, items } = info
 
-  const itemIsFirst = item === list.children[0]
-  if (itemIsFirst) return
+  if (items.current.meta.isFirst) return
+  if (!items.previous) return
 
-  const prevItemEntry = Editor.previous<ListItemElement>(editor, {
-    at: itemPath,
-    mode: 'lowest',
-  })
-  if (!prevItemEntry) return
-  const [prevItem, prevItemPath] = prevItemEntry
-
-  Transforms.wrapNodes(editor, createListElement(list.type, []), {
-    at: itemPath,
+  Transforms.wrapNodes(editor, createListElement(lists.current.node.type, []), {
+    at: items.current.path,
   })
   Transforms.moveNodes(editor, {
-    at: itemPath,
-    to: prevItemPath.concat(prevItem.children.length),
+    at: items.current.path,
+    to: items.previous.path.concat(items.previous.node.children.length),
   })
-  mergeSiblings(editor, { at: prevItemPath })
+
+  mergeSiblings(editor, { at: items.previous.path })
 }

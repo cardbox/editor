@@ -1,113 +1,122 @@
-import { Editor, Location, Path, Range, Transforms } from 'slate'
-import { ListElement, ListItemElement } from '../../../elements/list/types'
+import { Editor, Location, Node, Path, Range, Transforms } from 'slate'
+import { createListElement } from '../../../elements/list'
 import { GlobalMatchers } from '../../../lib/global-matchers'
-import { GlobalQueries } from '../../../lib/global-queries'
+import { LocalQueries } from '../queries'
+import { FullInfo } from '../queries/info'
 import { mergeSiblings } from './merge-siblings'
+import { moveChildren } from './move-children'
 
 interface Options {
   at?: Location
 }
 
-// eslint-disable-next-line sonarjs/cognitive-complexity
 export function outdent(editor: Editor, options: Options = {}) {
   const { at = editor.selection } = options
   if (!at) return
 
   if (Range.isRange(at) && Range.isExpanded(at)) return
 
-  const isList = GlobalMatchers.block(editor, [
-    'ordered-list',
-    'unordered-list',
-  ])
+  const info = LocalQueries.info(editor, { at })
+  if (!info) return
 
-  const listEntry = GlobalQueries.getAbove<ListElement>(editor, {
-    at,
-    type: 'block',
-    mode: 'lowest',
-    match: isList,
-  })
-  if (!listEntry) return
-  const [list, listPath] = listEntry
+  if (!info.lists.above || !info.items.above) {
+    return outdentFirstLevel(editor, options, info)
+  }
 
-  const itemEntry = GlobalQueries.getAbove<ListItemElement>(editor, {
-    at,
-    type: 'block',
-    mode: 'lowest',
-    match: GlobalMatchers.block(editor, 'list-item'),
-  })
-  if (!itemEntry) return
-  const [item, itemPath] = itemEntry
+  function isWrapperAbove(node: Node) {
+    if (!info) return false
+    const isCurrentList = node === info.lists.current.node
+    const isItemAbove = node === info.items.above?.node
+    return isCurrentList || isItemAbove
+  }
 
-  const itemAboveEntry = GlobalQueries.getAbove<ListItemElement>(editor, {
-    at,
-    type: 'block',
-    mode: 'lowest',
-    match: GlobalMatchers.builder(editor)
-      .block('list-item')
-      .notEquals(item)
-      .compile(),
-  })
-
-  if (!itemAboveEntry) {
-    const hasListInside = item.children.length > 1
-
-    if (hasListInside) {
-      const listInside = item.children[1]
-      for (let i = listInside.children.length - 1; i >= 0; i--) {
-        outdent(editor, { at: itemPath.concat([1, i, 0]) })
-      }
-    }
-
-    Transforms.setNodes(
-      editor,
-      { type: 'paragraph' },
-      { at: itemPath.concat(0) }
-    )
+  if (info.lists.current.node.children.length === 1) {
     Transforms.unwrapNodes(editor, {
-      at: itemPath.concat(0),
-      mode: 'lowest',
-      match: GlobalMatchers.block(editor, 'list-item'),
-    })
-    Transforms.unwrapNodes(editor, {
-      at: itemPath,
-      mode: 'lowest',
-      match: GlobalMatchers.block(editor, ['ordered-list', 'unordered-list']),
+      at: info.items.current.path,
+      mode: 'all',
       split: true,
+      match: isWrapperAbove,
     })
 
-    mergeSiblings(editor)
     return
   }
 
-  const [, itemAbovePath] = itemAboveEntry
-
-  const nextItemEntry = Editor.next(editor, { at: itemPath })
-
-  const isFirstItem = item === list.children[0]
-  const isLastItem = list.children.length === 1
-
-  if (nextItemEntry) {
-    const [, nextItemPath] = nextItemEntry
-    Transforms.splitNodes(editor, {
-      at: nextItemPath,
-      mode: 'lowest',
-      match: isList,
-    })
-    const bottomListPath = Path.next(Path.parent(nextItemPath))
-    Transforms.moveNodes(editor, {
-      at: bottomListPath,
-      to: itemPath.concat(item.children.length),
-    })
-  }
-
-  Transforms.moveNodes(editor, {
-    at: itemPath,
-    to: Path.next(itemAbovePath),
+  moveChildren(editor, {
+    parent: info.lists.current,
+    match: (_, index) => index > info.items.current.meta.index,
+    to: info.items.current.path.concat(info.items.current.node.children.length),
+    transform(nodes) {
+      return createListElement(info.lists.current.node.type, nodes)
+    },
   })
 
-  if (isFirstItem || isLastItem) {
-    Transforms.removeNodes(editor, { at: listPath })
+  mergeSiblings(editor, { at: info.items.current.path })
+
+  if (info.items.current.meta.isFirst) {
+    const newInfo = LocalQueries.info(editor, { at })
+    if (!newInfo) return
+    if (!newInfo.items.above) return
+
+    Transforms.unwrapNodes(editor, {
+      at: newInfo.items.current.path,
+      mode: 'all',
+      split: true,
+      match: GlobalMatchers.equals(editor, [
+        newInfo.lists.current.node,
+        newInfo.items.above.node,
+      ]),
+    })
+  } else {
+    Transforms.moveNodes(editor, {
+      at: info.items.current.path,
+      to: Path.next(info.items.above.path),
+    })
   }
 
+  mergeSiblings(editor, { at: info.lists.above.path })
+}
+
+function outdentFirstLevel(
+  editor: Editor,
+  options: Options = {},
+  info: FullInfo
+) {
+  const { at = editor.selection } = options
+  if (!at) return
+
+  Transforms.unwrapNodes(editor, {
+    at: info.items.current.path,
+    mode: 'all',
+    split: true,
+    match: GlobalMatchers.equals(editor, [
+      info.lists.current.node,
+      info.items.current.node,
+    ]),
+  })
+
   mergeSiblings(editor)
+
+  // const isSimple = info.items.current.meta.isSimple
+  // const hasListInside = info.blocks.second?.meta.isList
+
+  // const pathRefs = {
+  //   items: {
+  //     current: Editor.pathRef(editor, info.items.current.path),
+  //   },
+  // }
+
+  // if (!info.items.current.meta.isFirst)
+  //   Transforms.splitNodes(editor, {
+  //     at: info.items.current.path,
+  //     match: GlobalMatchers.equals(editor, info.lists.current.node),
+  //   })
+
+  // if (isSimple && hasListInside) {
+  //   if (!info.blocks.second) return
+
+  //   moveChildren(editor, {
+  //     parent: info.blocks.second,
+  //     to:
+  //   })
+  // }
 }

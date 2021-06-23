@@ -1,4 +1,5 @@
 import React from 'react'
+import { Editor as EditorType } from 'slate'
 import { Extension } from './lib/extensions/extend'
 import { RootProvider } from './root-provider'
 import { EditorInner } from './editor-inner'
@@ -11,12 +12,14 @@ export const Editor = ({
   readOnly = false,
   customKeybinds = {},
   customExtensions = [],
+  editorRef,
 }: {
   value: EditorValue
   onChange: (value: EditorValue) => void
   readOnly?: boolean
   customKeybinds?: CustomActionKeybinds
   customExtensions?: Extension[]
+  editorRef?: React.MutableRefObject<EditorType | null>
 }) => {
   return (
     <RootProvider customExtensions={customExtensions}>
@@ -25,6 +28,7 @@ export const Editor = ({
         onChange={onChange}
         readOnly={readOnly}
         customKeybinds={customKeybinds}
+        editorRef={editorRef}
       />
     </RootProvider>
   )

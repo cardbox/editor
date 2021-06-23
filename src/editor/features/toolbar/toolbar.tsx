@@ -47,7 +47,6 @@ const ToolbarInner = ({ renderButtons }: Props) => {
   const { instance, lastSelectedText } = useToolbarState()
   const forceUpdate = useThrottled(useForceUpdate(), 300)
 
-  // eslint-disable-next-line sonarjs/cognitive-complexity
   useEffect(() => {
     if (!editorNodeRef.current) return
 

@@ -3,6 +3,15 @@ import { LeafModification } from './leaf'
 
 export type ElementType = Element['type']
 
+export type ElementFromType<
+  T extends ElementType,
+  K extends Element = Element
+> = K extends {
+  type: T
+}
+  ? K
+  : never
+
 export interface ElementSettings {
   // used in different interface elements
   readonly name: string
