@@ -9,6 +9,7 @@
   "parser": "@typescript-eslint/parser",
   "rules": {
     "no-console": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "sonarjs/cognitive-complexity": "off"
   }
 }
