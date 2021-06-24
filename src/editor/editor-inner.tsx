@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Editable, Slate } from 'slate-react'
-import { renderElement } from './elements'
+import { createDefaultElement, renderElement } from './elements'
 import { renderLeaf } from './leaf'
 import { useKeybinds } from './use-keybinds'
 import { Toolbar } from './features/toolbar'
@@ -28,6 +28,11 @@ export const EditorInner = ({
   const editor = useEditor()
   const { handleKeyDown } = useKeybinds(customKeybinds)
   const { handlePaste } = useListeners()
+
+  useEffect(() => {
+    if (value.length > 0) return
+    onChange([createDefaultElement()])
+  }, [value])
 
   return (
     <StyledEditor>
