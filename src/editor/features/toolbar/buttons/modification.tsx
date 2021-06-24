@@ -3,7 +3,7 @@ import { Editor, Text } from 'slate'
 import { Action, actions } from '../../../actions'
 import { useEditor } from '../../../lib/hooks/use-editor'
 import { useUI } from '../../../lib/hooks/use-ui'
-import { noopKeyboardEvent } from '../../../lib/util'
+import { NoopEvents } from '../../../lib/util'
 import { ToolbarButton } from './common'
 
 type Mark = keyof Omit<Text, 'text'>
@@ -38,7 +38,7 @@ export const ToolbarMarkButton = ({
 
     actions.execute(action, {
       editor,
-      event: noopKeyboardEvent,
+      event: NoopEvents.keyboard(),
       ui,
     })
   }
