@@ -1,12 +1,10 @@
 /* eslint-disable sonarjs/no-duplicate-string */
-import { nanoid } from 'nanoid'
 import React, { useEffect, useState } from 'react'
 import { Element, Text } from 'slate'
 import { Editor, EditorValue } from './editor'
 
 const initialState: EditorValue = [
   {
-    id: nanoid(),
     type: 'heading-1',
     children: [
       {
@@ -15,7 +13,6 @@ const initialState: EditorValue = [
     ],
   },
   {
-    id: nanoid(),
     type: 'paragraph',
     children: [
       {
@@ -50,28 +47,22 @@ const initialState: EditorValue = [
     ],
   },
   {
-    id: nanoid(),
     type: 'unordered-list',
     children: [
       {
-        id: nanoid(),
         type: 'list-item',
         children: [
           {
-            id: nanoid(),
             type: 'paragraph',
             children: [{ text: 'a' }],
           },
           {
-            id: nanoid(),
             type: 'unordered-list',
             children: [
               {
-                id: nanoid(),
                 type: 'list-item',
                 children: [
                   {
-                    id: nanoid(),
                     type: 'paragraph',
                     children: [{ text: 'nested' }],
                   },
@@ -82,24 +73,19 @@ const initialState: EditorValue = [
         ],
       },
       {
-        id: nanoid(),
         type: 'list-item',
         children: [
           {
-            id: nanoid(),
             type: 'paragraph',
             children: [{ text: 'b' }],
           },
           {
-            id: nanoid(),
             type: 'unordered-list',
             children: [
               {
-                id: nanoid(),
                 type: 'list-item',
                 children: [
                   {
-                    id: nanoid(),
                     type: 'paragraph',
                     children: [{ text: 'nested' }],
                   },
@@ -110,24 +96,19 @@ const initialState: EditorValue = [
         ],
       },
       {
-        id: nanoid(),
         type: 'list-item',
         children: [
           {
-            id: nanoid(),
             type: 'paragraph',
             children: [{ text: 'c' }],
           },
           {
-            id: nanoid(),
             type: 'unordered-list',
             children: [
               {
-                id: nanoid(),
                 type: 'list-item',
                 children: [
                   {
-                    id: nanoid(),
                     type: 'paragraph',
                     children: [{ text: 'nested' }],
                   },
@@ -140,28 +121,22 @@ const initialState: EditorValue = [
     ],
   },
   {
-    id: nanoid(),
     type: 'ordered-list',
     children: [
       {
-        id: nanoid(),
         type: 'list-item',
         children: [
           {
-            id: nanoid(),
             type: 'paragraph',
             children: [{ text: 'a' }],
           },
           {
-            id: nanoid(),
             type: 'ordered-list',
             children: [
               {
-                id: nanoid(),
                 type: 'list-item',
                 children: [
                   {
-                    id: nanoid(),
                     type: 'paragraph',
                     children: [{ text: 'nested' }],
                   },
@@ -172,24 +147,19 @@ const initialState: EditorValue = [
         ],
       },
       {
-        id: nanoid(),
         type: 'list-item',
         children: [
           {
-            id: nanoid(),
             type: 'paragraph',
             children: [{ text: 'b' }],
           },
           {
-            id: nanoid(),
             type: 'ordered-list',
             children: [
               {
-                id: nanoid(),
                 type: 'list-item',
                 children: [
                   {
-                    id: nanoid(),
                     type: 'paragraph',
                     children: [{ text: 'nested' }],
                   },

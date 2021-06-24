@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid'
 import React from 'react'
 import { RenderElementProps } from 'slate-react'
 import { ALL_LEAF_MODIFICATIONS } from '../../constants'
@@ -9,7 +8,6 @@ import { ListItemElement, OrderedListElement } from './types'
 export const createOrderedListElement = (
   children: ListItemElement[] = [createListItemElement()]
 ): OrderedListElement => ({
-  id: nanoid(),
   type: 'ordered-list',
   children,
 })
