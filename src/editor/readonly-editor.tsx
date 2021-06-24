@@ -26,7 +26,7 @@ export const ReadonlyEditor = ({
           renderElement={renderElement}
           renderLeaf={renderLeaf}
           onKeyDown={handleKeyDown}
-          readOnly={false}
+          readOnly={true}
           onPaste={handlePaste}
           autoFocus
         />
