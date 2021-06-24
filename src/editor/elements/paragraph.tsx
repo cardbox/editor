@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid'
 import React from 'react'
 import { Text } from 'slate'
 import { RenderElementProps } from 'slate-react'
@@ -9,7 +8,6 @@ import { ParagraphElement } from './paragraph.types'
 export const createParagraphElement = (
   children: Text[] = [{ text: '' }]
 ): ParagraphElement => ({
-  id: nanoid(),
   type: 'paragraph',
   children,
 })

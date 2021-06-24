@@ -25,15 +25,7 @@ import {
 } from '@cardbox/editor'
 
 const MyEditor = () => {
-  const initialValue: EditorValue = [
-    {
-      id: nanoid(), // any unique string
-      type: 'paragraph',
-      children: [{ text: '' }],
-    },
-  ]
-
-  const [value, setValue] = useState(initialValue)
+  const [value, setValue] = useState<EditorValue>([])
 
   return (
     <Editor

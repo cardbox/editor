@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid'
 import React from 'react'
 import { Element } from 'slate'
 import { RenderElementProps } from 'slate-react'
@@ -10,7 +9,6 @@ import { ListItemElement } from './types'
 export const createListItemElement = (
   children: Element[] = [createParagraphElement()]
 ): ListItemElement => ({
-  id: nanoid(),
   type: 'list-item',
   children,
 })
