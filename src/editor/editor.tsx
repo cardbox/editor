@@ -12,7 +12,6 @@ export const Editor = ({
   readOnly = false,
   customKeybinds = {},
   customExtensions = [],
-  editorRef,
 }: {
   value: EditorValue
   onChange: (value: EditorValue) => void
@@ -28,7 +27,6 @@ export const Editor = ({
         onChange={onChange}
         readOnly={readOnly}
         customKeybinds={customKeybinds}
-        editorRef={editorRef}
       />
     </RootProvider>
   )
