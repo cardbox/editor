@@ -56,6 +56,7 @@ export default [
         '@popperjs/core': 'Popper',
         'tippy.js': 'tippy',
         'styled-components': 'styled',
+        'crypto': 'crypto',
       },
     },
     plugins: [
