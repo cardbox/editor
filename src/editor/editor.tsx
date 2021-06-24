@@ -1,33 +1,35 @@
 import React from 'react'
-import { Editor as EditorType } from 'slate'
-import { Extension } from './lib/extensions/extend'
 import { RootProvider } from './root-provider'
-import { EditorInner } from './editor-inner'
-import { EditorValue } from './types'
-import { CustomActionKeybinds } from './actions'
+import { EditorProps, NormalizedEditorProps } from './types/editor-props'
+import { EditableEditor } from './editable-editor'
+import { ReadonlyEditor } from './readonly-editor'
 
-export const Editor = ({
-  value,
-  onChange,
-  readOnly = false,
-  customKeybinds = {},
-  customExtensions = [],
-}: {
-  value: EditorValue
-  onChange: (value: EditorValue) => void
-  readOnly?: boolean
-  customKeybinds?: CustomActionKeybinds
-  customExtensions?: Extension[]
-  editorRef?: React.MutableRefObject<EditorType | null>
-}) => {
+function normalizeProps(dirty: EditorProps): NormalizedEditorProps {
+  const normalized: Partial<NormalizedEditorProps> = { ...dirty }
+
+  if (!dirty.customKeybinds) {
+    normalized.customKeybinds = {}
+  }
+
+  if (!dirty.customExtensions) {
+    normalized.customExtensions = []
+  }
+
+  return normalized as NormalizedEditorProps
+}
+
+export const Editor = (props: EditorProps) => {
+  const normalizedProps = normalizeProps(props)
+
+  const editor = normalizedProps.readOnly ? (
+    <ReadonlyEditor {...normalizedProps} />
+  ) : (
+    <EditableEditor {...normalizedProps} />
+  )
+
   return (
-    <RootProvider customExtensions={customExtensions}>
-      <EditorInner
-        value={value}
-        onChange={onChange}
-        readOnly={readOnly}
-        customKeybinds={customKeybinds}
-      />
+    <RootProvider customExtensions={normalizedProps.customExtensions}>
+      {editor}
     </RootProvider>
   )
 }

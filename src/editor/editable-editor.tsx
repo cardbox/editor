@@ -6,25 +6,18 @@ import { useKeybinds } from './use-keybinds'
 import { Toolbar } from './features/toolbar'
 import { ToolbarMarkButton } from './features/toolbar/buttons'
 import { useEditor } from './lib/hooks/use-editor'
-import { EditorValue } from './types'
 import { LinkPopup } from './features/link-popup'
-import { CustomActionKeybinds } from './actions'
 import { useListeners } from './features/listeners'
 import './features/list-interaction'
 import './features/paragraph-interaction'
 import { StyledEditor, TippyStyles } from './styles'
+import { EditableEditorProps } from './types/editor-props'
 
-export const EditorInner = ({
+export const EditableEditor = ({
   value,
   onChange,
-  readOnly = false,
-  customKeybinds = {},
-}: {
-  value: EditorValue
-  onChange: (value: EditorValue) => void
-  readOnly?: boolean
-  customKeybinds?: CustomActionKeybinds
-}) => {
+  customKeybinds,
+}: EditableEditorProps) => {
   const editor = useEditor()
   const { handleKeyDown } = useKeybinds(customKeybinds)
   const { handlePaste } = useListeners()
@@ -42,17 +35,14 @@ export const EditorInner = ({
           renderElement={renderElement}
           renderLeaf={renderLeaf}
           onKeyDown={handleKeyDown}
-          readOnly={readOnly}
+          readOnly={false}
           onPaste={handlePaste}
           autoFocus
         />
       </Slate>
-      {!readOnly && (
-        <>
-          <ToolbarWithButtons />
-          <LinkPopup />
-        </>
-      )}
+
+      <ToolbarWithButtons />
+      <LinkPopup />
     </StyledEditor>
   )
 }
