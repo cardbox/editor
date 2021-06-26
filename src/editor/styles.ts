@@ -175,6 +175,11 @@ export const StyledEditor = styled.div`
     padding: var(--editor-list-padding);
   }
 
+  ul ul,
+  ol ol {
+    margin: 0;
+  }
+
   ol ol {
     list-style-type: lower-roman;
   }
