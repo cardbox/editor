@@ -3,6 +3,7 @@ import { RootProvider } from './root-provider'
 import { EditorProps, NormalizedEditorProps } from './types/editor-props'
 import { EditableEditor } from './editable-editor'
 import { ReadonlyEditor } from './readonly-editor'
+import { RootGlobalStyles } from './styles'
 
 function normalizeProps(dirty: EditorProps): NormalizedEditorProps {
   const normalized: Partial<NormalizedEditorProps> = { ...dirty }
@@ -29,6 +30,7 @@ export const Editor = (props: EditorProps) => {
 
   return (
     <RootProvider customExtensions={normalizedProps.customExtensions}>
+      <RootGlobalStyles />
       {editor}
     </RootProvider>
   )

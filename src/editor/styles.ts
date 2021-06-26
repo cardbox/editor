@@ -108,13 +108,38 @@ export const TippyStyles = createGlobalStyle`
   }
 `
 
+export const RootGlobalStyles = createGlobalStyle`
+  :root {
+    --editor-font-family: 'Open Sans', sans-serif;
+    --editor-font-size: 16px;
+    --editor-line-height: 24px;
+
+    --editor-mod-bold-font-weight: 600;
+    --editor-mod-inline-code-font-family: 'Source Code Pro', monospace;
+    --editor-mod-inline-code-padding: 4px 6px;
+    --editor-mod-inline-code-background: #f7f6f9;
+    --editor-mod-inline-code-border-radius: 6px;
+    --editor-mod-link-color: rgb(75, 50, 195);
+
+    --editor-paragraph-margin: 1em 0;
+
+    --editor-heading1-margin: 0.67em 0;
+    --editor-heading1-font-size: 30px;
+    --editor-heading1-line-height: 36px;
+    --editor-heading1-font-weight: 400;
+
+    --editor-list-margin: 1em 0;
+    --editor-list-padding: 0 0 0 24px;
+  }
+`
+
 export const StyledEditor = styled.div`
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  line-height: 24px;
+  font-family: var(--editor-font-family);
+  font-size: var(--editor-font-size);
+  line-height: var(--editor-line-height);
 
   a {
-    color: rgb(75, 50, 195);
+    color: var(--editor-mod-link-color);
     text-decoration: none;
   }
 
@@ -123,30 +148,36 @@ export const StyledEditor = styled.div`
   }
 
   code {
-    font-family: 'Source Code Pro', monospace;
-    padding: 4px 6px;
-    background: #f7f6f9;
-    border-radius: 6px;
+    font-family: var(--editor-mod-inline-code-font-family);
+    padding: var(--editor-mod-inline-code-padding);
+    background: var(--editor-mod-inline-code-background);
+    border-radius: var(--editor-mod-inline-code-border-radius);
   }
 
   b {
-    font-weight: 600;
-  }
-
-  h1 {
-    font-size: 30px;
-    line-height: 36px;
-    font-weight: 400;
+    font-weight: var(--editor-mod-bold-font-weight);
   }
 
   p {
-    font-size: 16px;
-    line-height: 24px;
+    margin: var(--editor-paragraph-margin);
+  }
+
+  h1 {
+    margin: var(--editor-heading1-margin);
+    font-size: var(--editor-heading1-font-size);
+    line-height: var(--editor-heading1-line-height);
+    font-weight: var(--editor-heading1-font-weight);
   }
 
   ol,
   ul {
-    padding-left: 24px;
+    margin: var(--editor-list-margin);
+    padding: var(--editor-list-padding);
+  }
+
+  ul ul,
+  ol ol {
+    margin: 0;
   }
 
   ol ol {
