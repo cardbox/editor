@@ -10,7 +10,7 @@ import { LinkPopup } from './features/link-popup'
 import { useListeners } from './features/listeners'
 import './features/list-interaction'
 import './features/paragraph-interaction'
-import { StyledEditor, TippyStyles } from './styles'
+import { StyledEditor } from './styles'
 import { EditableEditorProps } from './types/editor-props'
 
 export const EditableEditor = ({
@@ -29,7 +29,6 @@ export const EditableEditor = ({
 
   return (
     <StyledEditor>
-      <TippyStyles />
       <Slate editor={editor} value={value} onChange={onChange}>
         <Editable
           renderElement={renderElement}

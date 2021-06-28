@@ -1,6 +1,6 @@
 import Tippy from '@tippyjs/react'
 import React, { ButtonHTMLAttributes, ReactNode } from 'react'
-import { THEMES } from '../../../lib/tippy/themes'
+import { TIPPY_THEMES } from '../../../lib/tippy'
 import { Container, Icon } from './styles'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -25,7 +25,7 @@ export const ToolbarButton = ({
   if (tooltip) {
     return (
       <Tippy
-        theme={THEMES.EDITOR_KEYBIND}
+        theme={TIPPY_THEMES.KEYBIND}
         content={tooltip}
         offset={[0, 20]}
         hideOnClick={false}
