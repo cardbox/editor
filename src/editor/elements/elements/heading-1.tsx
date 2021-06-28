@@ -1,7 +1,8 @@
 import React from 'react'
 import { Text } from 'slate'
 import { RenderElementProps } from 'slate-react'
-import { ElementSettings } from '../types'
+import { ElementSettings } from '../../types'
+
 import { Heading1Element } from './heading-1.types'
 
 export const createHeading1Element = (
@@ -19,9 +20,11 @@ export const Heading1Component = ({
 }
 
 export const HEADING_1_SETTINGS: ElementSettings = {
+  type: 'heading-1',
   name: 'Heading-1',
-  code: 'heading-1',
-  aliases: ['h1', 'title'],
+  code: 'h1',
+  aliases: ['heading-1', 'title'],
   allowedModifications: [],
   allowedTransformations: ['paragraph'],
+  create: createHeading1Element,
 }

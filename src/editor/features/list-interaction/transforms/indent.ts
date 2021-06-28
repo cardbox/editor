@@ -1,5 +1,5 @@
 import { Editor, Location, Range, Transforms } from 'slate'
-import { createListElement } from '../../../elements/list'
+import { createListElement } from '../../../elements/elements/list'
 import { LocalQueries } from '../queries'
 import { mergeSiblings } from './merge-siblings'
 

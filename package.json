@@ -19,6 +19,7 @@
     "lint": "eslint --fix \"src/**/*.{ts,tsx,js,jsx}\""
   },
   "dependencies": {
+    "clsx": "^1.1.1",
     "is-hotkey": "0.1.8",
     "just-debounce-it": "^1.5.0",
     "slate": "0.63.0",

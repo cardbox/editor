@@ -1,7 +1,7 @@
 import React from 'react'
 import { RenderElementProps } from 'slate-react'
-import { ALL_LEAF_MODIFICATIONS } from '../../constants'
-import { ElementSettings } from '../../types'
+import { ALL_LEAF_MODIFICATIONS } from '../../../constants'
+import { ElementSettings } from '../../../types'
 import { createListItemElement } from './list-item'
 import { ListItemElement, UnorderedListElement } from './types'
 
@@ -20,9 +20,11 @@ export const UnorderedListComponent = ({
 }
 
 export const UNORDERED_LIST_SETTINGS: ElementSettings = {
+  type: 'unordered-list',
   name: 'Unordered List',
-  code: 'unordered-list',
-  aliases: ['ul'],
+  code: 'ul',
+  aliases: ['unordered-list'],
   allowedModifications: Array.from(ALL_LEAF_MODIFICATIONS),
-  allowedTransformations: [],
+  allowedTransformations: ['ordered-list'],
+  create: createUnorderedListElement,
 }

@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom'
 import tippy from 'tippy.js'
 import debounce from 'just-debounce-it'
 import { useEditorNodeRef } from '../../lib/hooks/use-editor-node-ref'
-import { THEMES } from '../../lib/tippy/themes'
 import { useThrottled } from '../../lib/hooks/use-throttled'
 import { useForceUpdate } from '../../lib/hooks/use-force-update'
+import { TIPPY_THEMES } from '../../lib/tippy'
 import { useToolbarState } from './toolbar-context'
 
 /*
@@ -51,7 +51,7 @@ const ToolbarInner = ({ renderButtons }: Props) => {
     if (!editorNodeRef.current) return
 
     instance.current = tippy(editorNodeRef.current, {
-      theme: THEMES.EDITOR_TOOLBAR,
+      theme: TIPPY_THEMES.TOOLBAR,
       content: container,
       placement: 'top',
       trigger: 'manual',

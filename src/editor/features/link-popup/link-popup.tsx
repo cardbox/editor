@@ -8,10 +8,10 @@ import React, {
 import ReactDOM from 'react-dom'
 import tippy from 'tippy.js'
 import { useEditorNodeRef } from '../../lib/hooks/use-editor-node-ref'
-import { THEMES } from '../../lib/tippy/themes'
 import { GlobalTransforms } from '../../lib/global-transforms'
 import { useEditor } from '../../lib/hooks/use-editor'
 import { REGEX } from '../../lib/util'
+import { TIPPY_THEMES } from '../../lib/tippy'
 import { useLinkPopupActions, useLinkPopupState } from './link-popup-context'
 import { Input, InputWrapper, LinkIcon, ClearIcon, Error } from './styles'
 
@@ -93,7 +93,7 @@ const LinkPopupInner = () => {
     if (!editorNodeRef.current) return
 
     instance.current = tippy(editorNodeRef.current, {
-      theme: THEMES.EDITOR_LINK_POPUP,
+      theme: TIPPY_THEMES.LINK_POPUP,
       content: container,
       placement: 'bottom',
       trigger: 'manual',

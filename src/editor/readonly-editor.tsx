@@ -7,7 +7,7 @@ import { useEditor } from './lib/hooks/use-editor'
 import { useListeners } from './features/listeners'
 import './features/list-interaction'
 import './features/paragraph-interaction'
-import { StyledEditor, TippyStyles } from './styles'
+import { StyledEditor } from './styles'
 import { ReadonlyEditorProps } from './types/editor-props'
 
 export const ReadonlyEditor = ({
@@ -20,7 +20,6 @@ export const ReadonlyEditor = ({
 
   return (
     <StyledEditor>
-      <TippyStyles />
       <Slate editor={editor} value={value} onChange={() => {}}>
         <Editable
           renderElement={renderElement}

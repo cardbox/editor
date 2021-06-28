@@ -1,7 +1,7 @@
 import React from 'react'
 import { RenderElementProps } from 'slate-react'
-import { ALL_LEAF_MODIFICATIONS } from '../../constants'
-import { ElementSettings } from '../../types'
+import { ALL_LEAF_MODIFICATIONS } from '../../../constants'
+import { ElementSettings } from '../../../types'
 import { createListItemElement } from './list-item'
 import { ListItemElement, OrderedListElement } from './types'
 
@@ -20,9 +20,11 @@ export const OrderedListComponent = ({
 }
 
 export const ORDERED_LIST_SETTINGS: ElementSettings = {
+  type: 'ordered-list',
   name: 'Ordered List',
-  code: 'ordered-list',
-  aliases: ['ol'],
+  code: 'ol',
+  aliases: ['ordered-list'],
   allowedModifications: Array.from(ALL_LEAF_MODIFICATIONS),
-  allowedTransformations: [],
+  allowedTransformations: ['unordered-list'],
+  create: createOrderedListElement,
 }

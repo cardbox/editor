@@ -1,8 +1,8 @@
 import React from 'react'
 import { Element } from 'slate'
 import { RenderElementProps } from 'slate-react'
-import { ALL_LEAF_MODIFICATIONS } from '../../constants'
-import { ElementSettings } from '../../types'
+import { ALL_LEAF_MODIFICATIONS } from '../../../constants'
+import { ElementSettings } from '../../../types'
 import { createParagraphElement } from '../paragraph'
 import { ListItemElement } from './types'
 
@@ -21,10 +21,12 @@ export const ListItemComponent = ({
 }
 
 export const LIST_ITEM_SETTINGS: ElementSettings = {
+  type: 'list-item',
   name: 'List Item',
-  code: 'list-item',
-  aliases: ['li'],
-  canBeSearched: false,
+  code: 'li',
+  aliases: ['list-item'],
+  canBeAdded: false,
   allowedModifications: Array.from(ALL_LEAF_MODIFICATIONS),
   allowedTransformations: [],
+  create: createListItemElement,
 }

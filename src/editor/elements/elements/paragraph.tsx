@@ -1,8 +1,8 @@
 import React from 'react'
 import { Text } from 'slate'
 import { RenderElementProps } from 'slate-react'
-import { ALL_LEAF_MODIFICATIONS } from '../constants'
-import { ElementSettings } from '../types'
+import { ALL_LEAF_MODIFICATIONS } from '../../constants'
+import { ElementSettings } from '../../types'
 import { ParagraphElement } from './paragraph.types'
 
 export const createParagraphElement = (
@@ -20,9 +20,11 @@ export const ParagraphComponent = ({
 }
 
 export const PARAGRAPH_SETTINGS: ElementSettings = {
+  type: 'paragraph',
   name: 'Paragraph',
-  code: 'paragraph',
-  aliases: ['p', 'text'],
+  code: 'p',
+  aliases: ['paragraph', 'text'],
   allowedModifications: Array.from(ALL_LEAF_MODIFICATIONS),
   allowedTransformations: ['heading-1'],
+  create: createParagraphElement,
 }
