@@ -176,8 +176,9 @@ export const EditorTheme = createGlobalStyle`
       height: 6px;
     }
 
-    /* Theme colors template */
+    /* Theme template */
 
+    font-family: 'Open Sans', sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
     border: 1px solid var(--border-color);

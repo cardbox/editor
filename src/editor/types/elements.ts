@@ -13,6 +13,8 @@ export type ElementFromType<
   : never
 
 export interface ElementSettings {
+  readonly type: ElementType
+
   // used in different interface elements
   readonly name: string
 
@@ -22,7 +24,7 @@ export interface ElementSettings {
   // 'code' aliases for better search
   readonly aliases?: string[]
 
-  readonly canBeSearched?: boolean
+  readonly canBeAdded?: boolean
 
   // leaf modifications which you can apply to element's text
   readonly allowedModifications: LeafModification[]
@@ -30,4 +32,6 @@ export interface ElementSettings {
   // available transformations
   // for example, a paragraph can be transformed into the heading
   readonly allowedTransformations: ElementType[]
+
+  readonly create: () => Element
 }

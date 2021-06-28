@@ -74,6 +74,10 @@ export const StyledEditor = styled.div`
     padding-left: var(--editor-controls-container-width);
   }
 
+  .element-container.first-level.read-only > .content {
+    padding-left: 0;
+  }
+
   .element-container .controls .block-menu-icon {
     width: 25px;
     height: 25px;
@@ -148,7 +152,9 @@ export const StyledEditor = styled.div`
   }
 
   ul ul,
-  ol ol {
+  ol ol,
+  ul ol,
+  ol ul {
     margin: 0;
   }
 

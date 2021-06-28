@@ -2,9 +2,9 @@ import { Editor, Range, Transforms } from 'slate'
 import {
   createListElement,
   createListItemElement,
-} from '../../../elements/list'
-import { ListElement } from '../../../elements/list/types'
-import { ParagraphElement } from '../../../elements/paragraph.types'
+} from '../../../elements/elements/list'
+import { ListElement } from '../../../elements/elements/list/types'
+import { ParagraphElement } from '../../../elements/types'
 import { GlobalMatchers } from '../../../lib/global-matchers'
 import { GlobalQueries } from '../../../lib/global-queries'
 import { ListTransforms } from '../../list-interaction'

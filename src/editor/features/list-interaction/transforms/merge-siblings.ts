@@ -1,5 +1,5 @@
 import { Editor, NodeEntry, Path, Transforms } from 'slate'
-import { ListElement } from '../../../elements/list/types'
+import { ListElement } from '../../../elements/elements/list/types'
 import { ElementType } from '../../../types'
 
 interface Options {

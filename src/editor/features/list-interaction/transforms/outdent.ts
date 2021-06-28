@@ -1,5 +1,5 @@
 import { Editor, Location, Node, Path, Range, Transforms } from 'slate'
-import { createListElement } from '../../../elements/list'
+import { createListElement } from '../../../elements/elements/list'
 import { GlobalMatchers } from '../../../lib/global-matchers'
 import { LocalQueries } from '../queries'
 import { FullInfo } from '../queries/info'

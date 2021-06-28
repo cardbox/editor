@@ -1,6 +1,9 @@
 import { Editor, Element, Location, NodeEntry, Path } from 'slate'
-import { ListElement, ListItemElement } from '../../../elements/list/types'
-import { ParagraphElement } from '../../../elements/paragraph.types'
+import {
+  ListElement,
+  ListItemElement,
+} from '../../../elements/elements/list/types'
+import { ParagraphElement } from '../../../elements/types'
 import { GlobalMatchers } from '../../../lib/global-matchers'
 import { GlobalQueries } from '../../../lib/global-queries'
 
