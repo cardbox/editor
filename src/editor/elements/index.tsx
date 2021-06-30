@@ -6,6 +6,7 @@ import {
   createListItemElement,
 } from './elements/list'
 import { createParagraphElement } from './elements/paragraph'
+import './elements/code/code'
 
 const DEFAULT_ELEMENT_TYPE: DefaultElementType = 'paragraph'
 const createDefaultElement: CreateDefaultElement = createParagraphElement

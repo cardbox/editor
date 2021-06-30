@@ -12,6 +12,7 @@ import { useEditor } from '../lib/hooks/use-editor'
 import { useEditorNodeRef } from '../lib/hooks/use-editor-node-ref'
 import { TIPPY_THEMES } from '../lib/tippy'
 import { ElementType } from '../types'
+import { CodeComponent, CodeLineComponent } from './elements/code'
 import { Heading1Component } from './elements/heading-1'
 import {
   ListItemComponent,
@@ -31,6 +32,8 @@ const ELEMENT_COMPONENT_MAPPER: ElementComponentMapper = {
   'ordered-list': OrderedListComponent,
   'unordered-list': UnorderedListComponent,
   'list-item': ListItemComponent,
+  'code': CodeComponent,
+  'code-line': CodeLineComponent,
 }
 
 export function renderElement(props: RenderElementProps) {
@@ -49,6 +52,10 @@ const ElementStructure = (props: RenderElementProps) => {
   const isNested = path.length > 1
 
   const elementJSX = <Component {...props} />
+
+  if (element.type === 'code-line') {
+    return elementJSX
+  }
 
   if (isNested) {
     // nested elements don't need controls yet

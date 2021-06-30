@@ -5,6 +5,10 @@ import { EditableEditor } from './editable-editor'
 import { ReadonlyEditor } from './readonly-editor'
 import { RootGlobalStyles } from './styles'
 import { TippyGlobalStyles } from './lib/tippy'
+import { PrismGlobalStyles } from './lib/prism'
+import './features/list-interaction'
+import './features/paragraph-interaction'
+import './features/code-interaction'
 
 function normalizeProps(dirty: EditorProps): NormalizedEditorProps {
   const normalized: Partial<NormalizedEditorProps> = { ...dirty }
@@ -31,8 +35,9 @@ export const Editor = (props: EditorProps) => {
 
   return (
     <RootProvider customExtensions={normalizedProps.customExtensions}>
-      <RootGlobalStyles />
       <TippyGlobalStyles />
+      <PrismGlobalStyles />
+      <RootGlobalStyles />
       {editor}
     </RootProvider>
   )

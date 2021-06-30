@@ -15,6 +15,7 @@ const defaultExtensions: Extension[] = [
   withReact,
   withHistory,
   extensions.listNormalization,
+  extensions.code,
   extensions.format([
     {
       trigger: ' ',

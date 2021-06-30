@@ -22,6 +22,9 @@ const defaultKeybinds: DefaultActionKeybinds = {
   'make-underlined': 'mod+u',
   'make-inline-code': ['mod+e', 'mod+`'],
   'set-link-for-text': 'mod+k',
+  'copy': 'mod+c',
+  'copy-all': 'mod+a',
+  'paste': 'mod+v',
 }
 
 export function useKeybinds(customKeybinds: CustomActionKeybinds) {

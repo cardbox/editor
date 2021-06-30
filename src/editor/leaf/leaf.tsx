@@ -44,6 +44,10 @@ function buildElement({ leaf, children, attributes }: RenderLeafProps) {
     wrapped = React.createElement(elementType, null, wrapped)
   }
 
+  if (leaf.prismToken) {
+    wrapped = <span className={`token ${leaf.prismToken}`}>{wrapped}</span>
+  }
+
   if (leaf.href) {
     wrapped = (
       <a href={leaf.href} target="_blank">

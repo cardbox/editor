@@ -5,8 +5,6 @@ import { renderLeaf } from './leaf'
 import { useKeybinds } from './use-keybinds'
 import { useEditor } from './lib/hooks/use-editor'
 import { useListeners } from './features/listeners'
-import './features/list-interaction'
-import './features/paragraph-interaction'
 import { StyledEditor } from './styles'
 import { ReadonlyEditorProps } from './types/editor-props'
 

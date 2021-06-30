@@ -8,8 +8,6 @@ import { ToolbarMarkButton } from './features/toolbar/buttons'
 import { useEditor } from './lib/hooks/use-editor'
 import { LinkPopup } from './features/link-popup'
 import { useListeners } from './features/listeners'
-import './features/list-interaction'
-import './features/paragraph-interaction'
 import { StyledEditor } from './styles'
 import { EditableEditorProps } from './types/editor-props'
 
