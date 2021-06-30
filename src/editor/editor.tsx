@@ -8,7 +8,7 @@ import { TippyGlobalStyles } from './lib/tippy'
 import { PrismGlobalStyles } from './lib/prism'
 import './features/list-interaction'
 import './features/paragraph-interaction'
-import './features/code-interaction'
+import './features/code'
 
 function normalizeProps(dirty: EditorProps): NormalizedEditorProps {
   const normalized: Partial<NormalizedEditorProps> = { ...dirty }

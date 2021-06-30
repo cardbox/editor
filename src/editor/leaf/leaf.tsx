@@ -35,6 +35,14 @@ const ELEMENT_MAPPER: ElementMapper = {
 }
 
 function buildElement({ leaf, children, attributes }: RenderLeafProps) {
+  if (leaf.prismToken) {
+    return (
+      <span className={`token ${leaf.prismToken}`} {...attributes}>
+        {children}
+      </span>
+    )
+  }
+
   const modifications = GlobalQueries.leafModifications(leaf)
 
   let wrapped: ReactElement = children

@@ -10,6 +10,7 @@ import { LinkPopup } from './features/link-popup'
 import { useListeners } from './features/listeners'
 import { StyledEditor } from './styles'
 import { EditableEditorProps } from './types/editor-props'
+import { decorations } from './decorations'
 
 export const EditableEditor = ({
   value,
@@ -32,8 +33,9 @@ export const EditableEditor = ({
           renderElement={renderElement}
           renderLeaf={renderLeaf}
           onKeyDown={handleKeyDown}
-          readOnly={false}
           onPaste={handlePaste}
+          decorate={decorations.createHandler(editor)}
+          readOnly={false}
           autoFocus
         />
       </Slate>
