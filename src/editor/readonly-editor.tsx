@@ -1,5 +1,6 @@
 import React from 'react'
 import { Editable, Slate } from 'slate-react'
+import { decorations } from './decorations'
 import { useEditor } from './lib/hooks/slate/use-editor'
 import { renderElement } from './render.element'
 import { renderLeaf } from './render.leaf'
@@ -15,6 +16,7 @@ export const ReadonlyEditor = ({ value }: ReadonlyEditorProps) => {
         <Editable
           renderElement={renderElement}
           renderLeaf={renderLeaf}
+          decorate={decorations.createHandler(editor)}
           readOnly={true}
         />
       </Slate>
