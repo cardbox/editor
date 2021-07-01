@@ -57,6 +57,14 @@ Write `1.` or `1)` + space to create an ordered list.
 
 Use `Tab` and `Shift+Tab` to manage the items nesting level.
 
+### Code blocks
+
+Use `Tab` to indent, `Shift+Tab` to outdent.
+
+Use `⌘+Enter` to step out the code block.
+
+Write ``` to create the code block.
+
 ## Styles
 
 ```css
