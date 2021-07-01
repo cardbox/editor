@@ -8,6 +8,7 @@ import {
   createParagraphElement,
   createUnorderedListElement,
 } from './elements'
+import { createCodeElement } from './elements/elements/code'
 import { extensions } from './features/extensions'
 import { extend, Extension } from './lib/extensions/extend'
 
@@ -44,6 +45,17 @@ const defaultExtensions: Extension[] = [
         return createOrderedListElement([
           createListItemElement([createParagraphElement(initialLeafs)]),
         ])
+      },
+    },
+    {
+      trigger: ' ',
+      keepTrigger: false,
+      markupType: 'after',
+      markup: ['```'],
+      onlyOnBlockStart: true,
+      transformType: 'block',
+      transform: () => {
+        return createCodeElement()
       },
     },
   ]),
