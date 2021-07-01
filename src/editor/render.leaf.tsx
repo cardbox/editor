@@ -12,14 +12,28 @@ const ELEMENT_MAPPER: ElementMapper = {
   inlineCode: 'code',
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function isCodeEmptyLine(children: any): boolean {
+  const props = children?.props
+  return props?.text.text.length === 0 && props?.parent?.type === 'code-line'
+}
+
 function buildElement({ leaf, children, attributes }: RenderLeafProps) {
-  if (leaf.prismToken) {
+  if (isCodeEmptyLine(children))
+    return (
+      <span data-slate-leaf="true">
+        <span data-slate-zero-width="z" data-slate-length={0}>
+          {'\uFEFF'}
+        </span>
+      </span>
+    )
+
+  if (leaf.prismToken)
     return (
       <span className={`token ${leaf.prismToken}`} {...attributes}>
         {children}
       </span>
     )
-  }
 
   const modifications = GlobalQueries.leafModifications(leaf)
 
@@ -28,10 +42,6 @@ function buildElement({ leaf, children, attributes }: RenderLeafProps) {
   for (const modification of modifications) {
     const elementType = ELEMENT_MAPPER[modification]
     wrapped = React.createElement(elementType, null, wrapped)
-  }
-
-  if (leaf.prismToken) {
-    wrapped = <span className={`token ${leaf.prismToken}`}>{wrapped}</span>
   }
 
   if (leaf.href) {
