@@ -11,20 +11,23 @@ export const NordTheme = createGlobalStyle`
   pre[data-language] {
     color: #f8f8f2;
     background: none;
-    font-family: "Fira Code", Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-family: "Source Code Pro", Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
     text-align: left;
-    white-space: pre;
-    word-spacing: normal;
-    word-break: normal;
-    word-wrap: normal;
     line-height: 1.5;
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
-    tab-size: 4;
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    -ms-hyphens: none;
+    tab-size: 2;
     hyphens: none;
+
+    word-break: normal;
+    word-spacing: normal;
+    white-space: pre;
+    overflow-wrap: break-word;
+  }
+
+  pre[data-language] > div {
+    display: block;
+    position: relative;
+    overflow-wrap: normal;
+    white-space: pre;
   }
 
   /* Code blocks */

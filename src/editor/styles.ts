@@ -138,10 +138,6 @@ export const StyledEditor = styled.div`
     margin: var(--editor-code-margin);
   }
 
-  pre[data-language] > code {
-    display: block;
-  }
-
   b {
     font-weight: var(--editor-mod-bold-font-weight);
   }
