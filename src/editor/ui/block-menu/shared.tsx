@@ -35,22 +35,23 @@ const List = ({
   )
 }
 
+type LIAttributes = React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLLIElement>,
+  HTMLLIElement
+>
+
 const Item = ({
   name,
   detail,
   onClick,
+  ...rest
 }: {
   name: string
   detail?: string
   onClick?: React.MouseEventHandler<HTMLLIElement>
-}) => {
+} & LIAttributes) => {
   return (
-    <li
-      className="block-menu-item"
-      onClick={onClick}
-      role={onClick ? 'button' : ''}
-      tabIndex={0}
-    >
+    <li className="block-menu-item" onClick={onClick} {...rest}>
       <span className="block-menu-item-name">{name}</span>
       {detail && <span className="block-menu-item-detail">{detail}</span>}
     </li>

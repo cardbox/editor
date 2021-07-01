@@ -36,6 +36,8 @@ const Content: BlockMenuSection = ({ hide }) => {
     searchRef.current.focus()
   }, [])
 
+  if (element.type !== 'code') return null
+
   return (
     <BlockMenuContent.Section name="Select code language">
       <BlockMenuContent.Container>
@@ -50,11 +52,14 @@ const Content: BlockMenuSection = ({ hide }) => {
       </BlockMenuContent.Container>
       <BlockMenuContent.List style={{ maxHeight: 200, overflow: 'auto' }}>
         {matchedLanguages.map((language) => {
+          const isSelected = language.grammarName === element.language
+
           return (
             <BlockMenuContent.Item
               key={language.name}
               name={language.name}
               onClick={() => setLanguage(language.grammarName)}
+              style={{ color: isSelected ? 'rgb(56, 132, 255)' : '' }}
             />
           )
         })}
