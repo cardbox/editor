@@ -6,44 +6,19 @@ import { Editor, EditorValue } from './editor'
 const initialState: EditorValue = [
   {
     type: 'heading-1',
-    children: [
-      {
-        text: 'Manage map or Set in effector store',
-      },
-    ],
+    children: [{ text: 'Manage map or Set in effector store' }],
   },
   {
     type: 'paragraph',
     children: [
-      {
-        text: 'Sometimes we need to save Set in ',
-      },
-      {
-        text: 'effector',
-        italic: true,
-        href: 'https://effector.dev',
-      },
-      {
-        text: ' store.\nSimple ',
-      },
-      {
-        text: 'createStore(new Set())',
-        inlineCode: true,
-      },
-      {
-        text: ' ',
-      },
-      {
-        text: 'will not',
-        bold: true,
-      },
-      {
-        text: ' trigger updates on ',
-      },
-      {
-        text: '.add(item)',
-        inlineCode: true,
-      },
+      { text: 'Sometimes we need to save Set in ' },
+      { text: 'effector', italic: true, href: 'https://effector.dev' },
+      { text: ' store.\nSimple ' },
+      { text: 'createStore(new Set())', inlineCode: true },
+      { text: ' ' },
+      { text: 'will not', bold: true },
+      { text: ' trigger updates on ' },
+      { text: '.add(item)', inlineCode: true },
     ],
   },
   {
@@ -52,20 +27,14 @@ const initialState: EditorValue = [
       {
         type: 'list-item',
         children: [
-          {
-            type: 'paragraph',
-            children: [{ text: 'a' }],
-          },
+          { type: 'paragraph', children: [{ text: 'a' }] },
           {
             type: 'unordered-list',
             children: [
               {
                 type: 'list-item',
                 children: [
-                  {
-                    type: 'paragraph',
-                    children: [{ text: 'nested' }],
-                  },
+                  { type: 'paragraph', children: [{ text: 'nested' }] },
                 ],
               },
             ],
@@ -75,20 +44,14 @@ const initialState: EditorValue = [
       {
         type: 'list-item',
         children: [
-          {
-            type: 'paragraph',
-            children: [{ text: 'b' }],
-          },
+          { type: 'paragraph', children: [{ text: 'b' }] },
           {
             type: 'unordered-list',
             children: [
               {
                 type: 'list-item',
                 children: [
-                  {
-                    type: 'paragraph',
-                    children: [{ text: 'nested' }],
-                  },
+                  { type: 'paragraph', children: [{ text: 'nested' }] },
                 ],
               },
             ],
@@ -98,20 +61,14 @@ const initialState: EditorValue = [
       {
         type: 'list-item',
         children: [
-          {
-            type: 'paragraph',
-            children: [{ text: 'c' }],
-          },
+          { type: 'paragraph', children: [{ text: 'c' }] },
           {
             type: 'unordered-list',
             children: [
               {
                 type: 'list-item',
                 children: [
-                  {
-                    type: 'paragraph',
-                    children: [{ text: 'nested' }],
-                  },
+                  { type: 'paragraph', children: [{ text: 'nested' }] },
                 ],
               },
             ],
@@ -126,20 +83,14 @@ const initialState: EditorValue = [
       {
         type: 'list-item',
         children: [
-          {
-            type: 'paragraph',
-            children: [{ text: 'a' }],
-          },
+          { type: 'paragraph', children: [{ text: 'a' }] },
           {
             type: 'ordered-list',
             children: [
               {
                 type: 'list-item',
                 children: [
-                  {
-                    type: 'paragraph',
-                    children: [{ text: 'nested' }],
-                  },
+                  { type: 'paragraph', children: [{ text: 'nested' }] },
                 ],
               },
             ],
@@ -149,20 +100,14 @@ const initialState: EditorValue = [
       {
         type: 'list-item',
         children: [
-          {
-            type: 'paragraph',
-            children: [{ text: 'b' }],
-          },
+          { type: 'paragraph', children: [{ text: 'b' }] },
           {
             type: 'ordered-list',
             children: [
               {
                 type: 'list-item',
                 children: [
-                  {
-                    type: 'paragraph',
-                    children: [{ text: 'nested' }],
-                  },
+                  { type: 'paragraph', children: [{ text: 'nested' }] },
                 ],
               },
             ],
@@ -170,6 +115,20 @@ const initialState: EditorValue = [
         ],
       },
     ],
+  },
+  {
+    type: 'code',
+    children: [
+      {
+        type: 'code-line',
+        children: [{ text: 'const foo = 123;' }],
+      },
+      {
+        type: 'code-line',
+        children: [{ text: 'const bar = 321;' }],
+      },
+    ],
+    language: 'tsx',
   },
 ]
 

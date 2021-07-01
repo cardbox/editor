@@ -1,7 +1,7 @@
 import React, { CSSProperties, MouseEventHandler, ReactNode } from 'react'
 import { Editor, Text } from 'slate'
 import { Action, actions } from '../../../actions'
-import { useEditor } from '../../../lib/hooks/use-editor'
+import { useEditor } from '../../../lib/hooks/slate/use-editor'
 import { useUI } from '../../../lib/hooks/use-ui'
 import { NoopEvents } from '../../../lib/util'
 import { ToolbarButton } from './common'

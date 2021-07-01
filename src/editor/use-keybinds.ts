@@ -7,7 +7,7 @@ import {
   DefaultActionKeybinds,
 } from './actions'
 import { keybinds } from './features/keybinds'
-import { useEditor } from './lib/hooks/use-editor'
+import { useEditor } from './lib/hooks/slate/use-editor'
 import { useUI } from './lib/hooks/use-ui'
 
 const defaultKeybinds: DefaultActionKeybinds = {
@@ -22,6 +22,9 @@ const defaultKeybinds: DefaultActionKeybinds = {
   'make-underlined': 'mod+u',
   'make-inline-code': ['mod+e', 'mod+`'],
   'set-link-for-text': 'mod+k',
+  'copy': 'mod+c',
+  'copy-all': 'mod+a',
+  'paste': 'mod+v',
 }
 
 export function useKeybinds(customKeybinds: CustomActionKeybinds) {

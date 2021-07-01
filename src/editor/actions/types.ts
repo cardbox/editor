@@ -14,6 +14,9 @@ export type Action =
   | 'make-underlined'
   | 'make-inline-code'
   | 'set-link-for-text'
+  | 'copy'
+  | 'copy-all'
+  | 'paste'
 
 export type ActionKeybinds = {
   [KAction in Action]?: string | string[]

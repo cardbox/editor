@@ -27,6 +27,9 @@ export const RootGlobalStyles = createGlobalStyle`
 
     --editor-list-margin: 1em 0;
     --editor-list-padding: 0 0 0 24px;
+
+    --editor-code-font-family: 'Source Code Pro', monospace;
+    --editor-code-margin: 1.5em 0;
   }
 `
 
@@ -66,7 +69,7 @@ export const StyledEditor = styled.div`
     opacity: 1;
   }
 
-  .element-container.first-level.visible > .controls {
+  .element-container .controls.visible {
     opacity: 1;
   }
 
@@ -123,11 +126,20 @@ export const StyledEditor = styled.div`
     }
   }
 
-  code {
+  & :not(pre[data-language]) > code {
     font-family: var(--editor-mod-inline-code-font-family);
     padding: var(--editor-mod-inline-code-padding);
     background: var(--editor-mod-inline-code-background);
     border-radius: var(--editor-mod-inline-code-border-radius);
+  }
+
+  pre[data-language] {
+    font-family: var(--editor-code-font-family);
+    margin: var(--editor-code-margin);
+  }
+
+  pre[data-language] > code {
+    display: block;
   }
 
   b {
