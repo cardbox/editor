@@ -17,6 +17,7 @@ export type Action =
   | 'copy'
   | 'copy-all'
   | 'paste'
+  | 'exit-block'
 
 export type ActionKeybinds = {
   [KAction in Action]?: string | string[]

@@ -14,6 +14,7 @@ import { outdent } from './outdent'
 import { copy } from './copy'
 import { paste } from './paste'
 import { copyAll } from './copy-all'
+import { exitBlock } from './exit-block'
 
 const actions = createActionController<Action, ActionParams>()
 
@@ -31,6 +32,7 @@ actions.register('set-link-for-text', setLinkForText)
 actions.register('copy', copy)
 actions.register('copy-all', copyAll)
 actions.register('paste', paste)
+actions.register('exit-block', exitBlock)
 
 export { actions }
 export * from './types'

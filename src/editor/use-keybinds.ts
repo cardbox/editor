@@ -13,7 +13,7 @@ import { useUI } from './lib/hooks/use-ui'
 const defaultKeybinds: DefaultActionKeybinds = {
   'delete-backward': 'backspace',
   'insert-soft-break': 'shift+enter',
-  'insert-exit-break': ['enter', 'mod+enter'],
+  'insert-exit-break': 'enter',
   'indent': 'tab',
   'outdent': 'shift+tab',
   'get-out-the-leaf': 'arrowright',
@@ -25,6 +25,7 @@ const defaultKeybinds: DefaultActionKeybinds = {
   'copy': 'mod+c',
   'copy-all': 'mod+a',
   'paste': 'mod+v',
+  'exit-block': 'mod+enter',
 }
 
 export function useKeybinds(customKeybinds: CustomActionKeybinds) {
