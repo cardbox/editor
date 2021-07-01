@@ -125,6 +125,10 @@ const initialState: EditorValue = [
       },
       {
         type: 'code-line',
+        children: [{ text: '' }],
+      },
+      {
+        type: 'code-line',
         children: [{ text: 'const bar = 321;' }],
       },
     ],

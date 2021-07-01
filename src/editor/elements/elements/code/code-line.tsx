@@ -15,7 +15,7 @@ export const CodeLineComponent = ({
   attributes,
   children,
 }: RenderElementProps) => {
-  return <code {...attributes}>{children}</code>
+  return <div {...attributes}>{children}</div>
 }
 
 export const CODE_LINE_SETTINGS: ElementSettings = {
