@@ -17,7 +17,7 @@ export const ElementsThemes = createGlobalStyle`
     font-size: 12px;
   }
 
-  .tippy-box[data-theme~='editor-block-type-menu'] {
+  .tippy-box[data-theme~='editor-block-menu'] {
     width: 230px;
     padding: 6px;
 
@@ -25,20 +25,24 @@ export const ElementsThemes = createGlobalStyle`
       padding: 0;
     }
 
-    & .block-type-menu-advice {
+    & .block-menu-container {
+      padding: 6px 12px;
+    }
+
+    & .block-menu-list-name {
       font-size: 12px;
       color: #A9AAB3;
       margin: 0;
       padding: 6px 12px;
     }
 
-    & .block-type-menu-item-list {
+    & .block-menu-list {
       list-style: none;
       margin: 0;
       padding: 0;
     }
 
-    & .block-type-menu-item {
+    & .block-menu-item {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -51,7 +55,7 @@ export const ElementsThemes = createGlobalStyle`
       }
     }
 
-    & .block-type-menu-item-command {
+    & .block-menu-item-detail {
       color: #A9AAB3;
     }
   }

@@ -1,2 +1,2 @@
-export { createLeaf, renderLeaf } from './leaf'
+export { createLeaf } from './leaf'
 export * from './types'

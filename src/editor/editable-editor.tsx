@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react'
 import { Editable, Slate } from 'slate-react'
-import { createDefaultElement, renderElement } from './elements'
-import { renderLeaf } from './leaf'
+import { createDefaultElement } from './elements'
 import { useKeybinds } from './use-keybinds'
 import { Toolbar } from './features/toolbar'
 import { ToolbarMarkButton } from './features/toolbar/buttons'
-import { useEditor } from './lib/hooks/use-editor'
+import { useEditor } from './lib/hooks/slate/use-editor'
 import { LinkPopup } from './features/link-popup'
 import { useListeners } from './features/listeners'
 import { StyledEditor } from './styles'
 import { EditableEditorProps } from './types/editor-props'
 import { decorations } from './decorations'
+import { renderElement } from './render.element'
+import { renderLeaf } from './render.leaf'
 
 export const EditableEditor = ({
   value,

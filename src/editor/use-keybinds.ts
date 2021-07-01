@@ -7,7 +7,7 @@ import {
   DefaultActionKeybinds,
 } from './actions'
 import { keybinds } from './features/keybinds'
-import { useEditor } from './lib/hooks/use-editor'
+import { useEditor } from './lib/hooks/slate/use-editor'
 import { useUI } from './lib/hooks/use-ui'
 
 const defaultKeybinds: DefaultActionKeybinds = {

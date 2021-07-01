@@ -69,7 +69,7 @@ export const StyledEditor = styled.div`
     opacity: 1;
   }
 
-  .element-container.first-level.visible > .controls {
+  .element-container .controls.visible {
     opacity: 1;
   }
 
