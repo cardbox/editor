@@ -16,6 +16,7 @@ import 'prismjs/components/prism-tsx'
 import 'prismjs/components/prism-sql'
 import 'prismjs/components/prism-typescript'
 import 'prismjs/components/prism-yaml'
+import 'prismjs/components/prism-rust'
 
 Prism.languages.plain = {}
 
