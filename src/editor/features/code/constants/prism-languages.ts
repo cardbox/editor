@@ -2,6 +2,7 @@ export const PRISM_LANGUAGES: Array<{
   grammarName: string
   name: string
 }> = [
+  { grammarName: 'plain', name: 'Plain Text' },
   { grammarName: 'bash', name: 'Bash' },
   { grammarName: 'csharp', name: 'C#' },
   { grammarName: 'css', name: 'CSS' },
