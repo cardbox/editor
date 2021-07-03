@@ -127,6 +127,13 @@ export const StyledEditor = styled.div`
     }
   }
 
+  [data-slate-node='element'] {
+    width: fit-content;
+
+    // to display caret in empty blocks
+    min-width: 3px;
+  }
+
   a {
     color: var(--editor-mod-link-color);
     text-decoration: none;
@@ -144,6 +151,7 @@ export const StyledEditor = styled.div`
   }
 
   pre[data-language] {
+    width: 100%;
     font-family: var(--editor-code-font-family);
     margin: var(--editor-code-margin);
   }
