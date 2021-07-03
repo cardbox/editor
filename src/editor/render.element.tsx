@@ -15,6 +15,8 @@ import { CodeComponent, CodeLineComponent } from './elements/elements/code'
 import { Controls } from './ui/controls'
 import { BlockMenu } from './ui/block-menu'
 import { CodeControls } from './features/code'
+import { Heading2Component } from './elements/elements/heading-2'
+import { Heading3Component } from './elements/elements/heading-3'
 
 type ElementComponentMapper = {
   [KElementType in ElementType]: (props: RenderElementProps) => JSX.Element
@@ -23,6 +25,8 @@ type ElementComponentMapper = {
 const ELEMENT_COMPONENT_MAPPER: ElementComponentMapper = {
   'paragraph': ParagraphComponent,
   'heading-1': Heading1Component,
+  'heading-2': Heading2Component,
+  'heading-3': Heading3Component,
   'ordered-list': OrderedListComponent,
   'unordered-list': UnorderedListComponent,
   'list-item': ListItemComponent,
