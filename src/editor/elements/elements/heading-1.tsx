@@ -25,6 +25,6 @@ export const HEADING_1_SETTINGS: ElementSettings = {
   code: 'h1',
   aliases: ['heading-1', 'title'],
   allowedModifications: [],
-  allowedTransformations: ['paragraph'],
+  allowedTransformations: ['heading-2', 'heading-3', 'paragraph'],
   create: createHeading1Element,
 }

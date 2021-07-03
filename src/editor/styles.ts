@@ -21,9 +21,19 @@ export const RootGlobalStyles = createGlobalStyle`
     --editor-paragraph-margin: 1em 0;
 
     --editor-heading1-margin: 1em 0;
-    --editor-heading1-font-size: 24px;
-    --editor-heading1-line-height: 1;
-    --editor-heading1-font-weight: 400;
+    --editor-heading1-font-size: 26px;
+    --editor-heading1-line-height: 0.95;
+    --editor-heading1-font-weight: 600;
+
+    --editor-heading2-margin: 1em 0;
+    --editor-heading2-font-size: 22px;
+    --editor-heading2-line-height: 1.05;
+    --editor-heading2-font-weight: 600;
+
+    --editor-heading3-margin: 1em 0;
+    --editor-heading3-font-size: 18px;
+    --editor-heading3-line-height: 1.35;
+    --editor-heading3-font-weight: 600;
 
     --editor-list-margin: 1em 0;
     --editor-list-padding: 0 0 0 24px;
@@ -151,6 +161,20 @@ export const StyledEditor = styled.div`
     font-size: var(--editor-heading1-font-size);
     line-height: var(--editor-heading1-line-height);
     font-weight: var(--editor-heading1-font-weight);
+  }
+
+  h2 {
+    margin: var(--editor-heading2-margin);
+    font-size: var(--editor-heading2-font-size);
+    line-height: var(--editor-heading2-line-height);
+    font-weight: var(--editor-heading2-font-weight);
+  }
+
+  h3 {
+    margin: var(--editor-heading3-margin);
+    font-size: var(--editor-heading3-font-size);
+    line-height: var(--editor-heading3-line-height);
+    font-weight: var(--editor-heading3-font-weight);
   }
 
   ol,
