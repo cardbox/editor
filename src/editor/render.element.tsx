@@ -60,9 +60,9 @@ const ElementStructure = (props: RenderElementProps) => {
     return (
       <div className="element-container">
         <div className="content">
-          <div contentEditable={false} />
+          <Area position="top" />
           {elementJSX}
-          <div contentEditable={false} />
+          <Area position="bottom" />
         </div>
       </div>
     )
@@ -93,10 +93,29 @@ const FirstLevelElement = ({
         render={() => <BlockMenu sections={[CodeControls]} />}
       />
       <div className="content">
-        <div contentEditable={false} />
+        <Area position="top" />
         {children}
-        <div contentEditable={false} />
+        <Area position="bottom" />
       </div>
+    </div>
+  )
+}
+
+const Area = ({
+  position,
+  children,
+}: {
+  position: 'top' | 'bottom'
+  children?: JSX.Element | JSX.Element[]
+}) => {
+  const className = clsx({
+    'element-area': true,
+    ['element-area-' + position]: true,
+  })
+
+  return (
+    <div contentEditable={false} className={className}>
+      {children}
     </div>
   )
 }

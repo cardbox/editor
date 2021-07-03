@@ -75,6 +75,10 @@ export const StyledEditor = styled.div`
     transition: opacity 400ms ease 0s;
   }
 
+  .element-container .element-area {
+    user-select: none;
+  }
+
   .element-container .controls:hover {
     opacity: 1;
   }
