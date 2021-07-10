@@ -1,6 +1,6 @@
-import { CustomActionKeybinds } from '../actions'
+import { CustomActionKeybinds } from '../actions-registry'
 import { Extension } from '../lib/extensions/extend'
-import { EditorValue } from './editor'
+import { EditorValue } from '../shared/types'
 
 interface Common {
   value: EditorValue

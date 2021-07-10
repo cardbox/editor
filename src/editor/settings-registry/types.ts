@@ -1,19 +1,7 @@
-import { LeafModification } from './leaf'
 import { Element } from 'slate'
 
-export type ElementType = Element['type']
-
-export type ElementFromType<
-  T extends ElementType,
-  K extends Element = Element
-> = K extends {
-  type: T
-}
-  ? K
-  : never
-
 export interface ElementSettings {
-  readonly type: ElementType
+  readonly type: Element['type']
 
   // used in different interface elements
   readonly name: string
@@ -27,11 +15,13 @@ export interface ElementSettings {
   readonly canBeAdded?: boolean
 
   // leaf modifications which you can apply to element's text
-  readonly allowedModifications: LeafModification[]
+  readonly allowedModifications: Array<
+    'bold' | 'italic' | 'underlined' | 'inlineCode' | 'href' | 'prismToken'
+  >
 
   // available transformations
   // for example, a paragraph can be transformed into the heading
-  readonly allowedTransformations: ElementType[]
+  readonly allowedTransformations: Element['type'][]
 
   readonly create: () => Element
 }
