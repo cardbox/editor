@@ -2,15 +2,17 @@ import {
   Action,
   ActionKeybinds,
   ActionsRegistry,
-  CustomActionKeybinds,
-  DefaultActionKeybinds,
+  OptionalActionKeybinds,
+  PublicAction,
 } from '../actions-registry'
 import { keybinds } from '../features/keybinds'
 import { useEditor } from '../lib/hooks/slate'
 import { useUI } from '../lib/hooks/use-ui'
-import { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 
-const defaultKeybinds: DefaultActionKeybinds = {
+type AllKeybinds = ActionKeybinds<Action>
+
+const defaultKeybinds: AllKeybinds = {
   'delete-backward': 'backspace',
   'insert-soft-break': 'shift+enter',
   'insert-exit-break': 'enter',
@@ -28,12 +30,14 @@ const defaultKeybinds: DefaultActionKeybinds = {
   'exit-block': 'mod+enter',
 }
 
-export function useKeybinds(customKeybinds: CustomActionKeybinds) {
+export function useKeybinds(
+  customKeybinds: OptionalActionKeybinds<PublicAction>
+) {
   const editor = useEditor()
   const ui = useUI()
 
   useEffect(() => {
-    const finalKeybinds: ActionKeybinds = {
+    const finalKeybinds: AllKeybinds = {
       ...defaultKeybinds,
       ...customKeybinds,
     }
@@ -41,7 +45,7 @@ export function useKeybinds(customKeybinds: CustomActionKeybinds) {
     // clear possible previous keybinds
     keybinds.unregisterAll()
 
-    type Entries = Array<[Action, ActionKeybinds[Action]]>
+    type Entries = Array<[Action, AllKeybinds[Action]]>
     const entries = Object.entries(finalKeybinds) as Entries
 
     entries.forEach(([action, keybind]) => {

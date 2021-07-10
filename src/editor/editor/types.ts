@@ -1,10 +1,10 @@
-import { CustomActionKeybinds } from '../actions-registry'
+import { OptionalActionKeybinds, PublicAction } from '../actions-registry'
 import { Extension } from '../lib/extensions/extend'
 import { EditorValue } from '../shared/types'
 
 interface Common {
   value: EditorValue
-  customKeybinds?: CustomActionKeybinds
+  customKeybinds?: OptionalActionKeybinds<PublicAction>
   customExtensions?: Extension[]
   readOnly?: boolean
 }
@@ -19,7 +19,7 @@ interface WithoutReadOnly {
 }
 
 interface WithNormalized {
-  customKeybinds: CustomActionKeybinds
+  customKeybinds: OptionalActionKeybinds<PublicAction>
   customExtensions: Extension[]
 }
 

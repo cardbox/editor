@@ -12,17 +12,11 @@ import { EditorProps, NormalizedEditorProps } from './types'
 import React from 'react'
 
 function normalizeProps(dirty: EditorProps): NormalizedEditorProps {
-  const normalized: Partial<NormalizedEditorProps> = { ...dirty }
-
-  if (!dirty.customKeybinds) {
-    normalized.customKeybinds = {}
+  return {
+    ...dirty,
+    customKeybinds: dirty.customKeybinds || {},
+    customExtensions: dirty.customExtensions || [],
   }
-
-  if (!dirty.customExtensions) {
-    normalized.customExtensions = []
-  }
-
-  return normalized as NormalizedEditorProps
 }
 
 export const Editor = (props: EditorProps) => {

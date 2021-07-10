@@ -2,34 +2,33 @@ import { ActionBaseParams } from '../lib/action-controller/types'
 import { UI } from '../lib/hooks/use-ui.types'
 import { Editor } from 'slate'
 
-export type Action =
+export type PublicAction =
+  | 'make-bold'
+  | 'make-italic'
+  | 'make-underlined'
+  | 'make-inline-code'
+  | 'set-link-for-text'
+
+export type PrivateAction =
   | 'delete-backward'
   | 'insert-soft-break'
   | 'insert-exit-break'
   | 'indent'
   | 'outdent'
   | 'get-out-the-leaf'
-  | 'make-bold'
-  | 'make-italic'
-  | 'make-underlined'
-  | 'make-inline-code'
-  | 'set-link-for-text'
   | 'copy'
   | 'copy-all'
   | 'paste'
   | 'exit-block'
 
-export type ActionKeybinds = {
-  [KAction in Action]?: string | string[]
+export type Action = PublicAction | PrivateAction
+
+export type ActionKeybinds<TAction extends string> = {
+  [KAction in TAction]: string | string[]
 }
 
-export type CustomActionKeybinds = Omit<
-  ActionKeybinds,
-  'insert-soft-break' | 'insert-exit-break' | 'get-out-the-leaf'
->
-
-export type DefaultActionKeybinds = {
-  [KAction in Action]: string | string[]
+export type OptionalActionKeybinds<TAction extends string> = {
+  [KAction in TAction]: string | string[]
 }
 
 export interface ActionParams extends ActionBaseParams {
