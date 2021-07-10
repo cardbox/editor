@@ -1,4 +1,4 @@
-import { ElementType } from '../../types'
+import { ElementType } from '../../shared/types'
 import { block } from './block'
 import { childOf } from './child-of'
 import { equals } from './equals'

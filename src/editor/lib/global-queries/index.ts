@@ -6,8 +6,8 @@ import { getRangeFromBlockStart } from './get-range-from-block-start'
 import { hasSelection } from './has-selection'
 import { isInBlock } from './is-in-block'
 import { isOnEdges } from './is-on-edges'
-import { leafHasModifications } from './leaf-has-modifications'
-import { leafModifications } from './leaf-modifications'
+import { leafHasTextModifications } from './leaf-has-text-modifications'
+import { textModifications } from './text-modifications'
 
 export const GlobalQueries = {
   getAbove,
@@ -16,8 +16,8 @@ export const GlobalQueries = {
   getRangeBefore,
   getRangeFromBlockStart,
   hasSelection,
-  leafHasModifications,
-  leafModifications,
+  leafHasTextModifications,
+  textModifications,
   isInBlock,
   isOnEdges,
 }

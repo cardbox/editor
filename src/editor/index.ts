@@ -1,4 +1,4 @@
-import './custom-slate.d'
+import './slate-types/custom-slate.d'
 
 export { Editor } from './editor'
-export type { EditorValue } from './types'
+export type { EditorValue } from './shared/types'

@@ -1,4 +1,4 @@
-import { ActionParams } from '../../../actions'
+import { ActionParams } from '../../../actions-registry'
 import { ActionCallback } from '../../../lib/action-controller/types'
 import { LocalTransforms } from '../transforms'
 

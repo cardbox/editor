@@ -1,4 +1,3 @@
-import { createLeaf } from '../../leaf'
 import { GlobalQueries } from '../global-queries'
 import { Editor, Path, Point, Range, Transforms } from 'slate'
 
@@ -58,13 +57,13 @@ export function getOutTheLeaf(editor: Editor): TransformResult {
     return failure()
   }
 
-  const hasModifications = GlobalQueries.leafHasModifications(leaf)
+  const hasModifications = GlobalQueries.leafHasTextModifications(leaf)
 
   if (!hasModifications) {
     return failure()
   }
 
-  Transforms.insertNodes(editor, createLeaf({ text: ' ' }), { select: false })
+  Transforms.insertNodes(editor, { text: ' ' }, { select: false })
   Transforms.select(editor, Path.next(leafPath))
 
   return success()

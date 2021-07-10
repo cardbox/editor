@@ -4,10 +4,10 @@ import { getOutTheLeaf } from './get-out-the-leaf'
 import { insertExitBreak } from './insert-exit-break'
 import { insertSoftBreak } from './insert-soft-break'
 import { setHref } from './set-href'
-import { toggleModification } from './toggle-modification'
+import { toggleTextModification } from './toggle-text-modification'
 
 export const GlobalTransforms = {
-  toggleModification,
+  toggleTextModification,
   setHref,
   clearHref,
   getOutTheLeaf,
