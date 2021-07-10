@@ -28,6 +28,6 @@ SettingsRegistry.set('paragraph', {
   code: 'p',
   aliases: ['paragraph', 'text'],
   allowedModifications: [...TEXT_MODIFICATIONS, LINK_MODIFICATION],
-  allowedTransformations: ['heading-1'],
+  allowedTransformations: ['heading-1', 'heading-2', 'heading-3'],
   create: createParagraphElement,
 })
