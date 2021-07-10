@@ -1,6 +1,6 @@
-import { Editor, Range } from 'slate'
 import { getAbove } from './get-above'
 import { getPointFromLocation } from './get-point-from-location'
+import { Editor, Range } from 'slate'
 
 export function getRangeFromBlockStart(editor: Editor): Range | undefined {
   if (!editor.selection) return

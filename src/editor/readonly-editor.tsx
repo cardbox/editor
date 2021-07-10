@@ -1,11 +1,11 @@
-import React from 'react'
-import { Editable, Slate } from 'slate-react'
 import { decorations } from './decorations'
-import { useEditor } from './lib/hooks/slate/use-editor'
+import { useEditor } from './lib/hooks/slate'
 import { renderElement } from './render.element'
 import { renderLeaf } from './render.leaf'
 import { StyledEditor } from './styles'
 import { ReadonlyEditorProps } from './types/editor-props'
+import React from 'react'
+import { Editable, Slate } from 'slate-react'
 
 export const ReadonlyEditor = ({ value }: ReadonlyEditorProps) => {
   const editor = useEditor()

@@ -1,4 +1,3 @@
-import { useCallback, useEffect } from 'react'
 import {
   Action,
   ActionKeybinds,
@@ -7,8 +6,9 @@ import {
   DefaultActionKeybinds,
 } from './actions'
 import { keybinds } from './features/keybinds'
-import { useEditor } from './lib/hooks/slate/use-editor'
+import { useEditor } from './lib/hooks/slate'
 import { useUI } from './lib/hooks/use-ui'
+import { useCallback, useEffect } from 'react'
 
 const defaultKeybinds: DefaultActionKeybinds = {
   'delete-backward': 'backspace',

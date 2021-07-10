@@ -1,8 +1,8 @@
-import { Editor, Path, Range, Transforms } from 'slate'
 import { createListItemElement } from '../../../elements'
 import { GlobalMatchers } from '../../../lib/global-matchers'
 import { LocalQueries } from '../queries'
 import { outdent } from './outdent'
+import { Editor, Path, Range, Transforms } from 'slate'
 
 interface TransformResult {
   handled: boolean

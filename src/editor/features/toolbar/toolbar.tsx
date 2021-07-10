@@ -1,12 +1,12 @@
+import { useEditorNodeRef } from '../../lib/hooks/slate'
+import { useForceUpdate } from '../../lib/hooks/use-force-update'
+import { useThrottled } from '../../lib/hooks/use-throttled'
+import { TIPPY_THEMES } from '../../lib/tippy'
+import { useToolbarState } from './toolbar-context'
+import debounce from 'just-debounce-it'
 import React, { ReactNode, useEffect, useMemo } from 'react'
 import ReactDOM from 'react-dom'
 import tippy from 'tippy.js'
-import debounce from 'just-debounce-it'
-import { useEditorNodeRef } from '../../lib/hooks/slate/use-editor-node-ref'
-import { useThrottled } from '../../lib/hooks/use-throttled'
-import { useForceUpdate } from '../../lib/hooks/use-force-update'
-import { TIPPY_THEMES } from '../../lib/tippy'
-import { useToolbarState } from './toolbar-context'
 
 /*
  * We use this element as the React Portal container

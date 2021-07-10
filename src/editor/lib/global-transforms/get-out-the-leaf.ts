@@ -1,6 +1,6 @@
-import { Editor, Path, Point, Range, Transforms } from 'slate'
 import { createLeaf } from '../../leaf'
 import { GlobalQueries } from '../global-queries'
+import { Editor, Path, Point, Range, Transforms } from 'slate'
 
 interface TransformResult {
   success: boolean
@@ -51,8 +51,7 @@ export function getOutTheLeaf(editor: Editor): TransformResult {
 
   const isAllowedPlace = () => {
     const isBlockEnd = Point.equals(selectionPoint, blockEnd)
-    if (isBlockEnd) return true
-    return false
+    return isBlockEnd
   }
 
   if (!isAllowedPlace()) {

@@ -1,6 +1,6 @@
-import { Editor, Path, Range, Transforms } from 'slate'
 import { createDefaultElement } from '../../elements'
 import { GlobalQueries } from '../global-queries'
+import { Editor, Path, Range, Transforms } from 'slate'
 
 export function insertExitBreak(editor: Editor) {
   if (!editor.selection) return

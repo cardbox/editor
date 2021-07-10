@@ -1,5 +1,5 @@
-import { Editor, Node } from 'slate'
 import { ElementFromType, ElementType } from '../../types'
+import { Editor, Node } from 'slate'
 
 export function block<T extends ElementType>(editor: Editor, type?: T | T[]) {
   return (node: Node): node is ElementFromType<T> => {

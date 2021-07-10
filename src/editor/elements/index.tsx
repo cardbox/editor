@@ -1,4 +1,4 @@
-import { CreateDefaultElement, DefaultElementType } from './elements/types'
+import './elements/code/code'
 import { createHeading1Element } from './elements/heading-1'
 import {
   createOrderedListElement,
@@ -6,7 +6,7 @@ import {
   createListItemElement,
 } from './elements/list'
 import { createParagraphElement } from './elements/paragraph'
-import './elements/code/code'
+import { CreateDefaultElement, DefaultElementType } from './elements/types'
 
 const DEFAULT_ELEMENT_TYPE: DefaultElementType = 'paragraph'
 const createDefaultElement: CreateDefaultElement = createParagraphElement

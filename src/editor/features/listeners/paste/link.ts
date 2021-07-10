@@ -1,7 +1,7 @@
-import { Range } from 'slate'
 import { GlobalTransforms } from '../../../lib/global-transforms'
 import { REGEX } from '../../../lib/util'
 import { PasteListener } from './types'
+import { Range } from 'slate'
 
 export const link: PasteListener = ({ editor, event }) => {
   if (!editor.selection) return

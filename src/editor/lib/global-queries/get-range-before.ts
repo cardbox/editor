@@ -1,6 +1,6 @@
-import { Editor, Location, Range } from 'slate'
 import { getPointBefore } from './get-point-before'
 import { getPointFromLocation } from './get-point-from-location'
+import { Editor, Location, Range } from 'slate'
 
 interface Options {
   at?: Location

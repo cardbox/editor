@@ -1,5 +1,5 @@
-import { Editor, Range, Transforms } from 'slate'
 import { GlobalQueries } from '../global-queries'
+import { Editor, Range, Transforms } from 'slate'
 
 export const deleteBackward = (editor: Editor) => {
   if (!editor.selection) return

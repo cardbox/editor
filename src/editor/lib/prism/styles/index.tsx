@@ -1,5 +1,5 @@
-import React from 'react'
 import { NordTheme } from './nord.theme'
+import React from 'react'
 
 export const GlobalStyles = () => {
   return (

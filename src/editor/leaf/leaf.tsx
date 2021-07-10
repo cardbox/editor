@@ -1,5 +1,5 @@
-import { Text } from 'slate'
 import { LeafModification } from '../types'
+import { Text } from 'slate'
 
 export function createLeaf({
   text,

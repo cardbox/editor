@@ -1,4 +1,3 @@
-import { Editor, Range, Transforms } from 'slate'
 import {
   createListElement,
   createListItemElement,
@@ -8,6 +7,7 @@ import { ParagraphElement } from '../../../elements/types'
 import { GlobalMatchers } from '../../../lib/global-matchers'
 import { GlobalQueries } from '../../../lib/global-queries'
 import { ListTransforms } from '../../list-interaction'
+import { Editor, Range, Transforms } from 'slate'
 
 export function indent(editor: Editor) {
   if (!editor.selection) return

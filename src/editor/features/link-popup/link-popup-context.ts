@@ -1,7 +1,7 @@
+import { useForceUpdate } from '../../lib/hooks/use-force-update'
 import { createContext, useContext, useRef, useState } from 'react'
 import { Range } from 'slate'
 import { Instance } from 'tippy.js'
-import { useForceUpdate } from '../../lib/hooks/use-force-update'
 
 export function useNewLinkPopupState() {
   const [href, setHref] = useState('')

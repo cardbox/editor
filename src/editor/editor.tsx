@@ -1,14 +1,14 @@
-import React from 'react'
-import { RootProvider } from './root-provider'
-import { EditorProps, NormalizedEditorProps } from './types/editor-props'
 import { EditableEditor } from './editable-editor'
-import { ReadonlyEditor } from './readonly-editor'
-import { RootGlobalStyles } from './styles'
-import { TippyGlobalStyles } from './lib/tippy'
-import { PrismGlobalStyles } from './lib/prism'
+import './features/code'
 import './features/list-interaction'
 import './features/paragraph-interaction'
-import './features/code'
+import { PrismGlobalStyles } from './lib/prism'
+import { TippyGlobalStyles } from './lib/tippy'
+import { ReadonlyEditor } from './readonly-editor'
+import { RootProvider } from './root-provider'
+import { RootGlobalStyles } from './styles'
+import { EditorProps, NormalizedEditorProps } from './types/editor-props'
+import React from 'react'
 
 function normalizeProps(dirty: EditorProps): NormalizedEditorProps {
   const normalized: Partial<NormalizedEditorProps> = { ...dirty }

@@ -1,9 +1,9 @@
-import React from 'react'
-import { Text } from 'slate'
-import { RenderElementProps } from 'slate-react'
 import { ALL_LEAF_MODIFICATIONS } from '../../constants'
 import { ElementSettings } from '../../types'
 import { ParagraphElement } from './paragraph.types'
+import React from 'react'
+import { Text } from 'slate'
+import { RenderElementProps } from 'slate-react'
 
 export const createParagraphElement = (
   children: Text[] = [{ text: '' }]

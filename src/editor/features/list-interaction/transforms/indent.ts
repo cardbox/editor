@@ -1,7 +1,7 @@
-import { Editor, Location, Range, Transforms } from 'slate'
 import { createListElement } from '../../../elements/elements/list'
 import { LocalQueries } from '../queries'
 import { mergeSiblings } from './merge-siblings'
+import { Editor, Location, Range, Transforms } from 'slate'
 
 interface Options {
   at?: Location

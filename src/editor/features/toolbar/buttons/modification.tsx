@@ -1,10 +1,10 @@
-import React, { CSSProperties, MouseEventHandler, ReactNode } from 'react'
-import { Editor, Text } from 'slate'
 import { Action, actions } from '../../../actions'
-import { useEditor } from '../../../lib/hooks/slate/use-editor'
+import { useEditor } from '../../../lib/hooks/slate'
 import { useUI } from '../../../lib/hooks/use-ui'
 import { NoopEvents } from '../../../lib/util'
 import { ToolbarButton } from './common'
+import React, { CSSProperties, MouseEventHandler, ReactNode } from 'react'
+import { Editor, Text } from 'slate'
 
 type Mark = keyof Omit<Text, 'text'>
 

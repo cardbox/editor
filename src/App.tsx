@@ -1,7 +1,7 @@
 /* eslint-disable sonarjs/no-duplicate-string */
+import { Editor, EditorValue } from './editor'
 import React, { useEffect, useState } from 'react'
 import { Element, Text } from 'slate'
-import { Editor, EditorValue } from './editor'
 
 const initialState: EditorValue = [
   {

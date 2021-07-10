@@ -1,5 +1,5 @@
-import { Editor } from 'slate'
 import { LeafModification } from '../../types'
+import { Editor } from 'slate'
 
 export function toggleModification(editor: Editor, property: LeafModification) {
   const marks = Editor.marks(editor)

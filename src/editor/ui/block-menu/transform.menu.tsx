@@ -1,14 +1,13 @@
-import React, { useMemo } from 'react'
-import { Element, Transforms } from 'slate'
-import { ReactEditor } from 'slate-react'
 import { ELEMENT_SETTINGS_MAPPER } from '../../elements/settings'
-import { useEditor } from '../../lib/hooks/slate/use-editor'
-import { useEditorNodeRef } from '../../lib/hooks/slate/use-editor-node-ref'
+import { useEditorNodeRef, useEditor } from '../../lib/hooks/slate'
 import { ElementType } from '../../types'
 import { useControlsState } from '../controls'
 import { MenuWrapper } from './menu-wrapper'
-import { ContentProps, MenuAdditionalProps, SvgComponent } from './types'
 import { BlockMenuContent } from './shared'
+import { ContentProps, MenuAdditionalProps, SvgComponent } from './types'
+import React, { useMemo } from 'react'
+import { Element, Transforms } from 'slate'
+import { ReactEditor } from 'slate-react'
 
 export const TransformMenu = (props: MenuAdditionalProps) => (
   <MenuWrapper

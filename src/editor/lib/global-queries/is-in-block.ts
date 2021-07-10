@@ -1,7 +1,7 @@
-import { Editor, Location } from 'slate'
 import { ElementType } from '../../types'
 import { GlobalMatchers } from '../global-matchers'
 import { getAbove } from './get-above'
+import { Editor, Location } from 'slate'
 
 interface Options {
   at?: Location

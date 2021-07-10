@@ -1,9 +1,9 @@
-import { Editor, Element, Node } from 'slate'
 import { ElementType } from '../../types'
 import { block } from './block'
 import { childOf } from './child-of'
 import { equals } from './equals'
 import { notEquals } from './not-equals'
+import { Editor, Element, Node } from 'slate'
 
 export class Builder {
   editor: Editor

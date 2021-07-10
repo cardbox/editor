@@ -1,5 +1,5 @@
-import { Editor, Element, Node, Path, Transforms } from 'slate'
 import { GlobalMatchers } from '../../../lib/global-matchers'
+import { Editor, Element, Node, Path, Transforms } from 'slate'
 
 type ChildOf<T extends Element> = T['children'][number]
 

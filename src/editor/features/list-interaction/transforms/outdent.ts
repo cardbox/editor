@@ -1,10 +1,10 @@
-import { Editor, Location, Node, Path, Range, Transforms } from 'slate'
 import { createListElement } from '../../../elements/elements/list'
 import { GlobalMatchers } from '../../../lib/global-matchers'
 import { LocalQueries } from '../queries'
 import { FullInfo } from '../queries/info'
 import { mergeSiblings } from './merge-siblings'
 import { moveChildren } from './move-children'
+import { Editor, Location, Node, Path, Range, Transforms } from 'slate'
 
 interface Options {
   at?: Location

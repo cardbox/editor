@@ -1,8 +1,8 @@
-import { Transforms } from 'slate'
 import { ActionParams } from '../../../actions'
 import { ActionCallback } from '../../../lib/action-controller/types'
 import { GlobalMatchers } from '../../../lib/global-matchers'
 import { GlobalQueries } from '../../../lib/global-queries'
+import { Transforms } from 'slate'
 
 export const copyAll: ActionCallback<ActionParams> = ({ editor, event }) => {
   const code = GlobalQueries.getAbove(editor, {

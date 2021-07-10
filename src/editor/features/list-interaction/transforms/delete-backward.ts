@@ -1,7 +1,7 @@
-import { Editor, Range } from 'slate'
 import { GlobalMatchers } from '../../../lib/global-matchers'
 import { GlobalQueries } from '../../../lib/global-queries'
 import { outdent } from './outdent'
+import { Editor, Range } from 'slate'
 
 interface TransformResult {
   handled: boolean

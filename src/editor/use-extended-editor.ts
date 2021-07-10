@@ -1,7 +1,3 @@
-import { useMemo } from 'react'
-import { createEditor, Text } from 'slate'
-import { withHistory } from 'slate-history'
-import { withReact } from 'slate-react'
 import {
   createListItemElement,
   createOrderedListElement,
@@ -11,6 +7,10 @@ import {
 import { createCodeElement } from './elements/elements/code'
 import { extensions } from './features/extensions'
 import { extend, Extension } from './lib/extensions/extend'
+import { useMemo } from 'react'
+import { createEditor, Text } from 'slate'
+import { withHistory } from 'slate-history'
+import { withReact } from 'slate-react'
 
 const defaultExtensions: Extension[] = [
   withReact,

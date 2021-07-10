@@ -1,5 +1,5 @@
-import { Editor, Node, Point, Transforms } from 'slate'
 import { GlobalMatchers } from '../../../lib/global-matchers'
+import { Editor, Node, Point, Transforms } from 'slate'
 
 const INDENT_SIZE = 2
 

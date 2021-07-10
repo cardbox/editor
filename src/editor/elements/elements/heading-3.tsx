@@ -1,9 +1,8 @@
+import { ElementSettings } from '../../types'
+import { Heading3Element } from './heading-3.types'
 import React from 'react'
 import { Text } from 'slate'
 import { RenderElementProps } from 'slate-react'
-import { ElementSettings } from '../../types'
-
-import { Heading3Element } from './heading-3.types'
 
 export const createHeading3Element = (
   children: Text[] = [{ text: '' }]

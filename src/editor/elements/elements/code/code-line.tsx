@@ -1,8 +1,8 @@
+import { ElementSettings } from '../../../types'
+import { CodeLineElement } from './types'
 import React from 'react'
 import { Text } from 'slate'
 import { RenderElementProps } from 'slate-react'
-import { ElementSettings } from '../../../types'
-import { CodeLineElement } from './types'
 
 export const createCodeLineElement = (
   children: Text[] = [{ text: '' }]

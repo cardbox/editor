@@ -1,5 +1,5 @@
-import { Editor } from 'slate'
 import { GlobalMatchers } from '../../lib/global-matchers'
+import { Editor } from 'slate'
 
 export function listNormalization(editor: Editor): Editor {
   const { normalizeNode } = editor

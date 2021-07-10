@@ -1,6 +1,6 @@
-import { Editor, Path, Range, Transforms } from 'slate'
 import { GlobalMatchers } from '../../../lib/global-matchers'
 import { GlobalQueries } from '../../../lib/global-queries'
+import { Editor, Path, Range, Transforms } from 'slate'
 
 const INDENT_SIZE = 2
 

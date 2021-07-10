@@ -1,5 +1,5 @@
-import { Element } from 'slate'
 import { LeafModification } from './leaf'
+import { Element } from 'slate'
 
 export type ElementType = Element['type']
 

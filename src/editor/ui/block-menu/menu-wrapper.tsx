@@ -1,9 +1,9 @@
-import clsx from 'clsx'
-import React, { useState } from 'react'
-import Tippy from '@tippyjs/react'
 import { TIPPY_THEMES } from '../../lib/tippy'
 import { useControlsState } from '../controls'
 import { ContentProps, MenuAdditionalProps } from './types'
+import Tippy from '@tippyjs/react'
+import clsx from 'clsx'
+import React, { useState } from 'react'
 
 type SvgComponent = (props: React.SVGProps<SVGSVGElement>) => JSX.Element
 

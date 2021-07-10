@@ -1,10 +1,10 @@
-import React from 'react'
-import { Element } from 'slate'
-import { RenderElementProps } from 'slate-react'
 import { ALL_LEAF_MODIFICATIONS } from '../../../constants'
 import { ElementSettings } from '../../../types'
 import { createParagraphElement } from '../paragraph'
 import { ListItemElement } from './types'
+import React from 'react'
+import { Element } from 'slate'
+import { RenderElementProps } from 'slate-react'
 
 export const createListItemElement = (
   children: Element[] = [createParagraphElement()]

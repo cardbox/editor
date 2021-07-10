@@ -1,9 +1,9 @@
-import React from 'react'
-import { RenderElementProps } from 'slate-react'
 import { ALL_LEAF_MODIFICATIONS } from '../../../constants'
 import { ElementSettings } from '../../../types'
 import { createListItemElement } from './list-item'
 import { ListItemElement, UnorderedListElement } from './types'
+import React from 'react'
+import { RenderElementProps } from 'slate-react'
 
 export const createUnorderedListElement = (
   children: ListItemElement[] = [createListItemElement()]

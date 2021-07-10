@@ -1,6 +1,6 @@
+import { useForceUpdate } from '../../lib/hooks/use-force-update'
 import { createContext, useContext, useRef } from 'react'
 import { Instance } from 'tippy.js'
-import { useForceUpdate } from '../../lib/hooks/use-force-update'
 
 export function useNewToolbarState() {
   return {

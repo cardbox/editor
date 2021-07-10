@@ -1,22 +1,22 @@
-import clsx from 'clsx'
-import React from 'react'
-import { Element } from 'slate'
-import { ReactEditor, RenderElementProps, useReadOnly } from 'slate-react'
-import { useEditor } from './lib/hooks/slate/use-editor'
-import { ElementType } from './types'
-import { ParagraphComponent } from './elements/elements/paragraph'
+import { CodeComponent, CodeLineComponent } from './elements/elements/code'
 import { Heading1Component } from './elements/elements/heading-1'
+import { Heading2Component } from './elements/elements/heading-2'
+import { Heading3Component } from './elements/elements/heading-3'
 import {
   ListItemComponent,
   OrderedListComponent,
   UnorderedListComponent,
 } from './elements/elements/list'
-import { CodeComponent, CodeLineComponent } from './elements/elements/code'
-import { Controls } from './ui/controls'
-import { BlockMenu } from './ui/block-menu'
+import { ParagraphComponent } from './elements/elements/paragraph'
 import { CodeControls } from './features/code'
-import { Heading2Component } from './elements/elements/heading-2'
-import { Heading3Component } from './elements/elements/heading-3'
+import { useEditor } from './lib/hooks/slate'
+import { ElementType } from './types'
+import { BlockMenu } from './ui/block-menu'
+import { Controls } from './ui/controls'
+import clsx from 'clsx'
+import React from 'react'
+import { Element } from 'slate'
+import { ReactEditor, RenderElementProps, useReadOnly } from 'slate-react'
 
 type ElementComponentMapper = {
   [KElementType in ElementType]: (props: RenderElementProps) => JSX.Element
@@ -34,8 +34,8 @@ const ELEMENT_COMPONENT_MAPPER: ElementComponentMapper = {
   'code-line': CodeLineComponent,
 }
 
-export function renderElement(props: RenderElementProps) {
-  return <ElementStructure {...props} />
+export function renderElement({ children, ...rest }: RenderElementProps) {
+  return <ElementStructure {...rest}>{children}</ElementStructure>
 }
 
 function usePath(element: Element) {

@@ -1,4 +1,3 @@
-import { Editor, Element, Location, NodeEntry, Path } from 'slate'
 import {
   ListElement,
   ListItemElement,
@@ -6,6 +5,7 @@ import {
 import { ParagraphElement } from '../../../elements/types'
 import { GlobalMatchers } from '../../../lib/global-matchers'
 import { GlobalQueries } from '../../../lib/global-queries'
+import { Editor, Element, Location, NodeEntry, Path } from 'slate'
 
 interface Options {
   at?: Location

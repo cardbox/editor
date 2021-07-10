@@ -1,5 +1,5 @@
-import { Editor, Transforms } from 'slate'
 import { GlobalMatchers } from '../../../lib/global-matchers'
+import { Editor, Transforms } from 'slate'
 
 const INDENT_SIZE = 2
 const INDENTATION = ' '.repeat(INDENT_SIZE)

@@ -1,9 +1,9 @@
-import React from 'react'
-import { Extension } from './lib/extensions/extend'
-import { useExtendedEditor } from './use-extended-editor'
+import { LinkPopupContext, useNewLinkPopupState } from './features/link-popup'
 import { ToolbarContext, useNewToolbarState } from './features/toolbar'
 import { EditorContext } from './lib/editor-context'
-import { LinkPopupContext, useNewLinkPopupState } from './features/link-popup'
+import { Extension } from './lib/extensions/extend'
+import { useExtendedEditor } from './use-extended-editor'
+import React from 'react'
 
 export const RootProvider = ({
   children,

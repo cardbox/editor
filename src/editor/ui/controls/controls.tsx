@@ -1,10 +1,10 @@
+import { useEditor } from '../../lib/hooks/slate'
+import { ControlsProvider } from './context'
+import { BlockMeta, ControlsState } from './types'
 import clsx from 'clsx'
 import React, { useState } from 'react'
 import { Editor, Element, Range } from 'slate'
 import { useReadOnly, useSelected } from 'slate-react'
-import { useEditor } from '../../lib/hooks/slate/use-editor'
-import { ControlsProvider } from './context'
-import { BlockMeta, ControlsState } from './types'
 
 interface ControlsProps {
   element: Element

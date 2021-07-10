@@ -1,7 +1,7 @@
-import React, { ReactElement, ReactHTML } from 'react'
-import { RenderLeafProps } from 'slate-react'
 import { GlobalQueries } from './lib/global-queries'
 import { LeafModification } from './types'
+import React, { ReactElement, ReactHTML } from 'react'
+import { RenderLeafProps } from 'slate-react'
 
 type ElementMapper = Record<LeafModification, keyof ReactHTML>
 
@@ -64,6 +64,6 @@ const LeafComponent = (props: RenderLeafProps) => {
   return buildElement(props)
 }
 
-export function renderLeaf(props: RenderLeafProps) {
-  return <LeafComponent {...props} />
+export function renderLeaf({ children, ...rest }: RenderLeafProps) {
+  return <LeafComponent {...rest}>{children}</LeafComponent>
 }

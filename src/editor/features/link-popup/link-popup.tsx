@@ -1,3 +1,9 @@
+import { GlobalTransforms } from '../../lib/global-transforms'
+import { useEditorNodeRef, useEditor } from '../../lib/hooks/slate'
+import { TIPPY_THEMES } from '../../lib/tippy'
+import { REGEX } from '../../lib/util'
+import { useLinkPopupActions, useLinkPopupState } from './link-popup-context'
+import { Input, InputWrapper, LinkIcon, ClearIcon, Error } from './styles'
 import React, {
   ChangeEvent,
   FormEvent,
@@ -7,13 +13,6 @@ import React, {
 } from 'react'
 import ReactDOM from 'react-dom'
 import tippy from 'tippy.js'
-import { useEditorNodeRef } from '../../lib/hooks/slate/use-editor-node-ref'
-import { GlobalTransforms } from '../../lib/global-transforms'
-import { useEditor } from '../../lib/hooks/slate/use-editor'
-import { REGEX } from '../../lib/util'
-import { TIPPY_THEMES } from '../../lib/tippy'
-import { useLinkPopupActions, useLinkPopupState } from './link-popup-context'
-import { Input, InputWrapper, LinkIcon, ClearIcon, Error } from './styles'
 
 /*
  * We use this element as the React Portal container

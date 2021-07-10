@@ -1,6 +1,6 @@
-import { Text } from 'slate'
 import { ALL_LEAF_MODIFICATIONS } from '../../constants'
 import { LeafModification } from '../../types'
+import { Text } from 'slate'
 
 export function leafModifications(
   leaf: Text,

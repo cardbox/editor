@@ -1,6 +1,6 @@
-import { Editor, NodeEntry, Path, Transforms } from 'slate'
 import { ListElement } from '../../../elements/elements/list/types'
 import { ElementType } from '../../../types'
+import { Editor, NodeEntry, Path, Transforms } from 'slate'
 
 interface Options {
   at?: Path

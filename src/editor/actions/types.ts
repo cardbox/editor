@@ -1,6 +1,6 @@
-import { Editor } from 'slate'
 import { ActionBaseParams } from '../lib/action-controller/types'
 import { UI } from '../lib/hooks/use-ui.types'
+import { Editor } from 'slate'
 
 export type Action =
   | 'delete-backward'

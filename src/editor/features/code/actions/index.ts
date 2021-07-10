@@ -1,12 +1,12 @@
-import { Editor } from 'slate'
 import { actions } from '../../../actions'
 import { GlobalQueries } from '../../../lib/global-queries'
-import { insertExitBreak } from './insert-exit-break'
 import { copyAll } from './copy-all'
+import { exitBlock } from './exit-block'
 import { indent } from './indent'
+import { insertExitBreak } from './insert-exit-break'
 import { insertSoftBreak } from './insert-soft-break'
 import { outdent } from './outdent'
-import { exitBlock } from './exit-block'
+import { Editor } from 'slate'
 
 function match({ editor }: { editor: Editor }) {
   return GlobalQueries.isInBlock(editor, 'code')

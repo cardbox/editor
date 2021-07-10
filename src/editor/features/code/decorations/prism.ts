@@ -1,9 +1,9 @@
-import Prism from 'prismjs'
-import { Editor, Node, NodeEntry, Range } from 'slate'
 import { CodeElement } from '../../../elements/types'
 import { Decorator } from '../../../lib/decoration-controller'
 import { GlobalMatchers } from '../../../lib/global-matchers'
 import { GlobalQueries } from '../../../lib/global-queries'
+import Prism from 'prismjs'
+import { Editor, Node, NodeEntry, Range } from 'slate'
 
 export const prism: Decorator = (editor: Editor, entry: NodeEntry<Node>) => {
   const [node, path] = entry

@@ -1,8 +1,8 @@
-import React from 'react'
-import { RenderElementProps } from 'slate-react'
 import { ElementSettings } from '../../../types'
 import { createCodeLineElement } from './code-line'
 import { CodeElement, CodeLineElement } from './types'
+import React from 'react'
+import { RenderElementProps } from 'slate-react'
 
 export const createCodeElement = (
   language = 'tsx',
