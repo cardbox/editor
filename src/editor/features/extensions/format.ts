@@ -1,6 +1,6 @@
 import { GlobalQueries } from '../../lib/global-queries'
 import { GlobalTransforms } from '../../lib/global-transforms'
-import { Editor, Range, Transforms, Element, Text } from 'slate'
+import { Editor, Element, Range, Text, Transforms } from 'slate'
 
 interface SkipParams {
   block: Element

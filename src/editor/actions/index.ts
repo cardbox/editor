@@ -1,4 +1,4 @@
-import { createActionController } from '../lib/action-controller'
+import { ActionsRegistry } from '../actions-registry'
 import { copy } from './copy'
 import { copyAll } from './copy-all'
 import { deleteBackward } from './delete-backward'
@@ -14,25 +14,19 @@ import { makeUnderlined } from './make-underlined'
 import { outdent } from './outdent'
 import { paste } from './paste'
 import { setLinkForText } from './set-link-for-text'
-import { Action, ActionParams } from './types'
 
-const actions = createActionController<Action, ActionParams>()
-
-actions.register('delete-backward', deleteBackward)
-actions.register('insert-soft-break', insertSoftBreak)
-actions.register('insert-exit-break', insertExitBreak)
-actions.register('indent', indent)
-actions.register('outdent', outdent)
-actions.register('get-out-the-leaf', getOutTheLeaf)
-actions.register('make-bold', makeBold)
-actions.register('make-italic', makeItalic)
-actions.register('make-underlined', makeUnderlined)
-actions.register('make-inline-code', makeInlineCode)
-actions.register('set-link-for-text', setLinkForText)
-actions.register('copy', copy)
-actions.register('copy-all', copyAll)
-actions.register('paste', paste)
-actions.register('exit-block', exitBlock)
-
-export { actions }
-export * from './types'
+ActionsRegistry.register('delete-backward', deleteBackward)
+ActionsRegistry.register('insert-soft-break', insertSoftBreak)
+ActionsRegistry.register('insert-exit-break', insertExitBreak)
+ActionsRegistry.register('indent', indent)
+ActionsRegistry.register('outdent', outdent)
+ActionsRegistry.register('get-out-the-leaf', getOutTheLeaf)
+ActionsRegistry.register('make-bold', makeBold)
+ActionsRegistry.register('make-italic', makeItalic)
+ActionsRegistry.register('make-underlined', makeUnderlined)
+ActionsRegistry.register('make-inline-code', makeInlineCode)
+ActionsRegistry.register('set-link-for-text', setLinkForText)
+ActionsRegistry.register('copy', copy)
+ActionsRegistry.register('copy-all', copyAll)
+ActionsRegistry.register('paste', paste)
+ActionsRegistry.register('exit-block', exitBlock)

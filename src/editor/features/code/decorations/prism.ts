@@ -1,7 +1,7 @@
-import { CodeElement } from '../../../elements/types'
 import { Decorator } from '../../../lib/decoration-controller'
 import { GlobalMatchers } from '../../../lib/global-matchers'
 import { GlobalQueries } from '../../../lib/global-queries'
+import { CodeElement } from '../elements'
 import Prism from 'prismjs'
 import { Editor, Node, NodeEntry, Range } from 'slate'
 

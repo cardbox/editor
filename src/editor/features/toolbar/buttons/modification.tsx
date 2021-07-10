@@ -1,4 +1,4 @@
-import { Action, actions } from '../../../actions'
+import { Action, ActionsRegistry } from '../../../actions-registry'
 import { useEditor } from '../../../lib/hooks/slate'
 import { useUI } from '../../../lib/hooks/use-ui'
 import { NoopEvents } from '../../../lib/util'
@@ -36,7 +36,7 @@ export const ToolbarMarkButton = ({
   const handleClick: MouseEventHandler<Element> = (event) => {
     event.preventDefault()
 
-    actions.execute(action, {
+    ActionsRegistry.execute(action, {
       editor,
       event: NoopEvents.keyboard(),
       ui,

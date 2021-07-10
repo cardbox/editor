@@ -1,6 +1,6 @@
-import { ELEMENT_SETTINGS_MAPPER } from '../../elements/settings'
-import { useEditorNodeRef, useEditor } from '../../lib/hooks/slate'
-import { ElementType } from '../../types'
+import { useEditor, useEditorNodeRef } from '../../lib/hooks/slate'
+import { SettingsRegistry } from '../../settings-registry'
+import { ElementType } from '../../shared/types'
 import { useControlsState } from '../controls'
 import { MenuWrapper } from './menu-wrapper'
 import { BlockMenuContent } from './shared'
@@ -46,7 +46,7 @@ const AddMenuContent = ({ hide }: ContentProps) => {
   const path = usePath(element)
 
   const add = (type: ElementType) => {
-    const settings = ELEMENT_SETTINGS_MAPPER[type]
+    const settings = SettingsRegistry.get(type)
     Transforms.removeNodes(editor, { at: path })
     Transforms.insertNodes(editor, settings.create(), {
       at: path,
@@ -57,7 +57,7 @@ const AddMenuContent = ({ hide }: ContentProps) => {
   }
 
   const variants = useMemo(() => {
-    return Object.values(ELEMENT_SETTINGS_MAPPER)
+    return SettingsRegistry.getAll()
       .filter((settings) => settings.canBeAdded !== false)
       .map(({ type, name, code }) => {
         return (

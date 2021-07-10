@@ -1,4 +1,3 @@
-import { createDefaultElement } from '../../elements'
 import { GlobalQueries } from '../global-queries'
 import { Editor, Path, Range, Transforms } from 'slate'
 
@@ -21,12 +20,20 @@ export function insertExitBreak(editor: Editor) {
   })
 
   if (isEnd) {
-    Transforms.insertNodes(editor, createDefaultElement(), { select: true })
+    Transforms.insertNodes(
+      editor,
+      { type: 'paragraph', children: [{ text: '' }] },
+      { select: true }
+    )
     return
   }
 
   if (isStart) {
-    Transforms.insertNodes(editor, createDefaultElement(), { select: false })
+    Transforms.insertNodes(
+      editor,
+      { type: 'paragraph', children: [{ text: '' }] },
+      { select: false }
+    )
     Transforms.select(
       editor,
       Editor.point(editor, Path.next(blockPath), { edge: 'start' })

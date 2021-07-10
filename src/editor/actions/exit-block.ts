@@ -1,4 +1,4 @@
+import { ActionParams } from '../actions-registry/types'
 import { ActionCallback } from '../lib/action-controller/types'
-import { ActionParams } from './types'
 
 export const exitBlock: ActionCallback<ActionParams> = () => {}

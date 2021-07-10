@@ -1,8 +1,8 @@
-import { ActionParams } from '../../../actions'
-import { createDefaultElement } from '../../../elements'
+import { ActionParams } from '../../../actions-registry'
 import { ActionCallback } from '../../../lib/action-controller/types'
 import { GlobalMatchers } from '../../../lib/global-matchers'
 import { GlobalQueries } from '../../../lib/global-queries'
+import { createParagraphElement } from '../../paragraph'
 import { Path, Transforms } from 'slate'
 
 export const exitBlock: ActionCallback<ActionParams> = ({ editor, event }) => {
@@ -18,7 +18,8 @@ export const exitBlock: ActionCallback<ActionParams> = ({ editor, event }) => {
   const [, codePath] = code
 
   event.preventDefault()
-  Transforms.insertNodes(editor, createDefaultElement(), {
+
+  Transforms.insertNodes(editor, createParagraphElement(), {
     at: Path.next(codePath),
     select: true,
   })

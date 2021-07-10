@@ -1,4 +1,4 @@
-import { ElementType } from '../../types'
+import { ElementType } from '../../shared/types'
 import { GlobalMatchers } from '../global-matchers'
 import { getAbove } from './get-above'
 import { Editor, Location } from 'slate'

@@ -1,4 +1,4 @@
-import { useLinkPopupActions } from '../../features/link-popup'
+import { useLinkPopupActions } from '../../features/link'
 import { useToolbarActions } from '../../features/toolbar'
 
 export function useUI() {
