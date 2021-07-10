@@ -28,7 +28,7 @@ export type ActionKeybinds<TAction extends string> = {
 }
 
 export type OptionalActionKeybinds<TAction extends string> = {
-  [KAction in TAction]: string | string[]
+  [KAction in TAction]?: string | string[]
 }
 
 export interface ActionParams extends ActionBaseParams {

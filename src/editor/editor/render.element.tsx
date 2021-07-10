@@ -8,6 +8,7 @@ import {
   Heading2Component,
   Heading3Component,
 } from '../features/headings'
+import { BlockMenu, Controls } from '../features/left-controls'
 import {
   ListItemComponent,
   OrderedListComponent,
@@ -16,8 +17,6 @@ import {
 import { ParagraphComponent } from '../features/paragraph'
 import { useEditor } from '../lib/hooks/slate'
 import { ElementType } from '../shared/types'
-import { BlockMenu } from '../ui/block-menu'
-import { Controls } from '../ui/controls'
 import clsx from 'clsx'
 import React from 'react'
 import { Element } from 'slate'

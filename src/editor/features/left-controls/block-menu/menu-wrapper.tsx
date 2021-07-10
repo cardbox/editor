@@ -1,4 +1,4 @@
-import { TIPPY_THEMES } from '../../lib/tippy'
+import { TIPPY_THEMES } from '../../../lib/tippy'
 import { useControlsState } from '../controls'
 import { ContentProps, MenuAdditionalProps } from './types'
 import Tippy from '@tippyjs/react'

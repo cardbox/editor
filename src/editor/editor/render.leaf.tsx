@@ -1,5 +1,5 @@
-import { TextModification } from '../features/text-modifications'
 import { GlobalQueries } from '../lib/global-queries'
+import { TextModification } from '../shared/types'
 import React, { ReactElement, ReactHTML } from 'react'
 import { RenderLeafProps } from 'slate-react'
 
@@ -19,6 +19,7 @@ function isCodeEmptyLine(children: any): boolean {
 }
 
 function buildElement({ leaf, children, attributes }: RenderLeafProps) {
+  // fix double empty line copying problem
   if (isCodeEmptyLine(children))
     return (
       <span data-slate-leaf="true">

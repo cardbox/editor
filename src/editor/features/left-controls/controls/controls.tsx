@@ -1,4 +1,4 @@
-import { useEditor } from '../../lib/hooks/slate'
+import { useEditor } from '../../../lib/hooks/slate'
 import { ControlsProvider } from './context'
 import { BlockMeta, ControlsState } from './types'
 import clsx from 'clsx'

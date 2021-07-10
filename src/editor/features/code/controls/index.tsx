@@ -1,7 +1,9 @@
 import { useEditor, usePath } from '../../../lib/hooks/slate'
-import { BlockMenuContent } from '../../../ui/block-menu'
-import { BlockMenuSection } from '../../../ui/block-menu/types'
-import { useControlsState } from '../../../ui/controls'
+import {
+  BlockMenuContent,
+  BlockMenuSection,
+  useControlsState,
+} from '../../left-controls'
 import { PRISM_LANGUAGES } from '../constants'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { Transforms } from 'slate'
