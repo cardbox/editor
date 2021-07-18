@@ -1,4 +1,3 @@
-import { keybinds } from '../features/keybinds'
 import { useEditor } from '../lib/hooks/slate'
 import { useUI } from '../lib/hooks/use-ui'
 import {
@@ -8,6 +7,7 @@ import {
   OptionalActionKeybinds,
   PublicAction,
 } from '../registries/actions'
+import { keybinds } from '../registries/keybinds'
 import React, { useCallback, useEffect } from 'react'
 
 type AllKeybinds = ActionKeybinds<Action>
