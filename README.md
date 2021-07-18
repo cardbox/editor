@@ -94,4 +94,4 @@ Write ``` to create the code block.
 
 ## Architecture
 
-[Excalidraw](https://excalidraw.com/#json=4811335044956160,DJxYluN2Ua3_wl756Fv62A)
+[Excalidraw](https://excalidraw.com/#json=6706229653012480,_5pkV-mh3Dsc5O_e3czi6g)
