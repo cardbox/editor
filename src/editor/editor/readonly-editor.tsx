@@ -1,5 +1,5 @@
-import { decorations } from '../decorations'
 import { useEditor } from '../lib/hooks/slate'
+import { decorations } from '../registries/decorations'
 import { renderElement } from './render.element'
 import { renderLeaf } from './render.leaf'
 import { StyledEditor } from './styles'

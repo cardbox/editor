@@ -1,4 +1,4 @@
-import { createDecorationController } from '../lib/decoration-controller'
+import { createDecorationController } from '../../lib/decoration-controller'
 
 /*
  * It goes in 'decorate' prop of Editable
