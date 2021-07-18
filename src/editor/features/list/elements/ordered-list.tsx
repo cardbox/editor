@@ -1,4 +1,4 @@
-import { SettingsRegistry } from '../../../settings-registry'
+import { SettingsRegistry } from '../../../registries/settings'
 import {
   LINK_MODIFICATION,
   TEXT_MODIFICATIONS,

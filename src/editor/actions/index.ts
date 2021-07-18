@@ -1,4 +1,4 @@
-import { ActionsRegistry } from '../actions-registry'
+import { ActionsRegistry } from '../registries/actions'
 import { copy } from './copy'
 import { copyAll } from './copy-all'
 import { deleteBackward } from './delete-backward'

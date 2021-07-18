@@ -1,7 +1,7 @@
-import { ActionParams } from '../../../actions-registry'
 import { ActionCallback } from '../../../lib/action-controller/types'
 import { GlobalMatchers } from '../../../lib/global-matchers'
 import { GlobalQueries } from '../../../lib/global-queries'
+import { ActionParams } from '../../../registries/actions'
 import { createParagraphElement } from '../../paragraph'
 import { Path, Transforms } from 'slate'
 

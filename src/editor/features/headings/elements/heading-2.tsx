@@ -1,4 +1,4 @@
-import { SettingsRegistry } from '../../../settings-registry'
+import { SettingsRegistry } from '../../../registries/settings'
 import { Heading2Element } from './types'
 import React from 'react'
 import { Text } from 'slate'

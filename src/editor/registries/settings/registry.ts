@@ -1,4 +1,4 @@
-import { createRegistry } from '../lib/registry'
+import { createRegistry } from '../../lib/registry'
 import { ElementSettings } from './types'
 import { Element } from 'slate'
 

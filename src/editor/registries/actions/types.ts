@@ -1,5 +1,5 @@
-import { ActionBaseParams } from '../lib/action-controller/types'
-import { UI } from '../lib/hooks/use-ui.types'
+import { ActionBaseParams } from '../../lib/action-controller/types'
+import { UI } from '../../lib/hooks/use-ui.types'
 import { Editor } from 'slate'
 
 export type PublicAction =

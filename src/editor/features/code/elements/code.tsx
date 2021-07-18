@@ -1,4 +1,4 @@
-import { SettingsRegistry } from '../../../settings-registry'
+import { SettingsRegistry } from '../../../registries/settings'
 import { CODE_MODIFICATION } from '../../../shared/constants'
 import { createCodeLineElement } from './code-line'
 import { CodeElement, CodeLineElement } from './types'

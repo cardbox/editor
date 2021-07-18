@@ -1,7 +1,7 @@
-import { Action, ActionsRegistry } from '../../../actions-registry'
 import { useEditor } from '../../../lib/hooks/slate'
 import { useUI } from '../../../lib/hooks/use-ui'
 import { NoopEvents } from '../../../lib/util'
+import { Action, ActionsRegistry } from '../../../registries/actions'
 import { ToolbarButton } from './common'
 import React, { CSSProperties, MouseEventHandler, ReactNode } from 'react'
 import { Editor, Text } from 'slate'

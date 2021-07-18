@@ -1,13 +1,13 @@
+import { keybinds } from '../features/keybinds'
+import { useEditor } from '../lib/hooks/slate'
+import { useUI } from '../lib/hooks/use-ui'
 import {
   Action,
   ActionKeybinds,
   ActionsRegistry,
   OptionalActionKeybinds,
   PublicAction,
-} from '../actions-registry'
-import { keybinds } from '../features/keybinds'
-import { useEditor } from '../lib/hooks/slate'
-import { useUI } from '../lib/hooks/use-ui'
+} from '../registries/actions'
 import React, { useCallback, useEffect } from 'react'
 
 type AllKeybinds = ActionKeybinds<Action>

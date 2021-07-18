@@ -1,5 +1,5 @@
-import { OptionalActionKeybinds, PublicAction } from '../actions-registry'
 import { Extension } from '../lib/extensions/extend'
+import { OptionalActionKeybinds, PublicAction } from '../registries/actions'
 import { EditorValue } from '../shared/types'
 
 interface Common {

@@ -1,5 +1,5 @@
-import { ActionsRegistry } from '../../../actions-registry'
 import { GlobalQueries } from '../../../lib/global-queries'
+import { ActionsRegistry } from '../../../registries/actions'
 import { copyAll } from './copy-all'
 import { exitBlock } from './exit-block'
 import { indent } from './indent'

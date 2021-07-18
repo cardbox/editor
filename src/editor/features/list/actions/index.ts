@@ -1,5 +1,5 @@
-import { ActionsRegistry } from '../../../actions-registry'
 import { GlobalQueries } from '../../../lib/global-queries'
+import { ActionsRegistry } from '../../../registries/actions'
 import { deleteBackward } from './delete-backward'
 import { indent } from './indent'
 import { indentParagraph } from './indent-paragraph'

@@ -1,8 +1,8 @@
-import { SettingsRegistry } from '../../../settings-registry'
+import { SettingsRegistry } from '../../../registries/settings'
 import {
   LINK_MODIFICATION,
   TEXT_MODIFICATIONS,
-} from '../../../shared/constants/leaf'
+} from '../../../shared/constants'
 import { ListItemElement } from './types'
 import React from 'react'
 import { Element } from 'slate'

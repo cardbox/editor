@@ -1,5 +1,5 @@
 import { useEditor, useEditorNodeRef } from '../../../lib/hooks/slate'
-import { SettingsRegistry } from '../../../settings-registry'
+import { SettingsRegistry } from '../../../registries/settings'
 import { ElementType } from '../../../shared/types'
 import { useControlsState } from '../controls'
 import { MenuWrapper } from './menu-wrapper'
