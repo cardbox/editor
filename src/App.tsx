@@ -167,7 +167,9 @@ function printValue(value: EditorValue) {
   }
 
   const string = strings.join('\n')
+  console.group('editor value changed')
   console.log(string)
+  console.groupEnd();
 }
 
 function useEditorValue() {
@@ -184,7 +186,7 @@ export const App = () => {
     valueRef.current = value;
   }, [value])
   useEffect(() => {
-    window.getEditorValue = () => value;
+    (window as any).getEditorValue = () => value;
     console.log('To print current value of editor run `getEditorValue()`');
   }, [])
 
