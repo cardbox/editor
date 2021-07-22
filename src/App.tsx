@@ -185,7 +185,7 @@ export const App = () => {
   }, [value])
   useEffect(() => {
     window.getEditorValue = () => value;
-    console.log('To print current value of editor run `getEditorValue()`);
+    console.log('To print current value of editor run `getEditorValue()`');
   }, [])
 
   return <Editor value={value} onChange={setValue} />
