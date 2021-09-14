@@ -11,6 +11,7 @@ import { GlobalTransforms } from '../../../lib/global-transforms'
 import { useEditor, useEditorNodeRef } from '../../../lib/hooks/slate'
 import { TIPPY_THEMES } from '../../../lib/tippy'
 import { REGEX } from '../../../lib/util'
+import { ClearIconSvg, LinkIconSvg } from '../../../ui/icons'
 import { useLinkPopupActions, useLinkPopupState } from './link-popup-context'
 import { ClearIcon, Error, Input, InputWrapper, LinkIcon } from './styles'
 
