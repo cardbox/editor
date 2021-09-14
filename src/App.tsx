@@ -1,7 +1,7 @@
 /* eslint-disable sonarjs/no-duplicate-string */
-import { Editor, EditorValue } from './editor'
 import React, { useEffect, useState, useRef } from 'react'
 import { Element, Text } from 'slate'
+import { Editor, EditorValue, useExtendedEditor } from './editor'
 
 const initialState: EditorValue = [
   {
@@ -169,26 +169,29 @@ function printValue(value: EditorValue) {
   const string = strings.join('\n')
   console.group('editor value changed')
   console.log(string)
-  console.groupEnd();
+  console.groupEnd()
 }
 
 function useEditorValue() {
   const [value, setValue] = useState<EditorValue>(initialState)
   useEffect(() => printValue(value), [value])
-  
+
   return [value, setValue] as const
 }
 
 export const App = () => {
+  const editor = useExtendedEditor()
   const [value, setValue] = useEditorValue()
-  const valueRef = useRef(value);
+  const valueRef = useRef(value)
+
   useEffect(() => {
-    valueRef.current = value;
+    valueRef.current = value
   }, [value])
+
   useEffect(() => {
-    (window as any).getEditorValue = () => value;
-    console.log('To print current value of editor run `getEditorValue()`');
+    ;(window as any).getEditorValue = () => value
+    console.log('To print current value of editor run `getEditorValue()`')
   }, [])
 
-  return <Editor value={value} onChange={setValue} />
+  return <Editor editor={editor} value={value} onChange={setValue} />
 }

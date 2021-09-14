@@ -1,3 +1,3 @@
-import { Element } from 'slate'
+import { Descendant } from 'slate'
 
-export type EditorValue = Element[]
+export type EditorValue = Descendant[]
