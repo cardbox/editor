@@ -1,3 +1,7 @@
+import { useMemo } from 'react'
+import { createEditor, Text } from 'slate'
+import { withHistory } from 'slate-history'
+import { withReact } from 'slate-react'
 import { createCodeElement } from '../features/code'
 import { extensions } from '../features/extensions'
 import {
@@ -7,10 +11,6 @@ import {
 } from '../features/list'
 import { createParagraphElement } from '../features/paragraph'
 import { extend, Extension } from '../lib/extensions/extend'
-import { useMemo } from 'react'
-import { createEditor, Text } from 'slate'
-import { withHistory } from 'slate-history'
-import { withReact } from 'slate-react'
 
 const defaultExtensions: Extension[] = [
   withReact,
@@ -61,7 +61,7 @@ const defaultExtensions: Extension[] = [
   ]),
 ]
 
-export function useExtendedEditor(customExtensions: Extension[]) {
+export function useExtendedEditor(customExtensions: Extension[] = []) {
   return useMemo(() => {
     const finalExtensions = [...defaultExtensions, ...customExtensions]
 

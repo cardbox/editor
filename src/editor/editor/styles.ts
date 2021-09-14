@@ -1,6 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components'
 
-export const RootGlobalStyles = createGlobalStyle`
+export const GlobalStyles = createGlobalStyle`
   :root {
     --editor-font-family: 'Open Sans', sans-serif;
     --editor-font-size: 15px;

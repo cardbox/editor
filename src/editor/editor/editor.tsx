@@ -2,20 +2,16 @@ import '../actions'
 import '../features/code'
 import '../features/list'
 import '../features/paragraph'
-import { PrismGlobalStyles } from '../lib/prism'
-import { TippyGlobalStyles } from '../lib/tippy'
+import React from 'react'
 import { EditableEditor } from './editable-editor'
 import { ReadonlyEditor } from './readonly-editor'
 import { RootProvider } from './root-provider'
-import { RootGlobalStyles } from './styles'
 import { EditorProps, NormalizedEditorProps } from './types'
-import React from 'react'
 
 function normalizeProps(dirty: EditorProps): NormalizedEditorProps {
   return {
     ...dirty,
     customKeybinds: dirty.customKeybinds || {},
-    customExtensions: dirty.customExtensions || [],
   }
 }
 
@@ -28,12 +24,5 @@ export const Editor = (props: EditorProps) => {
     <EditableEditor {...normalizedProps} />
   )
 
-  return (
-    <RootProvider customExtensions={normalizedProps.customExtensions}>
-      <TippyGlobalStyles />
-      <PrismGlobalStyles />
-      <RootGlobalStyles />
-      {editor}
-    </RootProvider>
-  )
+  return <RootProvider editor={normalizedProps.editor}>{editor}</RootProvider>
 }
