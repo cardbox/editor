@@ -19,13 +19,31 @@ yarn add react@^16.8.6 react-dom@^16.8.6 styled-components@^5.1.1 tippy.js@^6.3.
 Then, use it:
 
 ```tsx
+// root
+import { EditorGlobalStyles } from '@cardbox/editor'
+
+const App = () => {
+  <>
+    <EditorGlobalStyles />
+    {/* Your App JSX... */}
+  </>
+}
+```
+
+```tsx
+// somewhere
 import {
-  Editor, // component
-  EditorValue, // value type
+  Editor,
+  useExtendedEditor,
+  EditorValue,
+  isEditorEmpty
 } from '@cardbox/editor'
 
 const MyEditor = () => {
+  const editor = useExtendedEditor(/* pass extensions if you want */)
   const [value, setValue] = useState<EditorValue>([])
+  
+  const isEmpty = () => isEditorEmpty(editor, value)
 
   return (
     <Editor

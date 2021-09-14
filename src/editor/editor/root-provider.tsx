@@ -1,18 +1,17 @@
+import React from 'react'
+import { BaseEditor } from 'slate'
+import { ReactEditor } from 'slate-react'
 import { LinkPopupContext, useNewLinkPopupState } from '../features/link'
 import { ToolbarContext, useNewToolbarState } from '../features/toolbar'
 import { EditorContext } from '../lib/editor-context'
-import { Extension } from '../lib/extensions/extend'
-import { useExtendedEditor } from './use-extended-editor'
-import React from 'react'
 
 export const RootProvider = ({
   children,
-  customExtensions = [],
+  editor,
 }: {
   children: JSX.Element | JSX.Element[]
-  customExtensions?: Extension[]
+  editor: BaseEditor & ReactEditor
 }) => {
-  const editor = useExtendedEditor(customExtensions)
   const toolbarState = useNewToolbarState()
   const linkPopupState = useNewLinkPopupState()
 

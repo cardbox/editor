@@ -1,11 +1,12 @@
-import { Extension } from '../lib/extensions/extend'
+import { BaseEditor } from 'slate'
+import { ReactEditor } from 'slate-react'
 import { OptionalActionKeybinds, PublicAction } from '../registries/actions'
 import { EditorValue } from '../shared/types'
 
 interface Common {
   value: EditorValue
   customKeybinds?: OptionalActionKeybinds<PublicAction>
-  customExtensions?: Extension[]
+  editor: BaseEditor & ReactEditor
   readOnly?: boolean
 }
 
@@ -20,7 +21,6 @@ interface WithoutReadOnly {
 
 interface WithNormalized {
   customKeybinds: OptionalActionKeybinds<PublicAction>
-  customExtensions: Extension[]
 }
 
 export type EditorProps = Common & (WithReadOnly | WithoutReadOnly)
