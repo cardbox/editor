@@ -1,3 +1,5 @@
+import React, { useEffect } from 'react'
+import { Editable, Slate } from 'slate-react'
 import { LinkPopup } from '../features/link'
 import { useListeners } from '../features/listeners'
 import { createParagraphElement } from '../features/paragraph'
@@ -10,8 +12,6 @@ import { renderLeaf } from './render.leaf'
 import { StyledEditor } from './styles'
 import { EditableEditorProps } from './types'
 import { useKeybinds } from './use-keybinds'
-import React, { useEffect } from 'react'
-import { Editable, Slate } from 'slate-react'
 
 export const EditableEditor = ({
   value,
@@ -38,6 +38,9 @@ export const EditableEditor = ({
           decorate={decorations.createHandler(editor)}
           readOnly={false}
           autoFocus
+          autoCapitalize="false"
+          autoCorrect="false"
+          spellCheck="false"
         />
       </Slate>
 
