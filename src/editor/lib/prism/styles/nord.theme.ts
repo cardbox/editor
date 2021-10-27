@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
-export const NordTheme = createGlobalStyle`
+export const Theme = createGlobalStyle`
   /**
   * Nord Theme Originally by Arctic Ice Studio
   * https://nordtheme.com
@@ -9,7 +9,7 @@ export const NordTheme = createGlobalStyle`
   */
 
   pre[data-language] {
-    color: #f8f8f2;
+    color: var(--nord-base-color);
     background: none;
     font-family: "Source Code Pro", Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
     text-align: left;
@@ -36,18 +36,24 @@ export const NordTheme = createGlobalStyle`
     margin: .5em 0;
     overflow: auto;
     border-radius: 0.3em;
-    background: #2E3440;
+    background: var(--nord-base-background);
+  }
+  
+  .token.comment,
+  .token.shebang {
+    font-style: italic;
   }
 
   .token.comment,
   .token.prolog,
   .token.doctype,
-  .token.cdata {
-    color: #636f88;
+  .token.cdata,
+  .token.shebang {
+    color: var(--nord-comment);
   }
 
   .token.punctuation {
-    color: #81A1C1;
+    color: var(--nord-punctuation);
   }
 
   .namespace {
@@ -58,16 +64,17 @@ export const NordTheme = createGlobalStyle`
   .token.tag,
   .token.constant,
   .token.symbol,
-  .token.deleted {
-    color: #81A1C1;
+  .token.deleted,
+  .token.key {
+    color: var(--nord-property);
   }
 
   .token.number {
-    color: #B48EAD;
+    color: var(--nord-number);
   }
 
   .token.boolean {
-    color: #81A1C1;
+    color: var(--nord-boolean);
   }
 
   .token.selector,
@@ -75,8 +82,9 @@ export const NordTheme = createGlobalStyle`
   .token.string,
   .token.char,
   .token.builtin,
-  .token.inserted {
-    color: #A3BE8C;
+  .token.inserted,
+  .token.directive {
+    color: var(--nord-selector);
   }
 
   .token.operator,
@@ -84,24 +92,26 @@ export const NordTheme = createGlobalStyle`
   .token.url,
   .language-css .token.string,
   .style .token.string,
-  .token.variable {
-    color: #81A1C1;
+  .token.variable,
+  .token.property-query {
+    color: var(--nord-operator);
   }
 
   .token.atrule,
   .token.attr-value,
   .token.function,
   .token.class-name {
-    color: #88C0D0;
+    color: var(--nord-function);
   }
 
-  .token.keyword {
-    color: #81A1C1;
+  .token.keyword,
+  .token.table {
+    color: var(--nord-keyword);
   }
 
   .token.regex,
   .token.important {
-    color: #EBCB8B;
+    color: var(--nord-regex);
   }
 
   .token.important,
@@ -115,5 +125,40 @@ export const NordTheme = createGlobalStyle`
 
   .token.entity {
     cursor: help;
+  }
+`
+
+export const NordLightTheme = createGlobalStyle`
+  :root {
+    --nord-selector: #7f9f64;
+    --nord-base-background: #ECEFF4;
+    --nord-base-color: #2E3440;
+    /* --nord-comment: #81A1C1; */
+    --nord-comment: #a7a7a7;
+    --nord-number: #B48EAD;
+    --nord-function: #5E81AC;
+    --nord-regex: #D08770;
+    --nord-punctuation: #4C566A;
+    --nord-property: #B48EAD;
+    --nord-boolean: #BF616A;
+    --nord-keyword: #81A1C1;
+    --nord-operator: #4C566A;
+  }
+`
+
+export const NordDarkTheme = createGlobalStyle`
+  :root {
+    --nord-selector: #A3BE8C;
+    --nord-base-background: #2E3440;
+    --nord-base-color: #f8f8f2;
+    --nord-comment: #636f88;
+    --nord-number: #B48EAD;
+    --nord-function: #88C0D0;
+    --nord-regex: #EBCB8B;
+    --nord-punctuation: #81A1C1;
+    --nord-property: #81A1C1;
+    --nord-boolean: #81A1C1;
+    --nord-keyword: #81A1C1;
+    --nord-operator: #81A1C1;
   }
 `

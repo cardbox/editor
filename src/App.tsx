@@ -1,7 +1,8 @@
 /* eslint-disable sonarjs/no-duplicate-string */
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Element, Text } from 'slate'
 import { Editor, EditorValue, useExtendedEditor } from './editor'
+import { GlobalStyles } from './editor/global-styles'
 
 const initialState: EditorValue = [
   {
@@ -193,5 +194,10 @@ export const App = () => {
     console.log('To print current value of editor run `getEditorValue()`')
   }, [])
 
-  return <Editor editor={editor} value={value} onChange={setValue} />
+  return (
+    <>
+      <GlobalStyles />
+      <Editor editor={editor} value={value} onChange={setValue} />
+    </>
+  )
 }

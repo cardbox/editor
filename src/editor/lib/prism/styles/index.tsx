@@ -1,10 +1,12 @@
-import { NordTheme } from './nord.theme'
 import React from 'react'
+import { NordLightTheme, Theme } from './nord.theme'
 
 export const GlobalStyles = () => {
   return (
     <>
-      <NordTheme />
+      <Theme />
+      {/*<NordDarkTheme />*/}
+      <NordLightTheme />
     </>
   )
 }
